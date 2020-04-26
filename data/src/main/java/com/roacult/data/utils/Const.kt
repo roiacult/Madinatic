@@ -1,7 +1,7 @@
 package com.roacult.data.utils
 
 //TODO add base url here
-const val BASE_URL = ""
+const val BASE_URL = "http://127.0.0.1:8000"
 
 //rest api roots
 object API_ROOTS {

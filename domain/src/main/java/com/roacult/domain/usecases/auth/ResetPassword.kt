@@ -6,6 +6,7 @@ import com.roacult.kero.team7.jstarter_domain.functional.CouroutineDispatchers
 import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.EitherInteractor
 import com.roacult.kero.team7.jstarter_domain.interactors.None
+import kotlinx.coroutines.delay
 
 class ResetPassword (
     dispathcher : CouroutineDispatchers,
@@ -13,6 +14,8 @@ class ResetPassword (
 ) : EitherInteractor<String, None, AuthFailure>(dispathcher) {
 
     override suspend fun invoke(executeParams: String): Either<AuthFailure, None> {
-        return repo.resetPassword(executeParams)
+//        return repo.resetPassword(executeParams)
+        delay(4000)
+        return Either.Right(None())
     }
 }

@@ -1,13 +1,14 @@
 package com.roacult.madinatic
 
 import android.app.Application
-import com.roacult.israfli.di.getModules
+import com.roacult.madinatic.di.getModules
+import com.roacult.madinatic.utils.StringProvider
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
-class MadinaticApp : Application() {
+class MadinaticApp : Application() ,StringProvider{
 
 
     override fun onCreate() {
@@ -25,5 +26,9 @@ class MadinaticApp : Application() {
             //Module liste
             modules(getModules())
         }
+    }
+
+    override fun getStringFromResource(resource: Int): String {
+        return getString(resource)
     }
 }

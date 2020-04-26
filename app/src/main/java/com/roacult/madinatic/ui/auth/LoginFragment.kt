@@ -12,6 +12,7 @@ import com.roacult.madinatic.databinding.LoginBinding
 import com.roacult.madinatic.databinding.ResetPasswordBinding
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class LoginFragment : FullScreenFragment<LoginBinding>() {
     override val layutIdRes = R.layout.login
@@ -40,10 +41,12 @@ class LoginFragment : FullScreenFragment<LoginBinding>() {
 
     private fun initViews() {
         binding.viewModel = viewModel
+        binding.resetPass.setOnClickListener{ forgetPasswordDialogue() }
     }
 
     private fun handleLoginState(async: Async<None>) {
         //TODO change it later
+        Timber.v("handling login state ....")
         when (async) {
             is Loading -> binding.state = ViewState.LOADING
             is Fail<*, *> -> binding.state = ViewState.EMPTY

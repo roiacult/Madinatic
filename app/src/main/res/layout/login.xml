@@ -13,6 +13,7 @@
         <import type="android.view.View"/>
         <import type="com.roacult.madinatic.utils.states.ViewState"/>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -57,7 +58,6 @@
                 android:textColor="@color/subtitleTextColor"
                 android:textSize="14sp" />
         </LinearLayout>
-
 
         <LinearLayout
             android:visibility="@{state != ViewState.LOADING ? View.VISIBLE : View.GONE }"
@@ -127,7 +127,7 @@
                         android:background="@color/transparent"
                         android:ems="10"
                         android:hint="@string/password"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textPassword"
                         android:textAlignment="viewStart" />
                 </LinearLayout>
 
@@ -142,6 +142,7 @@
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/resetPass"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:text="@string/reset_your_password"
                 android:layout_width="wrap_content"
@@ -150,6 +151,16 @@
         </LinearLayout>
 
 
+        <ProgressBar
+            android:visibility="@{state == ViewState.LOADING ? View.VISIBLE : View.GONE}"
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -163,13 +174,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2">
 
-            <view
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="@color/subtitleTextColor"
-                app:layout_constraintTop_toTopOf="@+id/guideline2"
-                tools:layout_editor_absoluteX="12dp" />
+                android:background="@color/subtitleTextColor"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -180,13 +189,11 @@
                 android:text="@string/you_are_new_here"
                 android:textColor="@color/subtitleTextColor" />
 
-            <view
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="@color/subtitleTextColor"
-                app:layout_constraintTop_toTopOf="@+id/guideline2"
-                tools:layout_editor_absoluteX="12dp" />
+                android:background="@color/subtitleTextColor"/>
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -201,18 +208,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-        <ProgressBar
-            tools:visibility="gone"
-            android:visibility="@{state == ViewState.LOADING ? View.VISIBLE : View.GONE }"
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
