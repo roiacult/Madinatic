@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.roacult.madinatic.ui.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
 
@@ -16,8 +18,14 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
     abstract val layutIdRes: Int
     private var mActivity: BaseActivity? = null
 
+    protected val vm : MainViewModel by sharedViewModel()
+
     fun hideKeyboeard() {
         mActivity?.hideKeyboard()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        vm.showBottomNav()
     }
 
     override fun onAttach(context: Context) {

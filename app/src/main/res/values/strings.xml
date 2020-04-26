@@ -4,4 +4,11 @@
     <string name="home">home</string>
     <string name="declaration">declaration</string>
     <string name="profile">profile</string>
+    <string name="login_desc">Please enter your username \n and password to sign-in</string>
+    <string name="email_or_username">email or username</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="reset_your_password">reset your password</string>
+    <string name="you_are_new_here">You are new here?</string>
+    <string name="register">Register</string>
 </resources>
