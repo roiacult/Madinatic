@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Madinatic</string>
     <string name="unknown_error">some thing went wrong</string>
+    <string name="home">home</string>
+    <string name="declaration">declaration</string>
+    <string name="profile">profile</string>
 </resources>
