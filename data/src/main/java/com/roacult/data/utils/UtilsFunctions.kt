@@ -1,4 +1,4 @@
-package com.team7.data.utils
+package com.roacult.data.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

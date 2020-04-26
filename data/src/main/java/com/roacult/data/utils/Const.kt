@@ -5,6 +5,9 @@ const val BASE_URL = ""
 
 //prefrences keys
 object PREFRENCES {
+
+    const val TOKEN = "com.roacult.kero:TOKEN"
+    const val USER = "com.roacult.kero:USER"
 }
 
 const val DATABASE_NAME = ""
