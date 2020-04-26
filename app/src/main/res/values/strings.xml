@@ -11,4 +11,9 @@
     <string name="reset_your_password">reset your password</string>
     <string name="you_are_new_here">You are new here?</string>
     <string name="register">Register</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="reset_pass_desc">we will send you an email to reset your password</string>
+    <string name="email">email</string>
+    <string name="envoyer">send</string>
+    <string name="please_wait">please wait</string>
 </resources>
