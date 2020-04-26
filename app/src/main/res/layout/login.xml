@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.roacult.madinatic.ui.auth.LoginViewModel" />
+        <variable
             name="state"
             type="ViewState" />
         <import type="android.view.View"/>
@@ -98,24 +101,23 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"
+                android:gravity="center"
+                android:background="#E7E6E6"
+                android:layout_marginEnd="32dp">
+                <ImageView
+                    android:layout_marginTop="2dp"
+                    android:layout_weight="5"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    app:layout_constraintTop_toBottomOf="@+id/title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    android:gravity="center"
-                    android:background="#E7E6E6"
-                    android:layout_marginEnd="32dp">
-                    <ImageView
-                        android:layout_marginTop="2dp"
-                        android:layout_weight="5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/lock_outline"/>
-
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/lock_outline"/>
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
@@ -130,19 +132,20 @@
                 </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                    android:layout_marginStart="45dp"
-                    android:layout_marginEnd="45dp"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/login"
-                    android:textColor="#FFF"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                android:onClick="@{(v)-> viewModel.login(email.getText().toString(),password.getText().toString())}"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/login"
+                android:textColor="#FFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:text="@string/reset_your_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="@string/reset_your_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
