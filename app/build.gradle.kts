@@ -42,8 +42,8 @@ android{
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-//    implementation(project(":data"))
-//    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
     implementation(Dependencies.AndroidJetpack.activity)
     implementation(Dependencies.AndroidJetpack.viewPager2)
     implementation(Dependencies.AndroidJetpack.activity_ktx)
