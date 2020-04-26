@@ -2,8 +2,7 @@ package com.roacult.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.room.Room
-import com.roacult.data.utils.DATABASE_NAME
+import com.roacult.data.remote.AuthLocal
 import org.koin.dsl.module
 
 val localModule = module {
@@ -22,4 +21,6 @@ val localModule = module {
 //        val db = get<Database>()
 //        db.provideAddProductDao()
 //    }
+
+    single { AuthLocal(get()) }
 }

@@ -3,7 +3,9 @@ package com.roacult.data.remote
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.roacult.data.BuildConfig
+import com.roacult.data.remote.services.AuthService
 import com.roacult.data.utils.BASE_URL
+import com.roacult.data.utils.createService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -42,13 +44,7 @@ val remoteModule = module {
         }.build()
     }
 
-//    single {
-//        val retrofit : Retrofit = get()
-//        retrofit.create(AuthService::class.java)
-//    }
+    single{ createService(AuthService::class.java) }
 
-
-//    single{
-//        createService(StoreService::class.java)
-//    }
+    single { AuthRemote(get()) }
 }
