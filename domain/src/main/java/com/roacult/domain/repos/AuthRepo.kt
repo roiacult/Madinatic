@@ -8,4 +8,6 @@ import com.roacult.kero.team7.jstarter_domain.interactors.None
 interface AuthRepo {
     suspend fun logUserIn(loginParams: LoginParams): Either<AuthFailure, None>
 
+    suspend fun resetPassword(email: String): Either<AuthFailure, None>
+
 }

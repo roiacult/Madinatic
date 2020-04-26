@@ -29,6 +29,12 @@ class AuthRepoImpl(
         return getUserAndStoreData(token)
     }
 
+    /**
+     * send reset password email
+     * */
+    override suspend fun resetPassword(email: String): Either<AuthFailure, None> {
+        return authRemote.resetPassword(email)
+    }
 
     /**
      * store data locally

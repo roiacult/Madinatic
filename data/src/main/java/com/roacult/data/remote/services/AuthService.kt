@@ -1,8 +1,7 @@
 package com.roacult.data.remote.services
 
-import com.roacult.data.remote.entities.RemoteLoginParams
-import com.roacult.data.remote.entities.Token
-import com.roacult.data.remote.entities.UserRemoteEntity
+import com.roacult.data.remote.entities.*
+import com.roacult.data.utils.API_ROOTS
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -10,12 +9,17 @@ import retrofit2.http.POST
 
 interface AuthService {
 
-    @POST("/rest-auth/login/")
+    @POST(API_ROOTS.LOGIN)
     fun login(
         @Body login : RemoteLoginParams
     ) : Call<Token>
 
-    @POST("/api/userwithtoken/")
+    @POST(API_ROOTS.RESET_PASSWORD)
+    fun resetPassword(
+        @Body resetPassword: ResetPassword
+    ): Call<ResetPasswordResult>
+
+    @POST(API_ROOTS.USER_WITH_TOKEN)
     fun searchUser(
         @Header("Authorization") key: String,
         @Body token: Token

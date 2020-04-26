@@ -1,13 +1,12 @@
 package com.roacult.data.remote
 
-import com.roacult.data.remote.entities.RemoteLoginParams
-import com.roacult.data.remote.entities.Token
-import com.roacult.data.remote.entities.UserRemoteEntity
+import com.roacult.data.remote.entities.*
 import com.roacult.data.remote.services.AuthService
 import com.roacult.data.utils.TOKEN_PREFEXE
 import com.roacult.domain.exceptions.AuthFailure
 import com.roacult.domain.usecases.auth.LoginParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
+import com.roacult.kero.team7.jstarter_domain.interactors.None
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,4 +62,28 @@ class AuthRemote (
                     }
                 })
         }
+
+    suspend fun resetPassword(email: String): Either<AuthFailure, None> = suspendCoroutine {coroutine->
+        authService
+            .resetPassword(ResetPassword(email))
+            .enqueue(object : Callback<ResetPasswordResult> {
+                override fun onFailure(call: Call<ResetPasswordResult>, t: Throwable) {
+                    Timber.v("fail to send email ")
+                    coroutine.resume(Either.Left(AuthFailure.InternetConnection))
+                }
+
+                override fun onResponse(
+                    call: Call<ResetPasswordResult>,
+                    response: Response<ResetPasswordResult>
+                ) {
+                    Timber.v("resetPassword response")
+                    val body2 = response.body()
+                    if(body2 == null || !response.isSuccessful){
+                        Timber.v("resetPassword failed")
+                        coroutine.resume(Either.Left(AuthFailure.InvalidEmail))
+                    }else coroutine.resume(Either.Right(None()))
+                }
+            })
+
+    }
 }
