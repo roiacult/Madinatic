@@ -59,6 +59,6 @@ class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
                 setOnDismissListener {
                     this@RegistrationFragment.activity?.onBackPressed()
                 }
-            }
+            }.show()
     }
 }
