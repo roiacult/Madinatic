@@ -318,6 +318,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/login"
                     android:visibility="@{state != ViewState.LOADING ? View.VISIBLE : View.GONE}"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="45dp"

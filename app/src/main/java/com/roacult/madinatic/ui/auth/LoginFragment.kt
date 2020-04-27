@@ -10,6 +10,7 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.LoginBinding
 import com.roacult.madinatic.databinding.ResetPasswordBinding
+import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -42,6 +43,11 @@ class LoginFragment : FullScreenFragment<LoginBinding>() {
     private fun initViews() {
         binding.viewModel = viewModel
         binding.resetPass.setOnClickListener{ forgetPasswordDialogue() }
+        binding.register.setOnClickListener {
+            vm.navigate(
+                FragmentNavigation(destinationClass = RegistrationFragment::class.java)
+            )
+        }
     }
 
     private fun handleLoginState(async: Async<None>) {

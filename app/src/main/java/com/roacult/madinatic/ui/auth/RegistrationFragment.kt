@@ -32,6 +32,7 @@ class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
 
     private fun initViews() {
         binding.viewModel = viewModel
+        binding.login.setOnClickListener { activity?.onBackPressed() }
     }
 
     private fun handleRegistration(async: Async<None>) {
