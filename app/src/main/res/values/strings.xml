@@ -40,4 +40,5 @@
     <string name="invalid_phone">invalid phone number</string>
     <string name="invalid_address">invalid address</string>
     <string name="invalid_nationalID">invalid national id</string>
+    <string name="alredy_signedin">there is an account linked to this email address ,try login</string>
 </resources>

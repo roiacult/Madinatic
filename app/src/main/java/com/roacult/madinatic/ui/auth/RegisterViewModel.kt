@@ -10,9 +10,8 @@ import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
 import com.roacult.madinatic.utils.StringProvider
 import com.roacult.madinatic.utils.extensions.isValidEmail
-import com.roacult.madinatic.utils.states.Async
-import com.roacult.madinatic.utils.states.Event
-import com.roacult.madinatic.utils.states.Loading
+import com.roacult.madinatic.utils.states.*
+import timber.log.Timber
 
 class RegisterViewModel(
     private val register: Register,
@@ -74,11 +73,20 @@ class RegisterViewModel(
     }
 
     private fun handleRegistrationFailed(authFailure: AuthFailure){
-        //TODO
+        Timber.v("login succeeded $authFailure")
+        val erroMsg = when(authFailure){
+            AuthFailure.InternetConnection -> stringProvider.getStringFromResource(R.string.internet_prblm)
+            AuthFailure.InvalidEmail -> stringProvider.getStringFromResource(R.string.invalid_email)
+            AuthFailure.AuthFailed -> stringProvider.getStringFromResource(R.string.login_failure)
+            AuthFailure.InvalidPassword -> stringProvider.getStringFromResource(R.string.invalid_password)
+            AuthFailure.AlredySignedIn -> stringProvider.getStringFromResource(R.string.alredy_signedin)
+            else -> stringProvider.getStringFromResource(R.string.unknown_error)
+        }
+        setState { copy(errorMsg = Event(erroMsg), registration = Fail(authFailure)) }
     }
 
     private fun handleRegistrationSucceded(none: None) {
-        //TODO
+        setState { copy(registration = Success(none)) }
     }
 }
 
