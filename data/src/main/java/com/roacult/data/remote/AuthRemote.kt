@@ -5,8 +5,10 @@ import com.roacult.data.remote.services.AuthService
 import com.roacult.data.utils.TOKEN_PREFEXE
 import com.roacult.domain.exceptions.AuthFailure
 import com.roacult.domain.usecases.auth.LoginParams
+import com.roacult.domain.usecases.auth.RegistrationParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.None
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -85,5 +87,27 @@ class AuthRemote (
                 }
             })
 
+    }
+
+    suspend fun register(registrationParams: RegistrationParams): Either<AuthFailure, None> = suspendCoroutine{coroutine->
+        authService
+            .register(registrationParams.toRemoteEntity())
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Timber.v("fail to post registration request ")
+                    coroutine.resume(Either.Left(AuthFailure.InternetConnection))
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    val body2 = response.body()
+                    if(body2 == null || !response.isSuccessful){
+                        Timber.v("failed to post registration request")
+                        coroutine.resume(Either.Left(AuthFailure.InvalidEmail))
+                    }else coroutine.resume(Either.Right(None()))
+                }
+            })
     }
 }

@@ -2,6 +2,7 @@ package com.roacult.data.remote.services
 
 import com.roacult.data.remote.entities.*
 import com.roacult.data.utils.API_ROOTS
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -24,4 +25,9 @@ interface AuthService {
         @Header("Authorization") key: String,
         @Body token: Token
     ) : Call<UserRemoteEntity>
+
+    @POST(API_ROOTS.REGISTRATION)
+    fun register(
+        @Body remoteRegistrationParams: RemoteRegistrationParams
+    ) : Call<ResponseBody>
 }

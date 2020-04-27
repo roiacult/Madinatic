@@ -7,6 +7,7 @@ import com.roacult.data.remote.AuthRemote
 import com.roacult.domain.exceptions.AuthFailure
 import com.roacult.domain.repos.AuthRepo
 import com.roacult.domain.usecases.auth.LoginParams
+import com.roacult.domain.usecases.auth.RegistrationParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 
@@ -34,6 +35,13 @@ class AuthRepoImpl(
      * */
     override suspend fun resetPassword(email: String): Either<AuthFailure, None> {
         return authRemote.resetPassword(email)
+    }
+
+    /**
+     * post registration request
+     * */
+    override suspend fun register(registrationParams: RegistrationParams): Either<AuthFailure, None> {
+        return authRemote.register(registrationParams)
     }
 
     /**

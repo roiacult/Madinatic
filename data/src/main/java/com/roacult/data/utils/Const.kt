@@ -8,6 +8,7 @@ object API_ROOTS {
     const val LOGIN = "/rest-auth/login/"
     const val RESET_PASSWORD = "/rest-auth/password/reset/"
     const val USER_WITH_TOKEN = "/api/userwithtoken/"
+    const val REGISTRATION = "/"
 }
 
 
