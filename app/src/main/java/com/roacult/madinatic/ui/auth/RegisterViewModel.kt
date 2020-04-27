@@ -1,6 +1,10 @@
 package com.roacult.madinatic.ui.auth
 
+import com.roacult.domain.exceptions.AuthFailure
+import com.roacult.domain.usecases.auth.Register
+import com.roacult.domain.usecases.auth.RegistrationParams
 import com.roacult.kero.team7.jstarter_domain.interactors.None
+import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
@@ -11,6 +15,7 @@ import com.roacult.madinatic.utils.states.Event
 import com.roacult.madinatic.utils.states.Loading
 
 class RegisterViewModel(
+    private val register: Register,
     private val stringProvider: StringProvider
 ) :BaseViewModel<RegisterState>(RegisterState()){
     
@@ -59,8 +64,21 @@ class RegisterViewModel(
             return
         }
         setState { copy(registration = Loading()) }
-        //TODO start interactor
 
+        scope.launchInteractor(register, RegistrationParams(
+            fullName,email,phone,address,password,nationalID
+        )){
+            it.either(::handleRegistrationFailed,::handleRegistrationSucceded)
+        }
+
+    }
+
+    private fun handleRegistrationFailed(authFailure: AuthFailure){
+        //TODO
+    }
+
+    private fun handleRegistrationSucceded(none: None) {
+        //TODO
     }
 }
 
