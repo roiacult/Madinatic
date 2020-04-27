@@ -58,6 +58,7 @@ class LoginFragment : FullScreenFragment<LoginBinding>() {
             is Fail<*, *> -> binding.state = ViewState.EMPTY
             is Success -> {
                 //TODO go to main page here
+                binding.state = ViewState.SUCCESS
                 showMessage("TODO go to main here")
             }
         }
