@@ -88,6 +88,10 @@ class RegisterViewModel(
     private fun handleRegistrationSucceded(none: None) {
         setState { copy(registration = Success(none)) }
     }
+
+    fun endRegistration() {
+        setState { copy(registration = null) }
+    }
 }
 
 
