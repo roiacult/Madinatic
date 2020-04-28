@@ -24,7 +24,7 @@ interface AuthService {
     @GET(API_ROOTS.USER_WITH_TOKEN)
     fun searchUser(
         @Header("Authorization") key: String
-    ) : Call<UserRemoteEntity>
+    ) : Call<UserRemoteWrapper>
 
     @POST(API_ROOTS.REGISTRATION)
     fun register(

@@ -45,20 +45,20 @@ class AuthRemote (
     suspend fun getUserEntity(token: String): Either<AuthFailure, UserRemoteEntity> =
         suspendCoroutine { coroutine ->
             authService.searchUser(TOKEN_PREFEXE + token)
-                .enqueue(object : Callback<UserRemoteEntity> {
-                    override fun onFailure(call: Call<UserRemoteEntity>, t: Throwable) {
+                .enqueue(object : Callback<UserRemoteWrapper> {
+                    override fun onFailure(call: Call<UserRemoteWrapper>, t: Throwable) {
                         Timber.v("get user failled $t")
                         coroutine.resume(Either.Left(AuthFailure.InternetConnection))
                     }
 
                     override fun onResponse(
-                        call: Call<UserRemoteEntity>,
-                        response: Response<UserRemoteEntity>
+                        call: Call<UserRemoteWrapper>,
+                        response: Response<UserRemoteWrapper>
                     ) {
                         val body = response.body()
                         if (body == null || !response.isSuccessful) {
                             coroutine.resume(Either.Left(AuthFailure.AuthFailed))
-                        } else coroutine.resume(Either.Right(body))
+                        } else coroutine.resume(Either.Right(body.user))
                     }
                 })
         }

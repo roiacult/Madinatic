@@ -3,7 +3,11 @@ package com.roacult.data.remote.entities
 import com.google.gson.annotations.SerializedName
 import com.roacult.domain.entities.User
 
-class UserRemoteEntity(
+data class UserRemoteWrapper(
+    @SerializedName("user") val user : UserRemoteEntity
+)
+
+data class UserRemoteEntity(
     @SerializedName("uid") val idu : String,
     @SerializedName("first_name") val first_name : String,
     @SerializedName("last_name") val last_name : String,

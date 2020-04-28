@@ -5,10 +5,10 @@ const val BASE_URL = "http://13.92.195.8"
 
 //rest api roots
 object API_ROOTS {
-    const val LOGIN = "/rest-auth/login/"
-    const val RESET_PASSWORD = "/rest-auth/password/reset/"
-    const val USER_WITH_TOKEN = "/api/user/"
-    const val REGISTRATION = "/"
+    const val LOGIN = "/api/login/"
+    const val RESET_PASSWORD = "/api/password/reset/"
+    const val USER_WITH_TOKEN = "/api/userinstance/"
+    const val REGISTRATION = "/api/registration/"
 }
 
 
