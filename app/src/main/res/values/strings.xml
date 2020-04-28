@@ -46,4 +46,6 @@
     <string name="regi_succ_msg">we will send you an email once the admin approve your registration request ,please check your email inbox later</string>
     <string name="close">close</string>
     <string name="madina_tic">MADINA TIC</string>
+    <string name="date_of_birth">date of birth</string>
+    <string name="invalid_date">invalid date</string>
 </resources>

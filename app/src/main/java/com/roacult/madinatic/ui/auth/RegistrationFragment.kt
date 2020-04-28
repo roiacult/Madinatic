@@ -1,7 +1,9 @@
 package com.roacult.madinatic.ui.auth
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.DatePicker
 import androidx.appcompat.app.AlertDialog
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
@@ -9,6 +11,7 @@ import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.RegisterBinding
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
 
@@ -33,6 +36,20 @@ class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
     private fun initViews() {
         binding.viewModel = viewModel
         binding.login.setOnClickListener { activity?.onBackPressed() }
+        binding.dateBirth.setOnClickListener {showDatePicker()}
+        binding.register.setOnClickListener {
+            viewModel.register(
+                binding.firstname.text.toString(),
+                binding.lastname.text.toString(),
+                binding.email.text.toString(),
+                binding.phone.text.toString(),
+                binding.address.text.toString(),
+                binding.password.text.toString(),
+                binding.password2.text.toString(),
+                binding.nationalid.text.toString(),
+                binding.dateBirth.text.toString()
+            )
+        }
     }
 
     private fun handleRegistration(async: Async<None>) {
@@ -45,6 +62,13 @@ class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
                 showSuccDialgue()
             }
         }
+    }
+
+    private fun showDatePicker() {
+        DatePickerDialog(context!!,
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                binding.dateBirth.setText("$year-$month-$dayOfMonth")
+            },2020,1,1).show()
     }
 
     private fun showSuccDialgue() {

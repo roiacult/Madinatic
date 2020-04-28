@@ -315,7 +315,18 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:onClick="@{(v)->viewModel.register(firstname.getText().toString(),lastname.getText().toString(),email.getText().toString(),phone.getText().toString(),address.getText().toString(),password.getText().toString(),password2.getText().toString(),nationalid.getText().toString())}"
+                    android:id="@+id/dateBirth"
+                    android:text="@string/date_of_birth"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#909090"
+                    app:backgroundTint="#E7E6E6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/register"
                     android:visibility="@{state != ViewState.LOADING ? View.VISIBLE : View.INVISIBLE}"
                     android:layout_marginStart="45dp"
                     android:layout_marginEnd="45dp"

@@ -25,5 +25,6 @@ data class RegistrationParams(
     val phone: String,
     val address: String,
     val password: String,
+    val dateBirth : String,
     val nationalid: String
 )

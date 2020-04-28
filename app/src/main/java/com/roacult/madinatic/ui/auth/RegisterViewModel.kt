@@ -27,7 +27,8 @@ class RegisterViewModel(
         address:String,
         password:String,
         password2:String,
-        nationalID:String
+        nationalID:String,
+        dateBirth:String
     ){
         if(firstname.isEmpty() || lastName.isEmpty()) {
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.fullname_fail))) }
@@ -63,10 +64,16 @@ class RegisterViewModel(
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.invalid_nationalID))) }
             return
         }
+
+        if(!dateBirth.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.invalid_date))) }
+            return
+        }
+
         setState { copy(registration = Loading()) }
 
         scope.launchInteractor(register, RegistrationParams(
-            firstname,lastName,email,phone,address,password,nationalID
+            firstname,lastName,email,phone,address,password,dateBirth,nationalID
         )){
             it.either(::handleRegistrationFailed,::handleRegistrationSucceded)
         }
