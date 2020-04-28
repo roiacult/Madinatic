@@ -5,6 +5,7 @@ import com.roacult.data.utils.API_ROOTS
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -20,10 +21,9 @@ interface AuthService {
         @Body resetPassword: ResetPassword
     ): Call<ResetPasswordResult>
 
-    @POST(API_ROOTS.USER_WITH_TOKEN)
+    @GET(API_ROOTS.USER_WITH_TOKEN)
     fun searchUser(
-        @Header("Authorization") key: String,
-        @Body token: Token
+        @Header("Authorization") key: String
     ) : Call<UserRemoteEntity>
 
     @POST(API_ROOTS.REGISTRATION)

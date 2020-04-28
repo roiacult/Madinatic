@@ -44,9 +44,7 @@ class AuthRemote (
 
     suspend fun getUserEntity(token: String): Either<AuthFailure, UserRemoteEntity> =
         suspendCoroutine { coroutine ->
-            authService.searchUser(TOKEN_PREFEXE + token,
-                Token(token)
-            )
+            authService.searchUser(TOKEN_PREFEXE + token)
                 .enqueue(object : Callback<UserRemoteEntity> {
                     override fun onFailure(call: Call<UserRemoteEntity>, t: Throwable) {
                         Timber.v("get user failled $t")
