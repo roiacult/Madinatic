@@ -44,4 +44,5 @@
     <string name="reg_succ_title">Registration Request submitted</string>
     <string name="regi_succ_msg">we will send you an email once the admin approve your registration request ,please check your email inbox later</string>
     <string name="close">close</string>
+    <string name="madina_tic">MADINA TIC</string>
 </resources>
