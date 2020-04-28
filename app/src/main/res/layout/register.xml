@@ -73,17 +73,51 @@
                         app:srcCompat="@drawable/registration_name"/>
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/fullname"
+                        android:id="@+id/firstname"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1"
                         android:background="@color/transparent"
                         android:ems="10"
-                        android:hint="@string/full_name"
+                        android:hint="@string/first_name"
                         android:inputType="textPersonName"
                         android:textAlignment="viewStart" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="@{state != ViewState.LOADING ? View.VISIBLE : View.INVISIBLE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:gravity="center"
+                    android:background="#E7E6E6"
+                    android:layout_marginEnd="32dp">
+                    <ImageView
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/registration_name"/>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="16dp"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:ems="10"
+                        android:hint="@string/last_name"
+                        android:inputType="textPersonName"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:visibility="@{state != ViewState.LOADING ? View.VISIBLE : View.INVISIBLE}"
@@ -281,7 +315,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:onClick="@{(v)->viewModel.register(fullname.getText().toString(),email.getText().toString(),phone.getText().toString(),address.getText().toString(),password.getText().toString(),password2.getText().toString(),nationalid.getText().toString())}"
+                    android:onClick="@{(v)->viewModel.register(firstname.getText().toString(),lastname.getText().toString(),email.getText().toString(),phone.getText().toString(),address.getText().toString(),password.getText().toString(),password2.getText().toString(),nationalid.getText().toString())}"
                     android:visibility="@{state != ViewState.LOADING ? View.VISIBLE : View.INVISIBLE}"
                     android:layout_marginStart="45dp"
                     android:layout_marginEnd="45dp"

@@ -30,7 +30,8 @@
     <string name="invalid_pass_failure">this is an invalid or too common password please choose another one</string>
     <string name="resetpassword_succ">l\'e-mail pour réinitialiser votre mot de passe a été envoyé avec succès, vérifiez votre boîte de réception</string>
     <string name="registration_desc">please fill all information bellow \nto create an acount</string>
-    <string name="full_name">Full name</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
     <string name="repeat_password">Repeat password</string>
     <string name="national_id">National ID</string>
     <string name="phone_number">Phone number</string>

@@ -17,18 +17,21 @@ data class ResetPassword(
 )
 
 data class RemoteRegistrationParams(
-    @SerializedName("fullname") val fullName: String,
+    @SerializedName("first_name") val fullName: String,
+    @SerializedName("last_name") val lastName: String,
     @SerializedName("email") val email: String,
     @SerializedName("phone") val phone: String,
     @SerializedName("address") val address: String,
-    @SerializedName("password") val password: String,
+    @SerializedName("password1") val password: String,
     @SerializedName("password2") val password2: String,
-    @SerializedName("nationaid") val nationalid: String
+    @SerializedName("date_of_birth") val dateBirth: String = "",
+    @SerializedName("nationaid") val nationalid: String = ""
 )
 
 fun RegistrationParams.toRemoteEntity() : RemoteRegistrationParams{
     return RemoteRegistrationParams(
-        fullName,
+        firstName,
+        lastName,
         email,
         phone,
         address,

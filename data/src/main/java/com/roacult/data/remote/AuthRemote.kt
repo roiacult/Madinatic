@@ -103,7 +103,13 @@ class AuthRemote (
                     val body2 = response.body()
                     if(body2 == null || !response.isSuccessful){
                         Timber.v("failed to post registration request")
-                        coroutine.resume(Either.Left(AuthFailure.InvalidEmail))
+                        val err = response.errorBody()!!.string()
+
+                        if(err.contains("A user is already registered")){
+                            coroutine.resume(Either.Left(AuthFailure.AlredySignedIn))
+                        }else if(err.contains("This password is too short")){
+                            coroutine.resume(Either.Left(AuthFailure.InvalidPassword))
+                        } else coroutine.resume(Either.Left(AuthFailure.InvalidEmail))
                     }else coroutine.resume(Either.Right(None()))
                 }
             })

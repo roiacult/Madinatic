@@ -20,7 +20,8 @@ class RegisterViewModel(
     
     
     fun register(
-        fullName:String,
+        firstname : String,
+        lastName:String,
         email:String,
         phone:String,
         address:String,
@@ -28,7 +29,7 @@ class RegisterViewModel(
         password2:String,
         nationalID:String
     ){
-        if(fullName.isEmpty()) {
+        if(firstname.isEmpty() || lastName.isEmpty()) {
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.fullname_fail))) }
             return
         }
@@ -65,7 +66,7 @@ class RegisterViewModel(
         setState { copy(registration = Loading()) }
 
         scope.launchInteractor(register, RegistrationParams(
-            fullName,email,phone,address,password,nationalID
+            firstname,lastName,email,phone,address,password,nationalID
         )){
             it.either(::handleRegistrationFailed,::handleRegistrationSucceded)
         }
