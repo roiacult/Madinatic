@@ -56,7 +56,7 @@ class AuthRepoImpl(
 
         //store token & user entity locally
         authLocal.storeToken(token)
-        authLocal.storeUser(userEntity.toLocalEntity(gson),gson)
+        authLocal.storeUser(userEntity.toLocalEntity(),gson)
 
         return Either.Right(None())
     }
