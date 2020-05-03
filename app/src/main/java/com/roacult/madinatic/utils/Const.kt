@@ -6,3 +6,16 @@ object MainFragemtnsTags{
     const val PROFILE= "com.roacult.madinatic:profile"
     const val LOGIN = "com.roacult.madinatic:login"
 }
+
+object UserBunndle {
+    const val IDU = "idu"
+    const val FIRSTNAME= "firstname"
+    const val LASTNAME = "lastname"
+    const val EMAIL = "email"
+    const val PHONE = "phone"
+    const val ADDRESS = "address"
+    const val DATEBIRTH = "dataBirth"
+    const val IMAGE = "image"
+    const val CREATEDON ="createdOn"
+}
+

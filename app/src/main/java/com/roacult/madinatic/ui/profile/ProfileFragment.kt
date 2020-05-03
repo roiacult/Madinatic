@@ -2,9 +2,11 @@ package com.roacult.madinatic.ui.profile
 
 import android.os.Bundle
 import android.view.View
+import com.roacult.domain.entities.User
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.ProfileBinding
+import com.roacult.madinatic.utils.extensions.toBunndle
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +35,16 @@ class ProfileFragment : BaseFragment<ProfileBinding>() {
     private fun handlClickEvent(profileClickEvent: ProfileClickEvent) {
         when(profileClickEvent) {
             ProfileClickEvent.CHANGEINFO -> {
-                vm.navigate(FragmentNavigation(destinationClass = EditInfoFragment::class.java))
+                viewModel.withState {
+                    if (it.user != null ){
+                        vm.navigate(
+                            FragmentNavigation(
+                                destinationClass = EditInfoFragment::class.java,
+                                fragmentArguments = it.user.toBunndle()
+                            )
+                        )
+                    }
+                }
             }
             ProfileClickEvent.CHANGEPASSWORD -> {
                 //TODO
