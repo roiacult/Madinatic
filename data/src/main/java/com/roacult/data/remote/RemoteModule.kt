@@ -4,6 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.roacult.data.BuildConfig
 import com.roacult.data.remote.services.AuthService
+import com.roacult.data.remote.services.MainService
 import com.roacult.data.utils.BASE_URL
 import com.roacult.data.utils.createService
 import okhttp3.OkHttpClient
@@ -42,6 +43,8 @@ val remoteModule = module {
     }
 
     single{ createService(AuthService::class.java) }
+    single { createService(MainService::class.java) }
 
     single { AuthRemote(get()) }
+    single { MainRemote(get()) }
 }
