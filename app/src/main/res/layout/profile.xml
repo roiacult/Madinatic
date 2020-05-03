@@ -3,9 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="com.roacult.madinatic.ui.profile.ProfileClickEvent"/>
         <variable
             name="user"
             type="com.roacult.domain.entities.User" />
+        <variable
+            name="viewModel"
+            type="com.roacult.madinatic.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -222,6 +226,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:onClick="@{(v)-> viewModel.clickEvent(ProfileClickEvent.CHANGEINFO)}"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:drawablePadding="4dp"
@@ -232,6 +237,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:onClick="@{(v)-> viewModel.clickEvent(ProfileClickEvent.CHANGEPASSWORD)}"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:drawablePadding="4dp"
