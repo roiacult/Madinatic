@@ -7,7 +7,7 @@ const val BASE_URL = "http://13.92.195.8"
 object API_ROOTS {
     const val LOGIN = "/api/login/"
     const val RESET_PASSWORD = "/api/password/reset/"
-    const val USER_WITH_TOKEN = "/api/userinstance/"
+    const val USER_WITH_TOKEN = "/api/user/"
     const val REGISTRATION = "/api/registration/"
 }
 
