@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.roacult.data.local.entities.UserLocalEntity
 import com.roacult.data.utils.PREFRENCES
+import com.roacult.data.utils.TOKEN_PREFEXE
 
 class AuthLocal (
     private val prefrence : SharedPreferences
@@ -25,7 +26,7 @@ class AuthLocal (
     }
 
     fun getToken(): String {
-        return prefrence.getString(PREFRENCES.TOKEN,"")!!
+        return TOKEN_PREFEXE+prefrence.getString(PREFRENCES.TOKEN,"")!!
     }
 
     fun getUserState(): Boolean {

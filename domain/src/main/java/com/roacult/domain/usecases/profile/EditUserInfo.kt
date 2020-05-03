@@ -10,9 +10,9 @@ import com.roacult.kero.team7.jstarter_domain.interactors.None
 class EditUserInfo(
     dispatcher: CouroutineDispatchers,
     private val repo : MainRepo
-) : EitherInteractor<EditUserInfo,None,ProfileFailures>(dispatcher) {
+) : EitherInteractor<EditInfoParams,None,ProfileFailures>(dispatcher) {
 
-    override suspend fun invoke(executeParams: EditUserInfo): Either<ProfileFailures, None> {
+    override suspend fun invoke(executeParams: EditInfoParams): Either<ProfileFailures, None> {
         return repo.editInfo(executeParams)
     }
 }

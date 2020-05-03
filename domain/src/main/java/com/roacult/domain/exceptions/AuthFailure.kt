@@ -13,4 +13,6 @@ sealed class AuthFailure : Failure() {
 
 sealed class ProfileFailures : Failure() {
     object UserNotStored : ProfileFailures()
+    object InternetConnection : ProfileFailures()
+    object AuthFailed : ProfileFailures()
 }
