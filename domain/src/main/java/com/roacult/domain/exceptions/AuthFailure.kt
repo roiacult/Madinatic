@@ -12,5 +12,5 @@ sealed class AuthFailure : Failure() {
 
 
 sealed class ProfileFailures : Failure() {
-
+    object UserNotStored : ProfileFailures()
 }

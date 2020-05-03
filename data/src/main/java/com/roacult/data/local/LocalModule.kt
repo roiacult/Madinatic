@@ -2,6 +2,7 @@ package com.roacult.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.roacult.data.remote.AuthLocal
 import org.koin.dsl.module
 
@@ -11,6 +12,8 @@ val localModule = module {
         val context = get<Context>()
         context.getSharedPreferences("prefrences",Context.MODE_PRIVATE)
     }
+
+    single { RxSharedPreferences.create(get()) }
 
 //    single{
 //        Room.databaseBuilder(get(),Database::class.java,DATABASE_NAME)
@@ -23,4 +26,5 @@ val localModule = module {
 //    }
 
     single { AuthLocal(get()) }
+    single { MainLocal(get(),get()) }
 }

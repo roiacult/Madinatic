@@ -17,9 +17,6 @@ import java.util.concurrent.TimeUnit
 
 val remoteModule = module {
 
-    //provide json parser Gson
-    single { Gson() }
-
     //provide HttpClient
     single {
         OkHttpClient.Builder().apply {
