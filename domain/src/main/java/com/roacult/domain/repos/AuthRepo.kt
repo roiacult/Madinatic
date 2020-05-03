@@ -13,4 +13,6 @@ interface AuthRepo {
 
     suspend fun register(registrationParams: RegistrationParams): Either<AuthFailure, None>
 
+    suspend fun getUserState() : Boolean
+
 }

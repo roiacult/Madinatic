@@ -45,6 +45,13 @@ class AuthRepoImpl(
     }
 
     /**
+     * return user state
+     * */
+    override suspend fun getUserState() : Boolean{
+        return authLocal.getUserState()
+    }
+
+    /**
      * store data locally
      * */
     private suspend fun getUserAndStoreData(token: String) : Either<AuthFailure,None>{
