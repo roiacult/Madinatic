@@ -1,5 +1,6 @@
 package com.roacult.madinatic.ui.profile
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import com.roacult.madinatic.R
@@ -11,6 +12,12 @@ class EditInfoFragment : FullScreenFragment<ProfileChangeInfoBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initViews()
+
+    }
+
+    private fun initViews() {
 
     }
 }
