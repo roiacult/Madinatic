@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id ="@+id/home"
-        android:title ="@string/home"/>
-    <item android:id ="@+id/cart"
+    <item android:id ="@+id/declaration"
+        android:icon="@drawable/file_document_outline"
         android:title ="@string/declaration"/>
+    <item android:id ="@+id/announce"
+        android:icon="@drawable/bullhorn_outline"
+        android:title ="@string/announce"/>
     <item android:id ="@+id/profile"
+        android:icon="@drawable/account_outline"
         android:title ="@string/profile"/>
 </menu>
