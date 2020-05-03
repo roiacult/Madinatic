@@ -3,278 +3,245 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="android.view.View"/>
-        <import type="com.roacult.madinatic.utils.states.ViewState"/>
         <variable
             name="user"
             type="com.roacult.domain.entities.User" />
-        <variable name="state" type="ViewState"/>
     </data>
-    <FrameLayout
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:visibility="@{state == ViewState.SUCCESS ? View.VISIBLE : View.GONE}"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_height="330dp"
-                android:layout_width="match_parent">
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:contentScrim="?attr/colorPrimary">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guideline27"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            app:layout_constraintGuide_percent="0.56969696" />
-                        <androidx.constraintlayout.widget.Guideline
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/guideline28"
-                            app:layout_constraintGuide_percent="0.11"/>
-                        <androidx.constraintlayout.widget.Guideline
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/guideline29"
-                            app:layout_constraintGuide_percent="0.1"/>
-                        <androidx.constraintlayout.widget.Guideline
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:id="@+id/guideline30"
-                            app:layout_constraintGuide_percent="0.9"/>
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/image"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:src="@drawable/profile_holder"
-                            app:loadImage="@{user.image}"
-                            app:layout_constraintEnd_toStartOf="@+id/guideline30"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintBottom_toTopOf="@+id/guideline27"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toTopOf="@+id/guideline28"
-                            app:layout_constraintStart_toStartOf="@+id/guideline29"
-                            android:layout_marginStart="8dp"
-                            tools:src="@tools:sample/avatars"/>
-                        <TextView
-                            android:text="@{user.first_name + ` , ` + user.last_name}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/name"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintTop_toTopOf="@+id/guideline27"
-                            android:textColor="@color/primaryTextColor"
-                            tools:text="@tools:sample/full_names"
-                            android:textSize="25sp"
-                            android:layout_marginStart="8dp"
-                            app:layout_constraintStart_toStartOf="@+id/guideline29"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintEnd_toStartOf="@+id/guideline30"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:text="@{user.address}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/year"
-                            app:layout_constraintTop_toBottomOf="@+id/name"
-                            app:layout_constraintEnd_toStartOf="@+id/guideline30"
-                            android:layout_marginEnd="8dp"
-                            app:layout_constraintStart_toStartOf="@+id/guideline29"
-                            android:layout_marginStart="8dp"
-                            android:textColor="@color/primaryTextColor"
-                            tools:text="Algeria.Tlemcen"
-                            android:textSize="17sp"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <androidx.core.widget.NestedScrollView
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="330dp"
+            android:layout_width="match_parent">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-                <LinearLayout
-                    android:layout_marginTop="48dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:contentScrim="?attr/colorPrimary">
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.56969696" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/guideline28"
+                        app:layout_constraintGuide_percent="0.11"/>
+                    <androidx.constraintlayout.widget.Guideline
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/guideline29"
+                        app:layout_constraintGuide_percent="0.1"/>
+                    <androidx.constraintlayout.widget.Guideline
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/guideline30"
+                        app:layout_constraintGuide_percent="0.9"/>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/profile_holder"
+                        app:loadImage="@{user.image}"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline30"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline27"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="@+id/guideline28"
+                        app:layout_constraintStart_toStartOf="@+id/guideline29"
+                        android:layout_marginStart="8dp"
+                        tools:src="@tools:sample/avatars"/>
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/mtrl_background_outlined"
-                        android:drawableStart="@drawable/registration_name"
-                        android:drawablePadding="16dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:paddingStart="8dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
                         android:text="@{user.first_name + ` , ` + user.last_name}"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black_white_icons"
-                        android:textSize="17sp"
-                        tools:ignore="RtlCompat,RtlSymmetry"
-                        tools:text="@tools:sample/full_names" />
-
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/name"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="@+id/guideline27"
+                        android:textColor="@color/primaryTextColor"
+                        tools:text="@tools:sample/full_names"
+                        android:textSize="25sp"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline29"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline30"
+                        android:textStyle="bold"/>
                     <TextView
-                        android:text="@{user.email}"
-                        android:textAlignment="viewStart"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/mtrl_background_outlined"
-                        android:drawableStart="@drawable/email_outline"
-                        android:drawablePadding="16dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:paddingStart="8dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:textColor="@color/black_white_icons"
-                        android:textSize="17sp"
-                        tools:ignore="RtlCompat,RtlSymmetry"
-                        tools:text="@tools:sample/us_zipcodes" />
-
-                    <TextView
-                        android:text="@{`+213 ` + user.phone}"
-                        android:textAlignment="viewStart"
-                        android:id="@+id/phoneNumbre"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/mtrl_background_outlined"
-                        android:drawableStart="@drawable/phone"
-                        android:drawablePadding="16dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:paddingStart="8dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:textColor="@color/black_white_icons"
-                        android:textSize="17sp"
-                        tools:ignore="RtlCompat,RtlSymmetry"
-                        tools:text="@tools:sample/us_phones" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/mtrl_background_outlined"
-                        android:drawableStart="@drawable/map"
-                        android:drawablePadding="16dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:paddingStart="8dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
                         android:text="@{user.address}"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black_white_icons"
-                        android:textSize="17sp"
-                        tools:ignore="RtlCompat,RtlSymmetry" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/mtrl_background_outlined"
-                        android:drawableStart="@drawable/calendar_range"
-                        android:drawablePadding="16dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:paddingStart="8dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="@{user.dateBirth}"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black_white_icons"
-                        android:textSize="17sp"
-                        tools:ignore="RtlCompat,RtlSymmetry" />
-                </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
-            <iammert.com.view.scalinglib.ScalingLayout
-                android:background="@color/secondaryColor"
-                android:id="@+id/scalingLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                app:radiusFactor="1"
-                app:layout_behavior=".utils.ScaleBehavior"
-                android:layout_gravity="center_horizontal">
-                <LinearLayout
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                        <TextView
-                            android:gravity="center"
-                            android:layout_weight="1"
-                            android:drawablePadding="4dp"
-                            android:drawableTop="@drawable/settings_outline"
-                            android:text="@string/modifier_votre_profile"
-                            android:textColor="@color/secondaryTextColor"
-                            android:textSize="14sp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"/>
-                        <TextView
-                            android:gravity="center"
-                            android:layout_weight="1"
-                            android:drawablePadding="4dp"
-                            android:drawableTop="@drawable/lock_outline_profile"
-                            android:text="@string/modifier_votre_mots_de_passe"
-                            android:textColor="@color/secondaryTextColor"
-                            android:textSize="14sp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-            </iammert.com.view.scalinglib.ScalingLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/empty_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/year"
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline30"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline29"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/primaryTextColor"
+                        tools:text="Algeria.Tlemcen"
+                        android:textSize="17sp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/surface"
-            android:visibility="@{state == ViewState.EMPTY ? View.VISIBLE : View.GONE}"
-            tools:visibility="gone">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            <LinearLayout
+                android:layout_marginTop="48dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/mtrl_background_outlined"
+                    android:drawableStart="@drawable/registration_name"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@{user.first_name + ` , ` + user.last_name}"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black_white_icons"
+                    android:textSize="17sp"
+                    tools:ignore="RtlCompat,RtlSymmetry"
+                    tools:text="@tools:sample/full_names" />
+                <TextView
+                    android:text="@{user.email}"
+                    android:textAlignment="viewStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/mtrl_background_outlined"
+                    android:drawableStart="@drawable/email_outline"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/black_white_icons"
+                    android:textSize="17sp"
+                    tools:ignore="RtlCompat,RtlSymmetry"
+                    tools:text="@tools:sample/us_zipcodes" />
+                <TextView
+                    android:text="@{`+213 ` + user.phone}"
+                    android:textAlignment="viewStart"
+                    android:id="@+id/phoneNumbre"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/mtrl_background_outlined"
+                    android:drawableStart="@drawable/phone"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/black_white_icons"
+                    android:textSize="17sp"
+                    tools:ignore="RtlCompat,RtlSymmetry"
+                    tools:text="@tools:sample/us_phones" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/mtrl_background_outlined"
+                    android:drawableStart="@drawable/map"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@{user.address}"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black_white_icons"
+                    android:textSize="17sp"
+                    tools:ignore="RtlCompat,RtlSymmetry" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/mtrl_background_outlined"
+                    android:drawableStart="@drawable/calendar_range"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@{user.dateBirth}"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black_white_icons"
+                    android:textSize="17sp"
+                    tools:ignore="RtlCompat,RtlSymmetry" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <iammert.com.view.scalinglib.ScalingLayout
+            android:background="@color/secondaryColor"
+            android:id="@+id/scalingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:radiusFactor="1"
+            app:layout_behavior=".utils.ScaleBehavior"
+            android:layout_gravity="center_horizontal">
+            <LinearLayout
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/settings_outline"
+                    android:text="@string/modifier_votre_profile"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/lock_outline_profile"
+                    android:text="@string/modifier_votre_mots_de_passe"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </iammert.com.view.scalinglib.ScalingLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
