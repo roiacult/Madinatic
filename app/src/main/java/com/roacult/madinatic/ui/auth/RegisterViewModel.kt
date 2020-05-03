@@ -9,6 +9,7 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
 import com.roacult.madinatic.utils.StringProvider
+import com.roacult.madinatic.utils.extensions.isDateValid
 import com.roacult.madinatic.utils.extensions.isValidEmail
 import com.roacult.madinatic.utils.states.*
 import timber.log.Timber
@@ -65,7 +66,7 @@ class RegisterViewModel(
             return
         }
 
-        if(!dateBirth.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
+        if(!dateBirth.isDateValid()) {
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.invalid_date))) }
             return
         }

@@ -22,6 +22,11 @@ fun String.isValidEmail(): Boolean {
     val matcher = pattern.matcher(this)
     return matcher.matches()
 }
+
+fun String.isDateValid() : Boolean{
+    return this.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
+}
+
 // TODO finish the bundle part
 fun <T:Activity>Fragment.navigateTo(finish:Boolean = false , destinationActivity:Class<T> , bundle: Bundle?= null ){
     val intent = Intent(activity , destinationActivity)

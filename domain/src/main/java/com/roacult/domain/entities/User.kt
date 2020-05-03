@@ -1,6 +1,6 @@
 package com.roacult.domain.entities
 
-class User (
+data class User (
     val idu : String,
     val first_name : String,
     val last_name : String,
