@@ -5,6 +5,9 @@
     <data>
         <import type="android.view.View"/>
         <import type="com.roacult.madinatic.utils.states.ViewState"/>
+        <variable
+            name="user"
+            type="com.roacult.domain.entities.User" />
         <variable name="state" type="ViewState"/>
     </data>
     <FrameLayout
@@ -57,6 +60,7 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:src="@drawable/profile_holder"
+                            app:loadImage="@{user.image}"
                             app:layout_constraintEnd_toStartOf="@+id/guideline30"
                             android:layout_marginEnd="8dp"
                             app:layout_constraintBottom_toTopOf="@+id/guideline27"
@@ -66,7 +70,7 @@
                             android:layout_marginStart="8dp"
                             tools:src="@tools:sample/avatars"/>
                         <TextView
-                            android:text="Benahmed Djawed"
+                            android:text="@{user.first_name + ` , ` + user.last_name}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/name"
@@ -81,7 +85,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/guideline30"
                             android:textStyle="bold"/>
                         <TextView
-                            android:text="Tlemcen Algeria"
+                            android:text="@{user.address}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/year"
@@ -111,8 +115,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="Benahmed Djawed"
-                        android:textAlignment="viewStart"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="10dp"
@@ -126,13 +128,15 @@
                         android:paddingStart="8dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
+                        android:text="@{user.first_name + ` , ` + user.last_name}"
+                        android:textAlignment="viewStart"
                         android:textColor="@color/black_white_icons"
                         android:textSize="17sp"
                         tools:ignore="RtlCompat,RtlSymmetry"
                         tools:text="@tools:sample/full_names" />
 
                     <TextView
-                        android:text="email@example.com"
+                        android:text="@{user.email}"
                         android:textAlignment="viewStart"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -153,7 +157,7 @@
                         tools:text="@tools:sample/us_zipcodes" />
 
                     <TextView
-                        android:text="+213 7982626526"
+                        android:text="@{`+213 ` + user.phone}"
                         android:textAlignment="viewStart"
                         android:id="@+id/phoneNumbre"
                         android:layout_width="match_parent"
@@ -189,7 +193,7 @@
                         android:paddingStart="8dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
-                        android:text="@string/address"
+                        android:text="@{user.address}"
                         android:textAlignment="viewStart"
                         android:textColor="@color/black_white_icons"
                         android:textSize="17sp"
@@ -210,7 +214,7 @@
                         android:paddingStart="8dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
-                        android:text="1999-12-23"
+                        android:text="@{user.dateBirth}"
                         android:textAlignment="viewStart"
                         android:textColor="@color/black_white_icons"
                         android:textSize="17sp"
