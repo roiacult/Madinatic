@@ -65,6 +65,7 @@ dependencies {
     implementation(Dependencies.circleImage)
     implementation(Dependencies.arcView)
     implementation(Dependencies.tagView)
+    implementation(Dependencies.scalLayout)
 
     implementation(Dependencies.Jstarter.domain)
 

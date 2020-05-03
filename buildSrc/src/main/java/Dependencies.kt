@@ -37,6 +37,8 @@ object Dependencies{
     const val arcView = "com.github.florent37:shapeofview:1.4.7"
     const val tagView = "co.lujun:androidtagview:1.1.7"
 
+    const val scalLayout = "com.github.iammert:ScalingLayout:1.2.1"
+
 
     const val SwipeRefreshLayout= "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayout}"
 
