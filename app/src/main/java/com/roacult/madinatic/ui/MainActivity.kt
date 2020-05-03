@@ -6,6 +6,7 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.ActivityNavigator
 import com.roacult.madinatic.databinding.MainBinding
 import com.roacult.madinatic.ui.auth.LoginFragment
+import com.roacult.madinatic.ui.profile.ProfileFragment
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,7 +26,7 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
             }
         }
         viewModel.navigate(FragmentNavigation(
-            destinationClass = LoginFragment::class.java
+            destinationClass = ProfileFragment::class.java
         ))
     }
 
