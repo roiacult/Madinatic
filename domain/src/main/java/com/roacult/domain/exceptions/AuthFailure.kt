@@ -9,3 +9,8 @@ sealed class AuthFailure : Failure() {
     object AlredySignedIn :AuthFailure()
     object InvalidPassword : AuthFailure()
 }
+
+
+sealed class ProfileFailures : Failure() {
+
+}
