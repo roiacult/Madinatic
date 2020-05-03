@@ -1,6 +1,7 @@
 package com.roacult.madinatic.ui
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.databinding.DataBindingUtil
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.ActivityNavigator
@@ -92,14 +93,16 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
         }
     }
 
-    private fun startHome() {
+    private fun startHome(selectedFragment: Int = R.id.declaration) {
         val fr = supportFragmentManager.findFragmentByTag(MainFragemtnsTags.LOGIN)
         if (fr != null) supportFragmentManager.inTransaction {
             remove(fr)
         }
 
+        viewModel.selectedFragment = selectedFragment
         viewModel.showBottomNav()
         // initialise current fragment
+
         currentFragment = when (viewModel.selectedFragment) {
             R.id.declaration -> declarationFragment
             R.id.announce -> anounceFragment
@@ -163,5 +166,17 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
             if (fr is FullScreenFragment<*>) viewModel.disableBottomNav()
             else if (fr is BaseFragment<*>) viewModel.showBottomNav()
         }
+    }
+
+    override fun navigate(navigation: FragmentNavigation) {
+        val selected = when(navigation.destinationClass){
+            DeclarationFragment::class.java -> R.id.declaration
+            AnounceFragment::class.java -> R.id.announce
+            ProfileFragment::class.java ->R.id.profile
+            else -> null
+        }
+        if(selected != null) {
+          startHome(selected)
+        } else super.navigate(navigation)
     }
 }

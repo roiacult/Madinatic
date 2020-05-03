@@ -10,7 +10,9 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.LoginBinding
 import com.roacult.madinatic.databinding.ResetPasswordBinding
+import com.roacult.madinatic.ui.profile.ProfileFragment
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
+import com.roacult.madinatic.utils.navigation.NavigationOption
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -57,9 +59,14 @@ class LoginFragment : FullScreenFragment<LoginBinding>() {
             is Loading -> binding.state = ViewState.LOADING
             is Fail<*, *> -> binding.state = ViewState.EMPTY
             is Success -> {
-                //TODO go to main page here
                 binding.state = ViewState.SUCCESS
-                showMessage("TODO go to main here")
+                vm.navigate(FragmentNavigation(isReplace = true,
+                    destinationClass = ProfileFragment::class.java,
+                    navigationOption = NavigationOption(
+                        addToBackStack = false,
+                        popUpBackStack = true
+                    )
+                ))
             }
         }
     }

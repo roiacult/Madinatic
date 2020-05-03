@@ -21,6 +21,12 @@ abstract class ActivityNavigator<VM: NavigationViewModel<*>> : BaseActivity(){
 
 
     private fun handleNavigation(navigation: FragmentNavigation) {
+        preNavigation(navigation)
+        navigate(navigation)
+    }
+
+
+    open fun preNavigation(navigation : FragmentNavigation) {
 
         if(navigation.navigationOption.popUpBackStack){
             // remove all added Fragment
@@ -28,7 +34,9 @@ abstract class ActivityNavigator<VM: NavigationViewModel<*>> : BaseActivity(){
                 supportFragmentManager.popBackStack()
             }
         }
+    }
 
+    open fun navigate(navigation: FragmentNavigation) {
         if (navigation.isADialogueFragment) {
             try {
                 val fr = navigation.destinationClass.newInstance() as AppCompatDialogFragment
