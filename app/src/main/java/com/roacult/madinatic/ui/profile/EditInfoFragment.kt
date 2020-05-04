@@ -8,10 +8,15 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.ProfileChangeInfoBinding
 import com.roacult.madinatic.utils.extensions.toUser
+import com.roacult.madinatic.utils.states.Async
+import com.roacult.madinatic.utils.states.Fail
+import com.roacult.madinatic.utils.states.Loading
+import com.roacult.madinatic.utils.states.Success
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -28,6 +33,35 @@ class EditInfoFragment : FullScreenFragment<ProfileChangeInfoBinding>() {
 
         initViews()
 
+        viewModel.observe(this){
+            it.erroMsg?.getContentIfNotHandled()?.let(::onError)
+            handleSaveUserData(it.saveUserData)
+        }
+
+    }
+
+    private fun handleSaveUserData(saveUserData: Async<None>) {
+        when(saveUserData){
+            is Loading -> showLoading(true)
+            is Fail<*,*> -> showLoading(false)
+            is Success -> {
+                showLoading(false)
+                showMessage(getString(R.string.editinfo_succ))
+                viewModel.finishSaveUserData()
+            }
+        }
+    }
+
+    private fun showLoading(show: Boolean) {
+        binding.firstName.isEnabled = !show
+        binding.lastName.isEnabled= !show
+        binding.email.isEnabled= !show
+        binding.phoneNumber.isEnabled= !show
+        binding.address.isEnabled= !show
+        binding.materialButton.isEnabled = !show
+        binding.save.isEnabled = !show
+        binding.cancel.isEnabled = !show
+        binding.ediBtn.isEnabled = !show
     }
 
     private fun initViews() {

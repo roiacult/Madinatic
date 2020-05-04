@@ -55,4 +55,5 @@
     <string name="cancel">Annuler</string>
     <string name="invalid_firstname">invalid first name</string>
     <string name="invalid_lastname">invalid last name</string>
+    <string name="editinfo_succ">data saved successfully</string>
 </resources>
