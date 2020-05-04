@@ -9,6 +9,7 @@ object API_ROOTS {
     const val RESET_PASSWORD = "/api/password/reset/"
     const val USER_WITH_TOKEN = "/api/user/"
     const val REGISTRATION = "/api/registration/"
+    const val UPDATEPASSWORD = "/api/password/change/"
 }
 
 

@@ -1,15 +1,18 @@
 package com.roacult.data.remote
 
+import com.roacult.data.remote.entities.RemoteUpdatePassword
 import com.roacult.data.remote.entities.UserRemoteEntity
 import com.roacult.data.remote.services.MainService
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
+import com.roacult.kero.team7.jstarter_domain.interactors.None
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,6 +58,29 @@ class MainRemote(
                 } else {
                     Timber.v("putUserInfo succeeded")
                     coroutine.resume(Either.Right(body))
+                }
+            }
+        })
+    }
+
+    suspend fun updatePassword(
+        toRemote: RemoteUpdatePassword,
+        token: String
+    ): Either<ProfileFailures, None> = suspendCoroutine{coroutine->
+        service.updatePassword(token,toRemote).enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Timber.v("updatePassword failled $t")
+                coroutine.resume(Either.Left(ProfileFailures.InternetConnection))
+            }
+it 
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val body = response.body()
+                if (body == null || !response.isSuccessful) {
+                    Timber.v("updatePassword failled $response")
+                    coroutine.resume(Either.Left(ProfileFailures.PasswordInvalid))
+                } else {
+                    Timber.v("updatePassword succeeded")
+                    coroutine.resume(Either.Right(None()))
                 }
             }
         })

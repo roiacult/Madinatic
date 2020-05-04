@@ -5,9 +5,11 @@ import com.roacult.data.local.MainLocal
 import com.roacult.data.local.entities.toLocalEntity
 import com.roacult.data.remote.AuthLocal
 import com.roacult.data.remote.MainRemote
+import com.roacult.data.remote.entities.toRemote
 import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.repos.MainRepo
+import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.None
@@ -41,5 +43,12 @@ class MainRepoImpl(
         authLocal.storeUser(user.toLocalEntity(),gson)
 
         return Either.Right(None())
+    }
+
+    /**
+     * update current user password
+     * */
+    override suspend fun changePassword(changePasswordParam: ChangePasswordParam): Either<ProfileFailures, None> {
+        return mainRemote.updatePassword(changePasswordParam.toRemote(),authLocal.getToken())
     }
 }
