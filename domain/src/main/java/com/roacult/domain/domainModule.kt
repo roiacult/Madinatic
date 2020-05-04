@@ -4,6 +4,7 @@ import com.roacult.domain.usecases.auth.Login
 import com.roacult.domain.usecases.auth.Register
 import com.roacult.domain.usecases.auth.ResetPassword
 import com.roacult.domain.usecases.auth.UserState
+import com.roacult.domain.usecases.profile.ChangePassword
 import com.roacult.domain.usecases.profile.EditUserInfo
 import com.roacult.domain.usecases.profile.UserObservable
 import org.koin.dsl.module
@@ -18,4 +19,6 @@ val domainModule = module {
 
     single { UserObservable(get(),get()) }
     single { EditUserInfo(get(),get()) }
+
+    single { ChangePassword(get(),get()) }
 }
