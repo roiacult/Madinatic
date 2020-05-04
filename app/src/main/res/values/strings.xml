@@ -53,4 +53,6 @@
     <string name="announce">Announce</string>
     <string name="save">enregistrer</string>
     <string name="cancel">Annuler</string>
+    <string name="invalid_firstname">invalid first name</string>
+    <string name="invalid_lastname">invalid last name</string>
 </resources>
