@@ -56,4 +56,8 @@
     <string name="invalid_firstname">invalid first name</string>
     <string name="invalid_lastname">invalid last name</string>
     <string name="editinfo_succ">data saved successfully</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New Password</string>
+    <string name="new_password_repear">Repeat New Password</string>
+    <string name="change_your_password">Change your password</string>
 </resources>
