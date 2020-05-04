@@ -45,8 +45,9 @@ class UpdatePasswordViewModel(
 
     fun onChangePassFailed(fail : ProfileFailures){
         val msg = when(fail){
-            ProfileFailures.PasswordInvalid -> stringProvider.getStringFromResource(R.string.invalid_pass_failure)
+            ProfileFailures.NewPasswordInvalid -> stringProvider.getStringFromResource(R.string.invalid_pass_failure)
             ProfileFailures.InternetConnection -> stringProvider.getStringFromResource(R.string.internet_prblm)
+            ProfileFailures.PasswordInvalid -> stringProvider.getStringFromResource(R.string.invalid_newpass)
             else -> stringProvider.getStringFromResource(R.string.unknown_error)
         }
 

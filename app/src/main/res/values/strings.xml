@@ -61,4 +61,5 @@
     <string name="new_password_repear">Repeat New Password</string>
     <string name="change_your_password">Change your password</string>
     <string name="updatepass_succ">password updated successfully</string>
+    <string name="invalid_newpass">this is an invalid password</string>
 </resources>

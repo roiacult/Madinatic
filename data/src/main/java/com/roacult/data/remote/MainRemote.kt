@@ -54,7 +54,7 @@ class MainRemote(
                 val body = response.body()
                 if (body == null || !response.isSuccessful) {
                     Timber.v("putUserInfo failled $response")
-                    coroutine.resume(Either.Left(ProfileFailures.AuthFailed))
+                    coroutine.resume(Either.Left(ProfileFailures.UnkonwError))
                 } else {
                     Timber.v("putUserInfo succeeded")
                     coroutine.resume(Either.Right(body))
@@ -77,7 +77,9 @@ class MainRemote(
                 val body = response.body()
                 if (body == null || !response.isSuccessful) {
                     Timber.v("updatePassword failled $response")
-                    coroutine.resume(Either.Left(ProfileFailures.PasswordInvalid))
+                    if(response.errorBody()!!.string().contains("old_password\":[\"Invalid password")) {
+                        coroutine.resume(Either.Left(ProfileFailures.PasswordInvalid))
+                    }else coroutine.resume(Either.Left(ProfileFailures.NewPasswordInvalid))
                 } else {
                     Timber.v("updatePassword succeeded")
                     coroutine.resume(Either.Right(None()))
