@@ -31,7 +31,7 @@ class MainRemote(
         map["email"] = editUserInfo.email.toRequestBody("text/plain".toMediaTypeOrNull())
         map["phone"] = editUserInfo.phoneNumber.toRequestBody("text/plain".toMediaTypeOrNull())
         map["date_of_birth"] = editUserInfo.dateBirth.toRequestBody("text/plain".toMediaTypeOrNull())
-        map["address"] = editUserInfo.dateBirth.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["address"] = editUserInfo.address.toRequestBody("text/plain".toMediaTypeOrNull())
 
         val image = editUserInfo.image
         val call = if(image == null) {
@@ -39,7 +39,7 @@ class MainRemote(
         }else{
             val file = File(image)
             val req = file.asRequestBody("image/*".toMediaTypeOrNull())
-            service.putUserInfo(token,map, MultipartBody.Part.createFormData("src",file.name,req))
+            service.putUserInfo(token,map, MultipartBody.Part.createFormData("image",file.name,req))
         }
         call.enqueue(object : Callback<UserRemoteEntity> {
             override fun onFailure(call: Call<UserRemoteEntity>, t: Throwable) {
