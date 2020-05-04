@@ -71,7 +71,7 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.main)
 
-        if (viewModel.homeStarted) startHome()
+        if (viewModel.homeStarted) startHome(viewModel.selectedFragment)
 
         viewModel.observe(this){
             it.bottomNavState?.getContentIfNotHandled()?.let(::handleBottomNavState)
