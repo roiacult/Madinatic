@@ -72,7 +72,7 @@ class MainRemote(
                 Timber.v("updatePassword failled $t")
                 coroutine.resume(Either.Left(ProfileFailures.InternetConnection))
             }
-it 
+
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 val body = response.body()
                 if (body == null || !response.isSuccessful) {
