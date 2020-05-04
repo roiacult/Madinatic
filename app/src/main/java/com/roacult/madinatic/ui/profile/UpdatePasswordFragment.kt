@@ -51,5 +51,9 @@ class UpdatePasswordFragment : FullScreenFragment<UpdatePasswordBinding>(){
 
     private fun initViews() {
         binding.viewModel =viewModel
+
+        binding.cancel.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 }

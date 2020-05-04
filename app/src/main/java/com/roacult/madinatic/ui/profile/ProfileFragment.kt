@@ -47,7 +47,7 @@ class ProfileFragment : BaseFragment<ProfileBinding>() {
                 }
             }
             ProfileClickEvent.CHANGEPASSWORD -> {
-                //TODO
+                vm.navigate(FragmentNavigation(destinationClass = UpdatePasswordFragment::class.java))
             }
         }
     }
