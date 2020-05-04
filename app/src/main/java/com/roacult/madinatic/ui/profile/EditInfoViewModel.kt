@@ -50,7 +50,7 @@ class EditInfoViewModel(
             return
         }
 
-        if(user.email.isValidEmail()){
+        if(!user.email.isValidEmail()){
             setState{copy(erroMsg= Event(stringProvider.getStringFromResource(R.string.invalid_email)))}
             return
         }

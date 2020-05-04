@@ -65,7 +65,7 @@ fun Bundle.toUser() : User {
         getString(UserBunndle.IDU)!!,
         getString(UserBunndle.FIRSTNAME)!!,
         getString(UserBunndle.LASTNAME)!!,
-        getString(UserBunndle.IMAGE)!!,
+        getString(UserBunndle.IMAGE),
         getString(UserBunndle.PHONE)!!,
         getString(UserBunndle.DATEBIRTH)!!,
         getString(UserBunndle.EMAIL)!!,

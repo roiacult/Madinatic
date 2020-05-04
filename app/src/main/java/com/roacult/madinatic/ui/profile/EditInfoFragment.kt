@@ -136,7 +136,7 @@ class EditInfoFragment : FullScreenFragment<ProfileChangeInfoBinding>() {
     private fun showDatePicker() {
         DatePickerDialog(context!!,
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                binding.materialButton.text = "$year-$month-$dayOfMonth"
+                binding.materialButton.text = "$year-${month+1}-$dayOfMonth"
             },2020,1,1).show()
     }
 }

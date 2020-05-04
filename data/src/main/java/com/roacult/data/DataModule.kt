@@ -14,5 +14,5 @@ val dataModule = module {
 
     //add all  repositories here as singleton
     single<AuthRepo>{ AuthRepoImpl(get(),get(),get()) }
-    single<MainRepo>{ MainRepoImpl(get()) }
+    single<MainRepo>{ MainRepoImpl(get(),get(),get(),get()) }
 }

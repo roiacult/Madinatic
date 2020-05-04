@@ -25,9 +25,9 @@ val remoteModule = module {
                 addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 addNetworkInterceptor(StethoInterceptor())
             }
-            connectTimeout(10, TimeUnit.SECONDS)
-            readTimeout(10, TimeUnit.SECONDS)
-            writeTimeout(10, TimeUnit.SECONDS)
+            connectTimeout(40, TimeUnit.SECONDS)
+            readTimeout(40, TimeUnit.SECONDS)
+            writeTimeout(40, TimeUnit.SECONDS)
         }.build()
     }
 
