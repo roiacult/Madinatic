@@ -86,7 +86,6 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
 
     private fun handleUserState(authState: Boolean) {
         if (authState) {
-            viewModel.homeStarted = true
             startHome()
         } else supportFragmentManager.inTransaction {
             add(R.id.main_container, LoginFragment(), MainFragemtnsTags.LOGIN)
@@ -94,6 +93,8 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
     }
 
     private fun startHome(selectedFragment: Int = R.id.declaration) {
+
+        viewModel.homeStarted = true
         val fr = supportFragmentManager.findFragmentByTag(MainFragemtnsTags.LOGIN)
         if (fr != null) supportFragmentManager.inTransaction {
             remove(fr)

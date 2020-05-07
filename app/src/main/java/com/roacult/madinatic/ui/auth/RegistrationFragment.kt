@@ -67,7 +67,7 @@ class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
     private fun showDatePicker() {
         DatePickerDialog(context!!,
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                binding.dateBirth.setText("$year-$month-$dayOfMonth")
+                binding.dateBirth.setText("$year-${month+1}-$dayOfMonth")
             },2020,1,1).show()
     }
 
