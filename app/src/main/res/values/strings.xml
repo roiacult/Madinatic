@@ -62,10 +62,13 @@
     <string name="change_your_password">Change your password</string>
     <string name="updatepass_succ">password updated successfully</string>
     <string name="invalid_newpass">this is an invalid password</string>
-    <string name="upload_a_file_doc_pdf">upload a file doc,pdf,…</string>
+    <string name="upload_a_file_doc_pdf">upload a file (doc,pdf,txt)</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="location">location</string>
     <string name="add_declaration">add declaration</string>
     <string name="upload_img">upload images</string>
+    <string name="permi_titel">permission needed</string>
+    <string name="permi_msg">madina-tic need storage permissions inorder to upload pdf files</string>
+    <string name="upload_permission_denied">you can\'t upload file permission denied</string>
 </resources>

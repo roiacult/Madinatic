@@ -66,6 +66,7 @@ dependencies {
     implementation(Dependencies.arcView)
     implementation(Dependencies.tagView)
     implementation(Dependencies.scalLayout)
+    implementation(Dependencies.filepicker)
 
     implementation(Dependencies.Jstarter.domain)
 
