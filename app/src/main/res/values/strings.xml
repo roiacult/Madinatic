@@ -62,4 +62,8 @@
     <string name="change_your_password">Change your password</string>
     <string name="updatepass_succ">password updated successfully</string>
     <string name="invalid_newpass">this is an invalid password</string>
+    <string name="upload_a_file_doc_pdf">upload a file doc,pdf,…</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="location">location</string>
 </resources>

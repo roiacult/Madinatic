@@ -20,4 +20,5 @@
     <color name="black_white_icons">#282828</color>
     <color name="border_color">#949494</color>
     <color name="white">#FFF</color>
+    <color name="add_product_back">#DBDBDB</color>
 </resources>
