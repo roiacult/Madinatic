@@ -9,6 +9,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import co.lujun.androidtagview.TagView
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import com.roacult.madinatic.R
@@ -26,31 +27,34 @@ class AddDeclaration : FullScreenFragment<AddDeclarationBinding>() {
     }
 
     private fun initViews() {
+        //TODO remove this later (this just for testing the ui)
         val list = ArrayList<String>().apply {
             add("categorie of declaration")
             add("categorie test1")
             add("categorie test2")
         }
-        binding.spinner.adapter = SpinnerAdapter<String>(context!!,android.R.layout.simple_dropdown_item_1line,list)
+        binding.spinner.adapter = SpinnerAdapter(context!!,android.R.layout.simple_dropdown_item_1line,list)
         binding.addfile.setOnClickListener {
             checkPermission()
         }
+        binding.tagView.setOnTagClickListener(object : TagView.OnTagClickListener {
+            override fun onSelectedTagDrag(position: Int, text: String?) {}
+            override fun onTagLongClick(position: Int, text: String?) {}
+            override fun onTagClick(position: Int, text: String?) {}
+            override fun onTagCrossClick(position: Int) {
+                binding.tagView.removeTag(position)
+            }
+        })
     }
 
     private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     activity!!,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 )
             ) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 AlertDialog.Builder(context!!).apply {
                     setTitle(R.string.permi_titel)
                     setMessage(R.string.permi_msg)
@@ -60,7 +64,6 @@ class AddDeclaration : FullScreenFragment<AddDeclarationBinding>() {
                     show()
                 }
             } else {
-                // No explanation needed, we can request the permission.
                 request()
             }
         } else {
