@@ -10,7 +10,8 @@ object APIROOTS {
     const val USER_WITH_TOKEN = "/api/user/"
     const val REGISTRATION = "/api/registration/"
     const val UPDATEPASSWORD = "/api/password/change/"
-    const val DECLARATIONTYPE = "/api/declarations/"
+    const val DECLARATION = "/api/declarations/"
+    const val DECLARATIONTYPE = "/api/declarations_types/"
 }
 
 //prefrences keys

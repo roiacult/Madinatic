@@ -14,6 +14,7 @@ import com.roacult.domain.repos.MainRepo
 import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
+import com.roacult.kero.team7.jstarter_domain.functional.map
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import io.reactivex.Observable
 
@@ -57,8 +58,9 @@ class MainRepoImpl(
     /**
      * fetch all declaration types
      * */
-
     override suspend fun fetchCategories(): Either<DeclarationFailure, List<Categorie>> {
-        return mainRemote.fetchCategories(authLocal.getToken())
+        return mainRemote.fetchCategories(authLocal.getToken()).map {
+            it.map { it.toCategorie() }
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 import com.roacult.domain.entities.Declaration
 
 data class RemoteDeclaration(
+    @SerializedName("did") val id : String,
     @SerializedName("title") val title: String,
     @SerializedName("desc") val desc: String,
     @SerializedName("citizen") val citizen: String,
@@ -17,6 +18,7 @@ data class RemoteDeclaration(
 ) {
     fun toDeclaration() : Declaration{
         return Declaration(
+            this.id,
             this.title,
             this.desc,
             this.citizen,
@@ -32,6 +34,7 @@ data class RemoteDeclaration(
 
 fun Declaration.toRemote() : RemoteDeclaration {
     return RemoteDeclaration(
+        this.id,
         this.title,
         this.desc,
         this.citizen,

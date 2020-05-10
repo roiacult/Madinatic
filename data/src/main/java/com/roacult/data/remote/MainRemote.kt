@@ -1,5 +1,6 @@
 package com.roacult.data.remote
 
+import com.roacult.data.remote.entities.RemoteCategorie
 import com.roacult.data.remote.entities.RemoteUpdatePassword
 import com.roacult.data.remote.entities.UserRemoteEntity
 import com.roacult.data.remote.services.MainService
@@ -90,8 +91,29 @@ class MainRemote(
         })
     }
 
-    suspend fun fetchCategories(token: String): Either<DeclarationFailure, List<Categorie>> = suspendCoroutine {coroutine->
+    suspend fun fetchCategories(token: String): Either<DeclarationFailure, List<RemoteCategorie>> = suspendCoroutine {coroutine->
+        service
+            .fetchCategories(token)
+            .enqueue(object : Callback<List<RemoteCategorie>> {
+                override fun onFailure(call: Call<List<RemoteCategorie>>, t: Throwable) {
+                    Timber.v("fetchCategories failed")
+                    coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+                }
 
+                override fun onResponse(
+                    call: Call<List<RemoteCategorie>>,
+                    response: Response<List<RemoteCategorie>>
+                ) {
+                    val body = response.body()
+                    if (body == null || !response.isSuccessful) {
+                        Timber.v("fetchCategories failled $response")
+                        coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                    } else {
+                        Timber.v("fetchCategories succeeded")
+                        coroutine.resume(Either.Right(body))
+                    }
+                }
+            })
     }
 
 }

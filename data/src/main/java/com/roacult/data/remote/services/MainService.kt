@@ -1,5 +1,6 @@
 package com.roacult.data.remote.services
 
+import com.roacult.data.remote.entities.RemoteCategorie
 import com.roacult.data.remote.entities.RemoteDeclaration
 import com.roacult.data.remote.entities.RemoteUpdatePassword
 import com.roacult.data.remote.entities.UserRemoteEntity
@@ -37,6 +38,6 @@ interface MainService {
     @GET(APIROOTS.DECLARATIONTYPE)
     fun fetchCategories(
         @Header("Authorization") key: String
-    ) : Call<List<RemoteDeclaration>>
+    ) : Call<List<RemoteCategorie>>
 
 }
