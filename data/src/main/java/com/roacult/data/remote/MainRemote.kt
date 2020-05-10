@@ -3,6 +3,8 @@ package com.roacult.data.remote
 import com.roacult.data.remote.entities.RemoteUpdatePassword
 import com.roacult.data.remote.entities.UserRemoteEntity
 import com.roacult.data.remote.services.MainService
+import com.roacult.domain.entities.Categorie
+import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
@@ -86,6 +88,10 @@ class MainRemote(
                 }
             }
         })
+    }
+
+    suspend fun fetchCategories(token: String): Either<DeclarationFailure, List<Categorie>> = suspendCoroutine {coroutine->
+
     }
 
 }

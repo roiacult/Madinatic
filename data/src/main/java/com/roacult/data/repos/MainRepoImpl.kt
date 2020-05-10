@@ -59,6 +59,6 @@ class MainRepoImpl(
      * */
 
     override suspend fun fetchCategories(): Either<DeclarationFailure, List<Categorie>> {
-        TODO("Not yet implemented")
+        return mainRemote.fetchCategories(authLocal.getToken())
     }
 }

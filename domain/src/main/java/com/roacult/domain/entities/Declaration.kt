@@ -8,6 +8,6 @@ class Declaration (
     val geo_cord: String,
     val categorie: String,
     val status: String?,
-    val validated_at: String?,
-    val modified_at: String?
+    val modified_at: String?,
+    val validated_at: String?
 )

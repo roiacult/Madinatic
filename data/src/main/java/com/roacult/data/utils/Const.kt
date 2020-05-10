@@ -4,14 +4,14 @@ package com.roacult.data.utils
 const val BASE_URL = "http://157.230.19.233/"
 
 //rest api roots
-object API_ROOTS {
+object APIROOTS {
     const val LOGIN = "/api/login/"
     const val RESET_PASSWORD = "/api/password/reset/"
     const val USER_WITH_TOKEN = "/api/user/"
     const val REGISTRATION = "/api/registration/"
     const val UPDATEPASSWORD = "/api/password/change/"
+    const val DECLARATIONTYPE = "/api/declarations/"
 }
-
 
 //prefrences keys
 object PREFRENCES {
