@@ -17,6 +17,10 @@ import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.AddDeclarationBinding
+import com.schibstedspain.leku.LATITUDE
+import com.schibstedspain.leku.LOCATION_ADDRESS
+import com.schibstedspain.leku.LONGITUDE
+import com.schibstedspain.leku.LocationPickerActivity
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import timber.log.Timber
@@ -70,6 +74,23 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
                 binding.desciption.text.toString(),
                 binding.spinner.selectedItem as String
             )
+        }
+
+        binding.materialButton2.setOnClickListener {
+            val locationPickerIntent = LocationPickerActivity.Builder()
+                .withGeolocApiKey(getString(R.string.google_api_key))
+                .withDefaultLocaleSearchZone()
+                .shouldReturnOkOnBackPressed()
+                .withSatelliteViewHidden()
+                .withGooglePlacesEnabled()
+                .withGoogleTimeZoneEnabled()
+                .build(context!!)
+
+            startActivityForResult(locationPickerIntent, MAP_REQUEST_CODE)
+        }
+
+        binding.cancel.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 
@@ -174,6 +195,17 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
                     setImageURI(result.uri)
                 }
             }
+        }else if(requestCode == MAP_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            val latitude = data.getDoubleExtra(LATITUDE, 0.0)
+            val longitude = data.getDoubleExtra(LONGITUDE, 0.0)
+            val address = data.getStringExtra(LOCATION_ADDRESS)
+
+            if(address != null) binding.materialButton2.text = address
+
+            Timber.v("lat : $latitude")
+            Timber.v("long : $longitude")
+            Timber.v("address : $address")
+
         }
     }
 
@@ -200,5 +232,6 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
     companion object {
         const val PICKFILE_REQUEST_CODE = 984
         const val REQUEST_STORAGE_PERMISSION = 875
+        const val MAP_REQUEST_CODE =958
     }
 }
