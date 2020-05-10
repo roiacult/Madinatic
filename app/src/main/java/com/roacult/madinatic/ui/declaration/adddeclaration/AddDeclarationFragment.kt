@@ -24,7 +24,7 @@ import java.util.regex.Pattern
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
-class AddDeclaration : FullScreenFragment<AddDeclarationBinding>(),View.OnClickListener {
+class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.OnClickListener {
     override val layutIdRes = R.layout.add_declaration
 
     private val viewModel : AddDeclarationViewModel by viewModel()
@@ -54,6 +54,7 @@ class AddDeclaration : FullScreenFragment<AddDeclarationBinding>(),View.OnClickL
             override fun onTagClick(position: Int, text: String?) {}
             override fun onTagCrossClick(position: Int) {
                 binding.tagView.removeTag(position)
+                viewModel.files.removeAt(position)
             }
         })
         binding.image1.setOnClickListener(this)
@@ -133,7 +134,7 @@ class AddDeclaration : FullScreenFragment<AddDeclarationBinding>(),View.OnClickL
 
     private fun showFilePicker(){
         MaterialFilePicker().apply {
-            withSupportFragment(this@AddDeclaration)
+            withSupportFragment(this@AddDeclarationFragment)
             withCloseMenu(true)
             withRequestCode(PICKFILE_REQUEST_CODE)
             withFilter(Pattern.compile(".*\\.(pdf|docx|doc|txt)$"))

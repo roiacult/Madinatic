@@ -6,7 +6,7 @@ import androidx.core.view.get
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.DeclarationBinding
-import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclaration
+import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationFragment
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 
 class DeclarationFragment : BaseFragment<DeclarationBinding>() {
@@ -19,7 +19,7 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
 
     private fun initViews() {
         binding.toolbar.menu[0].setOnMenuItemClickListener {
-            vm.navigate(FragmentNavigation(destinationClass = AddDeclaration::class.java))
+            vm.navigate(FragmentNavigation(destinationClass = AddDeclarationFragment::class.java))
             true
         }
     }
