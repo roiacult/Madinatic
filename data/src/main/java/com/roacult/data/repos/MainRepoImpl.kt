@@ -6,7 +6,9 @@ import com.roacult.data.local.entities.toLocalEntity
 import com.roacult.data.remote.AuthLocal
 import com.roacult.data.remote.MainRemote
 import com.roacult.data.remote.entities.toRemote
+import com.roacult.domain.entities.Categorie
 import com.roacult.domain.entities.User
+import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.repos.MainRepo
 import com.roacult.domain.usecases.profile.ChangePasswordParam
@@ -50,5 +52,13 @@ class MainRepoImpl(
      * */
     override suspend fun changePassword(changePasswordParam: ChangePasswordParam): Either<ProfileFailures, None> {
         return mainRemote.updatePassword(changePasswordParam.toRemote(),authLocal.getToken())
+    }
+
+    /**
+     * fetch all declaration types
+     * */
+
+    override suspend fun fetchCategories(): Either<DeclarationFailure, List<Categorie>> {
+        TODO("Not yet implemented")
     }
 }

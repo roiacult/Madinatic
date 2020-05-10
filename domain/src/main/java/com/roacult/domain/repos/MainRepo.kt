@@ -1,6 +1,8 @@
 package com.roacult.domain.repos
 
+import com.roacult.domain.entities.Categorie
 import com.roacult.domain.entities.User
+import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
@@ -15,5 +17,7 @@ interface MainRepo {
     suspend fun editInfo(editUserInfo: EditInfoParams): Either<ProfileFailures, None>
 
     suspend fun changePassword(changePasswordParam: ChangePasswordParam): Either<ProfileFailures, None>
+
+    suspend fun fetchCategories(): Either<DeclarationFailure, List<Categorie>>
 
 }

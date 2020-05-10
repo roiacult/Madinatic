@@ -18,3 +18,8 @@ sealed class ProfileFailures : Failure() {
     object PasswordInvalid : ProfileFailures()
     object NewPasswordInvalid : ProfileFailures()
 }
+
+sealed class DeclarationFailure : Failure() {
+    object InternetConnection : DeclarationFailure()
+    object UnkonwError : DeclarationFailure()
+}
