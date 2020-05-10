@@ -73,4 +73,5 @@
     <string name="permi_titel">permission needed</string>
     <string name="permi_msg">madina-tic need storage permissions inorder to upload pdf files</string>
     <string name="upload_permission_denied">you can\'t upload file permission denied</string>
+    <string name="type_dec">type of declaration</string>
 </resources>

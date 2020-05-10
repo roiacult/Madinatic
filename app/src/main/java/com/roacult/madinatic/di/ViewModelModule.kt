@@ -19,5 +19,5 @@ val viewModelModule =  module{
     viewModel { ProfileViewModel(get(),get()) }
     viewModel { EditInfoViewModel(get(),get()) }
     viewModel { UpdatePasswordViewModel(get(),get()) }
-    viewModel { AddDeclarationViewModel() }
+    viewModel { AddDeclarationViewModel(get(),get()) }
 }

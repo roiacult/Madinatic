@@ -14,9 +14,14 @@ import androidx.core.content.ContextCompat
 import co.lujun.androidtagview.TagView
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
+import com.roacult.domain.entities.Categorie
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.AddDeclarationBinding
+import com.roacult.madinatic.utils.states.Async
+import com.roacult.madinatic.utils.states.Fail
+import com.roacult.madinatic.utils.states.Loading
+import com.roacult.madinatic.utils.states.Success
 import com.schibstedspain.leku.LATITUDE
 import com.schibstedspain.leku.LOCATION_ADDRESS
 import com.schibstedspain.leku.LONGITUDE
@@ -38,20 +43,31 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        
+        viewModel.observe(this){
+            it.errorMsg?.getContentIfNotHandled()?.let(::onError)
+            handleCategories(it.categories)
+        }
+    }
+
+    private fun handleCategories(categories: Async<List<CategorieView>>) {
+        when(categories){
+            is Loading -> {
+                binding.spinner.isEnabled = false
+            }
+            is Success -> {
+                binding.spinner.isEnabled = true
+                binding.spinner.adapter = SpinnerAdapter(context!!,android.R.layout.simple_dropdown_item_1line,categories())
+            }
+        }
     }
 
     private fun initViews() {
-        //TODO remove this later (this just for testing the ui)
-        loadDataFromViewModel()
-        val list = ArrayList<String>().apply {
-            add("categorie of declaration")
-            add("categorie test1")
-            add("categorie test2")
-        }
-        binding.spinner.adapter = SpinnerAdapter(context!!,android.R.layout.simple_dropdown_item_1line,list)
+
         binding.addfile.setOnClickListener {
             checkPermission()
         }
+
         binding.tagView.setOnTagClickListener(object : TagView.OnTagClickListener {
             override fun onSelectedTagDrag(position: Int, text: String?) {}
             override fun onTagLongClick(position: Int, text: String?) {}
@@ -61,6 +77,7 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
                 viewModel.files.removeAt(position)
             }
         })
+
         binding.image1.setOnClickListener(this)
         binding.image2.setOnClickListener(this)
         binding.image3.setOnClickListener(this)
@@ -72,7 +89,7 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
             viewModel.save(
                 binding.title.text.toString(),
                 binding.desciption.text.toString(),
-                binding.spinner.selectedItem as String
+                binding.spinner.selectedItem as CategorieView
             )
         }
 
