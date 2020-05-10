@@ -11,6 +11,7 @@ class AddDeclarationViewModel  :BaseViewModel<AddDeclarationState>(AddDeclaratio
 
     val images = arrayListOf("","","","","","")
     val files = ArrayList<String>()
+    var adrress : Address? = null
 
 
     fun save(title: String, desc: String, categorie : String) {
@@ -23,3 +24,9 @@ data class AddDeclarationState(
     val errorMsg : Event<String>? = null,
     val addDeclaration : Async<None> = Uninitialized
 ) : State
+
+data class Address(
+    val name : String,
+    val lat: Double,
+    val long: Double
+)

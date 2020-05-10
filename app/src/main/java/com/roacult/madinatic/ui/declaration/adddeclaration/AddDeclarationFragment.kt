@@ -95,6 +95,7 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
     }
 
     private fun loadDataFromViewModel() {
+
         //load images from viewModel
         if(viewModel.images[0].isNotEmpty()){
             binding.image1.setImageURI(Uri.fromFile(File(viewModel.images[0])))
@@ -119,6 +120,11 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
         for( filePath in viewModel.files){
             val paths = filePath.split("/")
             binding.tagView.addTag(paths[paths.size -1])
+        }
+
+        //load address
+        if(viewModel.adrress != null) {
+            binding.materialButton2.text = viewModel.adrress!!.name
         }
     }
 
@@ -201,6 +207,8 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
             val address = data.getStringExtra(LOCATION_ADDRESS)
 
             if(address != null) binding.materialButton2.text = address
+
+            viewModel.adrress = Address(address ?: "",latitude,longitude)
 
             Timber.v("lat : $latitude")
             Timber.v("long : $longitude")
