@@ -25,4 +25,5 @@
     <color name="border_color">#949494</color>
     <color name="white">#FFF</color>
     <color name="add_product_back">#DBDBDB</color>
+    <color name="collection_plus">#D4D1D1</color>
 </resources>

@@ -81,4 +81,6 @@
     <string name="sub_msg">\"your declaration has been submitted successfully we will send you an email once your submission is processed \"</string>
     <string name="sub_title">declaration submitted</string>
     <string name="categorie_empty">please select declration type</string>
+    <string name="documents">documents</string>
+    <string name="declaration_information">declaration information</string>
 </resources>
