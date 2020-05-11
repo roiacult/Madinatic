@@ -39,11 +39,10 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
     private val viewModel : AddDeclarationViewModel by viewModel()
     private var selectedPhoto = 0
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        
+
         viewModel.observe(this){
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             handleCategories(it.categories)

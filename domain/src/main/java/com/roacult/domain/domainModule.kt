@@ -4,6 +4,7 @@ import com.roacult.domain.usecases.auth.Login
 import com.roacult.domain.usecases.auth.Register
 import com.roacult.domain.usecases.auth.ResetPassword
 import com.roacult.domain.usecases.auth.UserState
+import com.roacult.domain.usecases.declaration.GetCategories
 import com.roacult.domain.usecases.profile.ChangePassword
 import com.roacult.domain.usecases.profile.EditUserInfo
 import com.roacult.domain.usecases.profile.UserObservable
@@ -21,4 +22,5 @@ val domainModule = module {
     single { EditUserInfo(get(),get()) }
 
     single { ChangePassword(get(),get()) }
+    single { GetCategories(get(),get()) }
 }
