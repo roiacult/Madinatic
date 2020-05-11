@@ -12,6 +12,7 @@ object APIROOTS {
     const val UPDATEPASSWORD = "/api/password/change/"
     const val DECLARATION = "/api/declarations/"
     const val DECLARATIONTYPE = "/api/declarations_types/"
+    const val DECLARATIONDOC = "/api/documents/"
 }
 
 //prefrences keys

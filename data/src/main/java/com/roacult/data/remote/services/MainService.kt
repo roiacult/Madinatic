@@ -40,4 +40,18 @@ interface MainService {
         @Header("Authorization") key: String
     ) : Call<List<RemoteCategorie>>
 
+    @POST(APIROOTS.DECLARATION)
+    fun postDeclaration(
+        @Header("Authorization") key: String,
+        @Body remoteDeclaration: RemoteDeclaration
+    ) : Call<RemoteDeclaration>
+
+    @Multipart
+    @POST(APIROOTS.DECLARATIONDOC)
+    fun postDoc(
+        @Header("Authorization") key: String,
+        @PartMap parts: HashMap<String, RequestBody>,
+        @Part image : MultipartBody.Part
+    ) : Call<ResponseBody>
+
 }

@@ -1,6 +1,7 @@
 package com.roacult.data.remote
 
 import com.roacult.data.remote.entities.RemoteCategorie
+import com.roacult.data.remote.entities.RemoteDeclaration
 import com.roacult.data.remote.entities.RemoteUpdatePassword
 import com.roacult.data.remote.entities.UserRemoteEntity
 import com.roacult.data.remote.services.MainService
@@ -111,6 +112,70 @@ class MainRemote(
                     } else {
                         Timber.v("fetchCategories succeeded")
                         coroutine.resume(Either.Right(body))
+                    }
+                }
+            })
+    }
+
+    suspend fun submitDeclaration(key : String, remoteDeclaration: RemoteDeclaration): Either<DeclarationFailure, RemoteDeclaration>
+            = suspendCoroutine { coroutine->
+        service
+            .postDeclaration(key,remoteDeclaration)
+            .enqueue(object : Callback<RemoteDeclaration> {
+
+                override fun onFailure(call: Call<RemoteDeclaration>, t: Throwable) {
+                    Timber.v("postDeclaration failed")
+                    coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+                }
+
+                override fun onResponse(
+                    call: Call<RemoteDeclaration>,
+                    response: Response<RemoteDeclaration>
+                ) {
+                    val body = response.body()
+                    if (body == null || !response.isSuccessful) {
+                        Timber.v("postDeclaration failled $response")
+                        coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                    } else {
+                        Timber.v("postDeclaration succeeded")
+                        coroutine.resume(Either.Right(body))
+                    }
+                }
+            })
+    }
+
+    suspend fun postDoc(
+        token: String,
+        img: String,
+        type: String,
+        declration :String
+    ): Either<DeclarationFailure, None>
+            = suspendCoroutine { coroutine->
+
+        val map = hashMapOf<String, RequestBody>()
+
+        map["filetype"] = type.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["declaration"] = declration.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        val file = File(img)
+        val req = file.asRequestBody("image/*".toMediaTypeOrNull())
+
+        service
+            .postDoc(token,map,MultipartBody.Part.createFormData("src",file.name,req))
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Timber.v("putUserInfo failled $t")
+                    coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+                }
+
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    val body = response.body()
+                    if (body == null || !response.isSuccessful) {
+                        Timber.v("putUserInfo failled $response")
+                        coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                    } else {
+                        Timber.v("putUserInfo succeeded")
+                        coroutine.resume(Either.Right(None()))
                     }
                 }
             })

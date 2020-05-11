@@ -11,6 +11,7 @@ import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.repos.MainRepo
+import com.roacult.domain.usecases.declaration.SubmitionParams
 import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
@@ -62,5 +63,38 @@ class MainRepoImpl(
         return mainRemote.fetchCategories(authLocal.getToken()).map {
             it.map { it.toCategorie() }
         }
+    }
+
+    /**
+     * submit declaration (create declaration then upload all docs)
+     * */
+    override suspend fun submitDeclaration(submitionParams: SubmitionParams): Either<DeclarationFailure, None> {
+
+        //get token from local storage
+        val token = authLocal.getToken()
+
+        // post new instance of declaration in remote
+        val responce1 = mainRemote.submitDeclaration(token,submitionParams.declaration.toRemote())
+        if(responce1 is Either.Left) return responce1
+
+        //remote declaration instance
+        val remoteDeclaration = (responce1 as Either.Right).b
+
+        // post all images
+        for (img in submitionParams.submitionImages){
+            val responce = mainRemote.postDoc(token,img,"image",remoteDeclaration.id)
+            if(responce is Either.Left) return responce
+        }
+
+        //post all files
+        for (file in submitionParams.submitionFiles) {
+            val type = if(file.contains(".pdf")) "pdf"
+            else "other"
+            val responce = mainRemote.postDoc(token,file,type,remoteDeclaration.id)
+            if(responce is Either.Left) return responce
+        }
+
+        //if every thing went ok we return success
+        return Either.Right(None())
     }
 }
