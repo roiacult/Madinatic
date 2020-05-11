@@ -18,7 +18,7 @@ class GetCategories (
 //        return repo.fetchCategories()
         val list = ArrayList<Categorie>()
 
-        list.add(Categorie("id1","categories test 1", ""))
+        list.add(Categorie("793de2d2-2d17-416c-87e0-39c17b4f2297","categories test 1", ""))
         list.add(Categorie("id2","categories test 2", ""))
         list.add(Categorie("id3","categories test 3", ""))
         list.add(Categorie("id4","categories test 4", ""))

@@ -88,7 +88,7 @@ class MainRepoImpl(
 
         //post all files
         for (file in submitionParams.submitionFiles) {
-            val type = if(file.contains(".pdf")) "pdf"
+            val type = if(file.endsWith(".pdf")) "pdf"
             else "other"
             val responce = mainRemote.postDoc(token,file,type,remoteDeclaration.id)
             if(responce is Either.Left) return responce

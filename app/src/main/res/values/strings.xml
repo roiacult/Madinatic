@@ -74,4 +74,8 @@
     <string name="permi_msg">madina-tic need storage permissions inorder to upload pdf files</string>
     <string name="upload_permission_denied">you can\'t upload file permission denied</string>
     <string name="type_dec">type of declaration</string>
+    <string name="title_empty">title should not be empty</string>
+    <string name="desc_empty">description should not be empty</string>
+    <string name="images_empty">At least upload one image</string>
+    <string name="location_empty">please specifier location</string>
 </resources>

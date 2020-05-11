@@ -1,8 +1,10 @@
 package com.roacult.madinatic.ui.declaration.adddeclaration
 
-import com.roacult.domain.entities.Categorie
+import com.roacult.domain.entities.Declaration
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.usecases.declaration.GetCategories
+import com.roacult.domain.usecases.declaration.SubmitDeclaration
+import com.roacult.domain.usecases.declaration.SubmitionParams
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
@@ -13,6 +15,7 @@ import com.roacult.madinatic.utils.states.*
 
 class AddDeclarationViewModel(
     private val getCategories : GetCategories,
+    private val submitDeclaration: SubmitDeclaration,
     private val stringProvider: StringProvider
 )  :BaseViewModel<AddDeclarationState>(AddDeclarationState()) {
 
@@ -42,6 +45,49 @@ class AddDeclarationViewModel(
 
     fun save(title: String, desc: String, categorie : CategorieView) {
 
+        if(title.isEmpty()){
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.title_empty))) }
+            return
+        }
+
+        if(desc.isEmpty()){
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.desc_empty))) }
+            return
+        }
+
+        if(images.isEmpty()) {
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.images_empty))) }
+            return
+        }
+
+        if(adrress == null) {
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.location_empty))) }
+        }
+
+        setState { copy(addDeclaration = Loading()) }
+        scope.launchInteractor(submitDeclaration, SubmitionParams(
+            declaration = Declaration("",
+                title,desc,
+                "",
+                adrress!!.name,
+                adrress!!.geoCord(),
+                categorie.idc,
+                null,
+                null,
+                null
+            ), submitionFiles = files,
+            submitionImages = images
+        )){
+            it.either({
+                val msg =when(it){
+                    DeclarationFailure.InternetConnection -> stringProvider.getStringFromResource(R.string.internet_prblm)
+                    else -> stringProvider.getStringFromResource(R.string.unknown_error)
+                }
+                setState { copy(errorMsg = Event(msg),addDeclaration = Fail(it)) }
+            },{
+                setState { copy(addDeclaration = Success(it)) }
+            })
+        }
     }
 
 }
@@ -56,4 +102,6 @@ data class Address(
     val name : String,
     val lat: Double,
     val long: Double
-)
+) {
+    fun geoCord()= "[$lat,$long]"
+}
