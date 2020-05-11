@@ -15,6 +15,7 @@ import co.lujun.androidtagview.TagView
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import com.roacult.domain.entities.Categorie
+import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.AddDeclarationBinding
@@ -46,6 +47,49 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
         viewModel.observe(this){
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             handleCategories(it.categories)
+            handleSubmition(it.addDeclaration)
+        }
+    }
+
+    private fun handleSubmition(addDeclaration: Async<None>) {
+        when(addDeclaration){
+            is Loading -> showLoading(true)
+            is Fail<*,*> -> showLoading(false)
+            is Success -> {
+                showLoading(false)
+                successDialogue()
+            }
+        }
+    }
+
+    private fun showLoading(show: Boolean) {
+//        binding.image1.isClickable = !show
+//        binding.image2.isClickable = !show
+//        binding.image3.isClickable = !show
+//        binding.image4.isClickable = !show
+//        binding.image5.isClickable = !show
+//        binding.image6.isClickable = !show
+//
+//        binding.addfile.isCheckable = !show
+//        binding.tagView.isClickable = !show
+//
+//        binding.title.isClickable = !show
+//        binding.desciption.isClickable = !show
+//        binding.spinner.isClickable = !show
+//        binding.materialButton2.isClickable = !show
+//        binding.cancel.isClickable = !show
+//        binding.save.isClickable = !show
+    }
+
+    private fun successDialogue() {
+        AlertDialog.Builder(context!!).apply {
+            setTitle(R.string.sub_title)
+            setMessage(R.string.sub_msg)
+            setPositiveButton(R.string.close){_,_-> }
+            setOnDismissListener {
+                activity?.onBackPressed()
+            }
+            show()
         }
     }
 
@@ -55,11 +99,19 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
                 binding.spinner.isEnabled = false
             }
             is Success -> {
+                val cat = categories()
+                if(cat.size == binding.spinner.adapter?.count) return
                 binding.spinner.isEnabled = true
                 binding.spinner.adapter = SpinnerAdapter(context!!,android.R.layout.simple_dropdown_item_1line,categories())
             }
         }
     }
+
+    private fun clearFocus() {
+        Timber.v("clearing focus .....")
+        binding.linearLayout6.requestFocus()
+    }
+
 
     private fun initViews() {
 
@@ -88,7 +140,7 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
             viewModel.save(
                 binding.title.text.toString(),
                 binding.desciption.text.toString(),
-                binding.spinner.selectedItem as CategorieView
+                binding.spinner.selectedItem as? CategorieView
             )
         }
 
@@ -207,8 +259,10 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
             if(filePath != null) {
                 val paths = filePath.split("/")
                 viewModel.files.add(filePath)
+                binding.tagView.requestFocus()
                 binding.tagView.addTag(paths[paths.size -1])
             }
+
         }else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 val result = CropImage.getActivityResult(data)
@@ -222,7 +276,10 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
             val longitude = data.getDoubleExtra(LONGITUDE, 0.0)
             val address = data.getStringExtra(LOCATION_ADDRESS)
 
-            if(address != null) binding.materialButton2.text = address
+            if(address != null) {
+                binding.materialButton2.requestFocus()
+                binding.materialButton2.text = address
+            }
 
             viewModel.adrress = Address(address ?: "",latitude,longitude)
 
@@ -231,6 +288,7 @@ class AddDeclarationFragment : FullScreenFragment<AddDeclarationBinding>(),View.
             Timber.v("address : $address")
 
         }
+        clearFocus()
     }
 
     private fun getIndex(id: Int): Int {

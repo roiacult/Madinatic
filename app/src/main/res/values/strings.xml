@@ -78,4 +78,7 @@
     <string name="desc_empty">description should not be empty</string>
     <string name="images_empty">At least upload one image</string>
     <string name="location_empty">please specifier location</string>
+    <string name="sub_msg">\"your declaration has been submitted successfully we will send you an email once your submission is processed \"</string>
+    <string name="sub_title">declaration submitted</string>
+    <string name="categorie_empty">please select declration type</string>
 </resources>

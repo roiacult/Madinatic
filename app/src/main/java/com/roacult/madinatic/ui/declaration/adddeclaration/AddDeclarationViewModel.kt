@@ -43,10 +43,15 @@ class AddDeclarationViewModel(
         }
     }
 
-    fun save(title: String, desc: String, categorie : CategorieView) {
+    fun save(title: String, desc: String, categorie : CategorieView?) {
 
         if(title.isEmpty()){
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.title_empty))) }
+            return
+        }
+
+        if(categorie == null || categorie.idc == HINT_VIEW_ID) {
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.categorie_empty))) }
             return
         }
 
@@ -62,6 +67,7 @@ class AddDeclarationViewModel(
 
         if(adrress == null) {
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.location_empty))) }
+            return
         }
 
         setState { copy(addDeclaration = Loading()) }
