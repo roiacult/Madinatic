@@ -4,6 +4,7 @@ import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.TypedEpoxyController
 import com.roacult.madinatic.AddDocHeaderBindingModel_
 import com.roacult.madinatic.addDoc
+import com.roacult.madinatic.addImage
 
 class DeclarationDocController(
     private val viewModel: AddDeclarationViewModel
@@ -14,11 +15,23 @@ class DeclarationDocController(
     override fun buildModels(data: List<String>?) {
 
         header.viewModel(viewModel).addTo(this)
-
         data?.forEach {
-            addDoc {
-                id(it)
-                image(it)
+
+            if(it.endsWith("jpg") ||
+                it.endsWith("png") ||
+                it.endsWith("gif")) {
+
+                addImage {
+                    id(it)
+                    image(it)
+                }
+
+            }
+            else {
+                addDoc {
+                    id(it)
+                    path(it)
+                }
             }
         }
     }

@@ -20,15 +20,26 @@ fun ImageView.loadImage(url:String?){
 
 @BindingAdapter("loadUri")
 fun ImageView.loadImageUri(path : String) {
+    setImageURI(Uri.fromFile(File(path)))
+}
+
+@BindingAdapter("loadicon")
+fun ImageView.loadIcon(path : String) {
 
     if (path.endsWith("pdf")) {
-        setImageResource(R.drawable.ic_doc2)
-    }else if(path.endsWith("doc") || path.endsWith("docx")){
         setImageResource(R.drawable.ic_pdf)
-    }
-    else if(path.endsWith("jpg") || path.endsWith("png") ||path.endsWith("gif")) {
-        setImageURI(Uri.fromFile(File(path)))
+    }else if(path.endsWith("doc") || path.endsWith("docx")){
+        setImageResource(R.drawable.ic_doc2)
     }else {
         setImageResource(R.drawable.ic_document)
     }
+}
+
+@BindingAdapter("loadTitle")
+fun TextView.loadName(path : String) {
+
+    val pathes = path.split("/")
+    val name = pathes[pathes.size-1]
+
+    text = name
 }
