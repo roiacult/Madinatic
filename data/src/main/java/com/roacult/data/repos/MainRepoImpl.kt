@@ -80,16 +80,17 @@ class MainRepoImpl(
         //remote declaration instance
         val remoteDeclaration = (responce1 as Either.Right).b
 
-        // post all images
-        for (img in submitionParams.submitionImages){
-            val responce = mainRemote.postDoc(token,img,"image",remoteDeclaration.id)
-            if(responce is Either.Left) return responce
-        }
-
         //post all files
-        for (file in submitionParams.submitionFiles) {
+        for (file in submitionParams.submitionDocs) {
             val type = if(file.endsWith(".pdf")) "pdf"
-            else "other"
+            else if (
+                file.endsWith(".png") ||
+                file.endsWith(".PNG") ||
+                file.endsWith(".jpg") ||
+                file.endsWith(".JPG") ||
+                file.endsWith(".gif") ||
+                file.endsWith(".GIF")
+            ) "image"  else "other"
             val responce = mainRemote.postDoc(token,file,type,remoteDeclaration.id)
             if(responce is Either.Left) return responce
         }

@@ -14,7 +14,7 @@ import com.roacult.madinatic.utils.StringProvider
 import com.roacult.madinatic.utils.states.*
 
 class AddDeclarationViewModel(
-    private val getCategories : GetCategories,
+    getCategories : GetCategories,
     private val submitDeclaration: SubmitDeclaration,
     private val stringProvider: StringProvider
 )  :BaseViewModel<AddDeclarationState>(AddDeclarationState()) {
@@ -60,7 +60,8 @@ class AddDeclarationViewModel(
             return
         }
 
-        if(images.isEmpty()) {
+        val docs = state.value!!.declarationDoc
+        if(docs.isEmpty()) {
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.images_empty))) }
             return
         }
@@ -81,8 +82,7 @@ class AddDeclarationViewModel(
                 null,
                 null,
                 null
-            ), submitionFiles = files,
-            submitionImages = images
+            ), submitionDocs = files
         )){
             it.either({
                 val msg =when(it){
@@ -96,12 +96,24 @@ class AddDeclarationViewModel(
         }
     }
 
+    fun addDocClick() {
+        setState { copy(addDocClickEvent = Event(None())) }
+    }
+
+    fun addDoc(filePath: String) {
+        val list = state.value!!.declarationDoc.toMutableList()
+        list.add(filePath)
+        setState { copy(declarationDoc = list) }
+    }
+
 }
 
 data class AddDeclarationState(
     val errorMsg : Event<String>? = null,
     val addDeclaration : Async<None> = Uninitialized,
-    val categories : Async<List<CategorieView>> = Uninitialized
+    val categories : Async<List<CategorieView>> = Uninitialized,
+    val addDocClickEvent : Event<None>? = null,
+    val declarationDoc : List<String> = emptyList()
 ) : State
 
 data class Address(

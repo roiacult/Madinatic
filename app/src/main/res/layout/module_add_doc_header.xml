@@ -2,8 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <variable
+            name="viewModel"
+            type="com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationViewModel" />
     </data>
     <com.google.android.material.card.MaterialCardView
+        android:onClick="@{(v)-> viewModel.addDocClick()}"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp"
         app:cardBackgroundColor="@color/collection_plus"
