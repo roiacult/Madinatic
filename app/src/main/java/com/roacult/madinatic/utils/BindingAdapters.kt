@@ -19,7 +19,7 @@ fun ImageView.loadImage(url:String?){
 
 @BindingAdapter("loadUri")
 fun ImageView.loadImageUri(path : String?) {
-    if(path != null) {
+    if(path != null && (path.endsWith("jpg") || path.endsWith("png") ||path.endsWith("gif"))) {
         setImageURI(Uri.fromFile(File(path)))
     }
 }

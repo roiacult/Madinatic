@@ -9,6 +9,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import com.roacult.kero.team7.jstarter_domain.interactors.None
@@ -101,6 +102,11 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
 
     private fun initViews() {
 
+        val manager = LinearLayoutManager(context).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
+        }
+        binding.epoxyRecyclerView.layoutManager = manager
+        binding.epoxyRecyclerView.setController(controller)
         binding.save.setOnClickListener {
             viewModel.save(
                 binding.title.text.toString(),
