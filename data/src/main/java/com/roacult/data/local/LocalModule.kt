@@ -26,5 +26,5 @@ val localModule = module {
 //    }
 
     single { AuthLocal(get()) }
-    single { MainLocal(get(),get()) }
+    single { MainLocal(get(),get(),get()) }
 }

@@ -1,6 +1,6 @@
 package com.roacult.domain.entities
 
-class Declaration (
+data class Declaration (
     val id: String,
     val title: String,
     val desc: String,

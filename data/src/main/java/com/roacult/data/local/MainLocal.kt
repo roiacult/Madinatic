@@ -1,5 +1,6 @@
 package com.roacult.data.local
 
+import android.content.SharedPreferences
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.google.gson.Gson
 import com.roacult.data.local.entities.UserLocalEntity
@@ -11,6 +12,7 @@ import io.reactivex.Observable
 
 class MainLocal(
     private val rxPreference: RxSharedPreferences,
+    private val preferences: SharedPreferences,
     private val gson : Gson
 ){
 
@@ -22,6 +24,13 @@ class MainLocal(
             else Either.Left(ProfileFailures.UserNotStored)
         }
 
+    }
+
+    fun getUser() : User {
+        return gson.fromJson(
+            preferences.getString(PREFRENCES.USER,""),
+            UserLocalEntity::class.java
+        ).toEntity(gson)
     }
 
 }
