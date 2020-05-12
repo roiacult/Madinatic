@@ -67,6 +67,7 @@ class RegisterViewModel(
         }
 
         if(!dateBirth.isDateValid()) {
+            Timber.v("data birth .... $dateBirth")
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.invalid_date))) }
             return
         }

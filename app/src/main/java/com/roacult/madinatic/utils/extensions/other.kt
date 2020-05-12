@@ -24,7 +24,7 @@ fun String.isValidEmail(): Boolean {
 }
 
 fun String.isDateValid() : Boolean{
-    return this.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
+    return this.matches(Regex("\\d{4}-\\d{1,2}-\\d{1,2}"))
 }
 
 // TODO finish the bundle part
