@@ -140,14 +140,12 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
     private fun syncData() {
         binding.title.setText(viewModel.title)
         binding.desciption.setText(viewModel.desc)
-        binding.type.setSelection(viewModel.position)
     }
 
     private fun saveData() {
         viewModel.title = binding.title.text.toString()
         viewModel.desc = binding.desciption.text.toString()
         viewModel.categorie = binding.type.selectedItem as? CategorieView
-        viewModel.position = binding.type.selectedItemPosition
     }
 
     override fun onRequestPermissionsResult(

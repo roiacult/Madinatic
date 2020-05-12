@@ -23,7 +23,6 @@ class AddDeclarationViewModel(
     var title = ""
     var desc = ""
     var categorie : CategorieView? = null
-    var position = 0
 
     init {
         scope.launchInteractor(getCategories,None()){
