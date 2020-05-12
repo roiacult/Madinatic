@@ -115,6 +115,11 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
             )
         }
 
+        binding.toolbar.setNavigationIcon(R.drawable.back)
+        binding.toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+
         binding.materialButton.setOnClickListener {
             val locationPickerIntent = LocationPickerActivity.Builder()
                 .withGeolocApiKey(getString(R.string.google_api_key))

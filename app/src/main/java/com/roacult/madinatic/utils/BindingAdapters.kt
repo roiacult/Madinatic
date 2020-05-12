@@ -4,6 +4,7 @@ import android.net.Uri
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.roacult.madinatic.R
 import com.squareup.picasso.Picasso
 import java.io.File
 
@@ -18,8 +19,16 @@ fun ImageView.loadImage(url:String?){
 }
 
 @BindingAdapter("loadUri")
-fun ImageView.loadImageUri(path : String?) {
-    if(path != null && (path.endsWith("jpg") || path.endsWith("png") ||path.endsWith("gif"))) {
+fun ImageView.loadImageUri(path : String) {
+
+    if (path.endsWith("pdf")) {
+        setImageResource(R.drawable.ic_doc2)
+    }else if(path.endsWith("doc") || path.endsWith("docx")){
+        setImageResource(R.drawable.ic_pdf)
+    }
+    else if(path.endsWith("jpg") || path.endsWith("png") ||path.endsWith("gif")) {
         setImageURI(Uri.fromFile(File(path)))
+    }else {
+        setImageResource(R.drawable.ic_document)
     }
 }
