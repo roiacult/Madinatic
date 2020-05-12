@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:gravity="center"
-                    android:text="this page is under\n construction"
+                    android:text="this page is under construction"
                     android:textColor="@color/titleTextColor"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"

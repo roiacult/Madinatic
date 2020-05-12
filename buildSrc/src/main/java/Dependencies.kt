@@ -26,6 +26,7 @@ object Dependencies{
     }
 
     const val googleDesign  = "com.google.android.material:material:${Versions.design}"
+    const val googleLocationService = "com.google.android.gms:play-services-location:16.0.0"
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
     const val lottie  = "com.airbnb.android:lottie:${Versions.lottieVersion}"
     const val imageCropper = "com.theartofdev.edmodo:android-image-cropper:${Versions.imageCropper}"
