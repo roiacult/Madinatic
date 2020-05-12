@@ -2,6 +2,7 @@ package com.roacult.madinatic.ui.declaration.adddeclaration
 
 import android.Manifest
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -23,6 +24,8 @@ import com.schibstedspain.leku.LATITUDE
 import com.schibstedspain.leku.LOCATION_ADDRESS
 import com.schibstedspain.leku.LONGITUDE
 import com.schibstedspain.leku.LocationPickerActivity
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -48,7 +51,27 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
         }
     }
 
-    private fun addDocClick(none: None) {
+    private fun addDocClick(none:None) {
+
+        AlertDialog.Builder(context!!).apply {
+            setItems(R.array.doc_options){ _, selected ->
+                when (selected) {
+                    0 -> {
+                        CropImage.activity()
+                            .setCropShape(CropImageView.CropShape.RECTANGLE)
+                            .start(context, this@AddDeclarationFragmentV2)
+                    }
+                    1 -> {
+                        addFile()
+                    }
+                }
+            }
+            show()
+        }
+
+    }
+
+    private fun addFile() {
         if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(
@@ -81,7 +104,7 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
             withSupportFragment(this@AddDeclarationFragmentV2)
             withCloseMenu(true)
             withRequestCode(PICKFILE_REQUEST_CODE)
-            withFilter(Pattern.compile(".*\\.(pdf|docx|doc|txt|jpg|png|gif)$"))
+            withFilter(Pattern.compile(".*\\.(pdf|docx|doc|txt)$"))
             start()
         }
     }
@@ -170,7 +193,11 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
             if(filePath != null) {
                 viewModel.addDoc(filePath)
             }
-
+        }else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                val result = CropImage.getActivityResult(data)
+                viewModel.addDoc(result.uri.path!!)
+            }
         }else if(requestCode == MAP_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val latitude = data.getDoubleExtra(LATITUDE, 0.0)
             val longitude = data.getDoubleExtra(LONGITUDE, 0.0)
