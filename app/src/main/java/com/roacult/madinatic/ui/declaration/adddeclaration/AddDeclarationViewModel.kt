@@ -98,6 +98,13 @@ class AddDeclarationViewModel(
     }
 
     fun addDocClick() {
+        val currentDoc = state.value!!.declarationDoc
+
+        if(currentDoc.size >= 5){
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.max_doc_fail))) }
+            return
+        }
+
         setState { copy(addDocClickEvent = Event(None())) }
     }
 
