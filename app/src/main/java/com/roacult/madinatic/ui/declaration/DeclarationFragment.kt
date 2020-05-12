@@ -6,7 +6,6 @@ import androidx.core.view.get
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.DeclarationBinding
-import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationFragment
 import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationFragmentV2
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 

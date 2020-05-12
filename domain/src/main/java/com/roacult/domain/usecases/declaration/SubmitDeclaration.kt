@@ -21,5 +21,5 @@ class SubmitDeclaration(
 
 data class SubmitionParams(
     val declaration : Declaration,
-    val submitionDocs : ArrayList<String>
+    val submitionDocs : List<String>
 )

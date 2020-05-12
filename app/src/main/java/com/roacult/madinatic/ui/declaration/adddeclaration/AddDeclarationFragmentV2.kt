@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -79,7 +80,7 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
         MaterialFilePicker().apply {
             withSupportFragment(this@AddDeclarationFragmentV2)
             withCloseMenu(true)
-            withRequestCode(AddDeclarationFragment.PICKFILE_REQUEST_CODE)
+            withRequestCode(PICKFILE_REQUEST_CODE)
             withFilter(Pattern.compile(".*\\.(pdf|docx|doc|txt|jpg|png|gif)$"))
             start()
         }
@@ -102,17 +103,16 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
 
     private fun initViews() {
 
+        syncData()
+
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
         binding.epoxyRecyclerView.layoutManager = manager
         binding.epoxyRecyclerView.setController(controller)
         binding.save.setOnClickListener {
-            viewModel.save(
-                binding.title.text.toString(),
-                binding.desciption.text.toString(),
-                binding.type.selectedItem as? CategorieView
-            )
+            saveData()
+            viewModel.save()
         }
 
         binding.toolbar.setNavigationIcon(R.drawable.back)
@@ -135,6 +135,19 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
         binding.cancel.setOnClickListener {
             activity?.onBackPressed()
         }
+    }
+
+    private fun syncData() {
+        binding.title.setText(viewModel.title)
+        binding.desciption.setText(viewModel.desc)
+        binding.type.setSelection(viewModel.position)
+    }
+
+    private fun saveData() {
+        viewModel.title = binding.title.text.toString()
+        viewModel.desc = binding.desciption.text.toString()
+        viewModel.categorie = binding.type.selectedItem as? CategorieView
+        viewModel.position = binding.type.selectedItemPosition
     }
 
     override fun onRequestPermissionsResult(
@@ -170,6 +183,11 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
 
             viewModel.adrress = Address(address ?: "",latitude,longitude)
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        saveData()
     }
 
     companion object {

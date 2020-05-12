@@ -19,9 +19,11 @@ class AddDeclarationViewModel(
     private val stringProvider: StringProvider
 )  :BaseViewModel<AddDeclarationState>(AddDeclarationState()) {
 
-    val images = arrayListOf("","","","","","")
-    val files = ArrayList<String>()
     var adrress : Address? = null
+    var title = ""
+    var desc = ""
+    var categorie : CategorieView? = null
+    var position = 0
 
     init {
         scope.launchInteractor(getCategories,None()){
@@ -43,14 +45,14 @@ class AddDeclarationViewModel(
         }
     }
 
-    fun save(title: String, desc: String, categorie : CategorieView?) {
+    fun save() {
 
         if(title.isEmpty()){
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.title_empty))) }
             return
         }
 
-        if(categorie == null || categorie.idc == HINT_VIEW_ID) {
+        if(categorie == null || categorie!!.idc == HINT_VIEW_ID) {
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.categorie_empty))) }
             return
         }
@@ -78,11 +80,11 @@ class AddDeclarationViewModel(
                 "",
                 adrress!!.name,
                 adrress!!.geoCord(),
-                categorie.idc,
+                categorie!!.idc,
                 null,
                 null,
                 null
-            ), submitionDocs = files
+            ), submitionDocs = docs
         )){
             it.either({
                 val msg =when(it){
