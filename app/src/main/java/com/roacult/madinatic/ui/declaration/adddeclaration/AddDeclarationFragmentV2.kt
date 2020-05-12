@@ -18,8 +18,7 @@ import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.AddDeclarationV2Binding
-import com.roacult.madinatic.utils.states.Async
-import com.roacult.madinatic.utils.states.Success
+import com.roacult.madinatic.utils.states.*
 import com.schibstedspain.leku.LATITUDE
 import com.schibstedspain.leku.LOCATION_ADDRESS
 import com.schibstedspain.leku.LONGITUDE
@@ -47,7 +46,30 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
             it.addDocClickEvent?.getContentIfNotHandled()?.let(::addDocClick)
             it.declarationDoc.let(controller::setData)
             handleCategories(it.categories)
-//            handleSubmition(it.addDeclaration)
+            handleSubmition(it.addDeclaration)
+        }
+    }
+
+    private fun handleSubmition(addDeclaration: Async<None>) {
+        when(addDeclaration){
+            is Loading -> binding.state = ViewState.LOADING
+            is Fail<*, *> -> binding.state = ViewState.EMPTY
+            is Success -> {
+                binding.state = ViewState.EMPTY
+                successDialogue()
+            }
+        }
+    }
+
+    private fun successDialogue() {
+        AlertDialog.Builder(context!!).apply {
+            setTitle(R.string.sub_title)
+            setMessage(R.string.sub_msg)
+            setPositiveButton(R.string.close){_,_-> }
+            setOnDismissListener {
+                activity?.onBackPressed()
+            }
+            show()
         }
     }
 

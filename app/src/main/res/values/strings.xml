@@ -84,6 +84,7 @@
     <string name="documents">documents</string>
     <string name="declaration_information">declaration information</string>
     <string name="max_doc_fail">max number of docs is 5</string>
+    <string name="patience_please">please wait while we upload all documents</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>
