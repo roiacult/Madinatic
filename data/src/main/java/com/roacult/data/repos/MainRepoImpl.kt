@@ -101,7 +101,8 @@ class MainRepoImpl(
         return mainRemote.fetchDeclarations(authLocal.getToken(),page).map {
             DeclarationPage(
                 it.count,
-                it.next.getNext(),
+                it.next?.getNext(),
+                it.previous?.getNext(),
                 it.results.map {
                     it.toDeclaration()
                 }

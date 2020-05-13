@@ -1,10 +1,9 @@
 package com.roacult.madinatic.ui.declaration
 
 import androidx.paging.DataSource
-import androidx.paging.PositionalDataSource
+import androidx.paging.PageKeyedDataSource
 import com.roacult.domain.entities.Declaration
 import com.roacult.kero.team7.jstarter_domain.functional.Either
-import com.roacult.madinatic.utils.PAGE_SIZE
 import kotlinx.coroutines.runBlocking
 
 class DeclarationDataSourceFactory(
@@ -17,14 +16,15 @@ class DeclarationDataSourceFactory(
 
 class DeclarationDataSource(
     private val viewModel: DeclarationViewModel
-) : PositionalDataSource<Declaration>() {
+) : PageKeyedDataSource<Int,Declaration>() {
 
-    private var page = 1
+    private var next: Int? = null
+    private var previous: Int? = null
 
 
     override fun loadInitial(
-        params: LoadInitialParams,
-        callback: LoadInitialCallback<Declaration>
+        params: LoadInitialParams<Int>,
+        callback: LoadInitialCallback<Int, Declaration>
     ) {
         runBlocking {
             val either = viewModel.loadInitial()
@@ -32,21 +32,49 @@ class DeclarationDataSource(
                 callback.onRetryableError(either.a)
             else {
                 val result = (either as Either.Right).b
-                page = result.next
-                callback.onResult(result.declarations,result.next*PAGE_SIZE,result.count)
+                next = result.next
+                previous = result.previous
+                callback.onResult(result.declarations,previous,next)
             }
         }
     }
 
-    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Declaration>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Declaration>) {
+
+        if(next == null) {
+            callback.onResult(emptyList(),null)
+            return
+        }
+
         runBlocking {
-            val either = viewModel.loadPage(page)
+            val either = viewModel.loadPage(next!!)
             if(either is Either.Left)
                 callback.onRetryableError(either.a)
             else {
                 val result = (either as Either.Right).b
-                page = result.next
-                callback.onResult(result.declarations)
+                next = result.next
+                previous = result.previous
+                callback.onResult(result.declarations,result.next)
+            }
+        }
+    }
+
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Declaration>) {
+
+        if(previous == null) {
+            callback.onResult(emptyList(),null)
+            return
+        }
+
+        runBlocking {
+            val either = viewModel.loadPage(previous!!)
+            if(either is Either.Left)
+                callback.onRetryableError(either.a)
+            else {
+                val result = (either as Either.Right).b
+                next = result.next
+                previous = result.previous
+                callback.onResult(result.declarations,result.next)
             }
         }
     }

@@ -9,8 +9,8 @@ import com.roacult.domain.entities.Declaration
 
 data class RemoteDeclarationPage(
     @SerializedName("count") val count: Int,
-    @SerializedName("next") val next: String,
-    @SerializedName("previous") val previous: String,
+    @SerializedName("next") val next: String?,
+    @SerializedName("previous") val previous: String?,
     @SerializedName("results") val results: List<RemoteDeclaration>
 )
 

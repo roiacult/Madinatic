@@ -19,6 +19,7 @@ class GetDeclarationPage (
 
 data class DeclarationPage(
     val count: Int,
-    val next: Int,
+    val next: Int?,
+    val previous: Int?,
     val declarations : List<Declaration>
 )
