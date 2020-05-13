@@ -14,7 +14,8 @@ data class RemoteDeclaration(
     @SerializedName("dtype") val categorie: String,
     @SerializedName("status") val status: String,
     @SerializedName("modified_at") val modifiedAt: String?,
-    @SerializedName("validated_at") val validatedAt: String?
+    @SerializedName("validated_at") val validatedAt: String?,
+    @SerializedName("attachments") val remoteAttachments: List<RemoteAttachment>
 ) {
     fun toDeclaration() : Declaration{
         return Declaration(
@@ -27,7 +28,8 @@ data class RemoteDeclaration(
             this.categorie,
             this.status,
             this.modifiedAt,
-            this.validatedAt
+            this.validatedAt,
+            this.remoteAttachments.map { it.toAttachment() }
         )
     }
 }
@@ -43,6 +45,7 @@ fun Declaration.toRemote() : RemoteDeclaration {
         this.categorie,
         this.status ?: "",
         this.modified_at,
-        this.validated_at
+        this.validated_at,
+        this.attachment.map { it.toRemote() }
     )
 }

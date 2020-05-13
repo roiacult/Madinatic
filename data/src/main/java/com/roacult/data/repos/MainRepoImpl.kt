@@ -7,11 +7,11 @@ import com.roacult.data.remote.AuthLocal
 import com.roacult.data.remote.MainRemote
 import com.roacult.data.remote.entities.toRemote
 import com.roacult.domain.entities.Categorie
+import com.roacult.domain.entities.Declaration
 import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.repos.MainRepo
-import com.roacult.domain.usecases.declaration.SubmitionParams
 import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
@@ -68,32 +68,23 @@ class MainRepoImpl(
     /**
      * submit declaration (create declaration then upload all docs)
      * */
-    override suspend fun submitDeclaration(submitionParams: SubmitionParams): Either<DeclarationFailure, None> {
+    override suspend fun submitDeclaration(declaration: Declaration): Either<DeclarationFailure, None> {
 
         //get token from local storage
         val token = authLocal.getToken()
         val user = mainLocal.getUser()
 
         // post new instance of declaration in remote
-        val declaration = submitionParams.declaration.copy(citizen = user.idu,status = "not_validated")
-        val responce1 = mainRemote.submitDeclaration(token,declaration.toRemote())
+        val newDeclaration = declaration.copy(citizen = user.idu,status = "not_validated")
+        val responce1 = mainRemote.submitDeclaration(token,newDeclaration.toRemote())
         if(responce1 is Either.Left) return responce1
 
         //remote declaration instance
         val remoteDeclaration = (responce1 as Either.Right).b
 
         //post all files
-        for (file in submitionParams.submitionDocs) {
-            val type = if(file.endsWith(".pdf")) "pdf"
-            else if (
-                file.endsWith(".png") ||
-                file.endsWith(".PNG") ||
-                file.endsWith(".jpg") ||
-                file.endsWith(".JPG") ||
-                file.endsWith(".gif") ||
-                file.endsWith(".GIF")
-            ) "image"  else "other"
-            val responce = mainRemote.postDoc(token,file,type,remoteDeclaration.id)
+        for (attachment in newDeclaration.attachment) {
+            val responce = mainRemote.postDoc(token,attachment.toRemote(remoteDeclaration.id))
             if(responce is Either.Left) return responce
         }
 

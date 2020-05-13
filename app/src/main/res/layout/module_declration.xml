@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="declaration"
+            type="com.roacult.domain.entities.Declaration" />
+    </data>
     <com.google.android.material.card.MaterialCardView
         app:cardElevation="2dp"
         android:foreground="?android:selectableItemBackground"
@@ -56,6 +61,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline7"
+                android:text="@{declaration.title}"
                 tools:text="Fuit de gaz" />
 
             <LinearLayout

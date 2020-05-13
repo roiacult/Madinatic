@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.roacult.domain.entities.Attachment
+import com.roacult.domain.entities.AttachmentType
 import com.roacult.domain.entities.User
 import com.roacult.madinatic.utils.UserBunndle
 import java.util.regex.Pattern
@@ -71,5 +73,23 @@ fun Bundle.toUser() : User {
         getString(UserBunndle.EMAIL)!!,
         getString(UserBunndle.ADDRESS)!!,
         getString(UserBunndle.CREATEDON)!!
+    )
+}
+
+fun String.toAttachment() : Attachment {
+
+    val type = if(this.endsWith(".pdf")) AttachmentType.PDF
+    else if (
+        endsWith(".png") ||
+        endsWith(".PNG") ||
+        endsWith(".jpg") ||
+        endsWith(".JPG") ||
+        endsWith(".gif") ||
+        endsWith(".GIF")
+    ) AttachmentType.IMAGE
+    else AttachmentType.OTHER
+
+    return Attachment(
+        "","","",type,this
     )
 }

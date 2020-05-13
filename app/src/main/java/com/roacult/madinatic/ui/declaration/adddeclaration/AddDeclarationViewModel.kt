@@ -11,6 +11,7 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
 import com.roacult.madinatic.utils.StringProvider
+import com.roacult.madinatic.utils.extensions.toAttachment
 import com.roacult.madinatic.utils.states.*
 
 class AddDeclarationViewModel(
@@ -73,17 +74,13 @@ class AddDeclarationViewModel(
         }
 
         setState { copy(addDeclaration = Loading()) }
-        scope.launchInteractor(submitDeclaration, SubmitionParams(
-            declaration = Declaration("",
-                title,desc,
-                "",
-                adrress!!.name,
-                adrress!!.geoCord(),
-                categorie!!.idc,
-                null,
-                null,
-                null
-            ), submitionDocs = docs
+        scope.launchInteractor(submitDeclaration, Declaration("", title,desc, "", adrress!!.name,
+            adrress!!.geoCord(),
+            categorie!!.idc,
+            null,
+            null,
+            null,
+            docs.map { it.toAttachment() }
         )){
             it.either({
                 val msg =when(it){

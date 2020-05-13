@@ -10,5 +10,6 @@ data class Declaration (
     val categorie: String,
     val status: String?,
     val modified_at: String?,
-    val validated_at: String?
+    val validated_at: String?,
+    val attachment: List<Attachment>
 )

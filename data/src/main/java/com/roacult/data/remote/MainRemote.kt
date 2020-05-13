@@ -1,9 +1,6 @@
 package com.roacult.data.remote
 
-import com.roacult.data.remote.entities.RemoteCategorie
-import com.roacult.data.remote.entities.RemoteDeclaration
-import com.roacult.data.remote.entities.RemoteUpdatePassword
-import com.roacult.data.remote.entities.UserRemoteEntity
+import com.roacult.data.remote.entities.*
 import com.roacult.data.remote.services.MainService
 import com.roacult.domain.entities.Categorie
 import com.roacult.domain.exceptions.DeclarationFailure
@@ -146,18 +143,16 @@ class MainRemote(
 
     suspend fun postDoc(
         token: String,
-        img: String,
-        type: String,
-        declration :String
+        remoteAttachment: RemoteAttachment
     ): Either<DeclarationFailure, None>
             = suspendCoroutine { coroutine->
 
         val map = hashMapOf<String, RequestBody>()
 
-        map["filetype"] = type.toRequestBody("text/plain".toMediaTypeOrNull())
-        map["declaration"] = declration.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["filetype"] = remoteAttachment.filetype.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["declaration"] = remoteAttachment.declaration.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val file = File(img)
+        val file = File(remoteAttachment.src)
         val req = file.asRequestBody("image/*".toMediaTypeOrNull())
 
         service

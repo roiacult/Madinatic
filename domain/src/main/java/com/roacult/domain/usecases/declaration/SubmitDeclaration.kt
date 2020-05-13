@@ -11,9 +11,9 @@ import com.roacult.kero.team7.jstarter_domain.interactors.None
 class SubmitDeclaration(
     dispathcher : CouroutineDispatchers,
     private val repo : MainRepo
-) : EitherInteractor<SubmitionParams,None,DeclarationFailure>(dispathcher) {
+) : EitherInteractor<Declaration,None,DeclarationFailure>(dispathcher) {
 
-    override suspend fun invoke(executeParams: SubmitionParams): Either<DeclarationFailure, None> {
+    override suspend fun invoke(executeParams: Declaration): Either<DeclarationFailure, None> {
         return repo.submitDeclaration(executeParams)
     }
 }
