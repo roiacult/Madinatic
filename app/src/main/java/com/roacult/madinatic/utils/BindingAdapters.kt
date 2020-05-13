@@ -2,6 +2,7 @@ package com.roacult.madinatic.utils
 
 import android.net.Uri
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.roacult.madinatic.R
@@ -42,4 +43,9 @@ fun TextView.loadName(path : String) {
     val name = pathes[pathes.size-1]
 
     text = name
+}
+
+@BindingAdapter("setState")
+fun LinearLayout.setState() {
+
 }

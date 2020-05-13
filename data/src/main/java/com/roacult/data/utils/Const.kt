@@ -22,6 +22,22 @@ object PREFRENCES {
     const val USER = "com.roacult.kero:USER"
 }
 
+object REMOTEATTACHMENT {
+    const val PDF = "pdf"
+    const val IMAGE = "image"
+    const val OTHER = "other"
+}
+
+object REMOTEDECLARATIONSTATES {
+    const val VALIDATED = "validated"
+    const val NOT_VALIDATED = "not_validated"
+    const val REFUSED = "refused"
+    const val LACK_OF_INFO = "lack_of_info"
+    const val UNDER_TREATMENT = "under_treatment"
+    const val TREATED = "treated"
+    const val ARCHIVED = "archived"
+}
+
 const val DATABASE_NAME = ""
 
 const val TOKEN_PREFEXE = "token "

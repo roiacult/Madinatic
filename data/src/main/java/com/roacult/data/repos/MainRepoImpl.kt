@@ -75,7 +75,7 @@ class MainRepoImpl(
         val user = mainLocal.getUser()
 
         // post new instance of declaration in remote
-        val newDeclaration = declaration.copy(citizen = user.idu,status = "not_validated")
+        val newDeclaration = declaration.copy(citizen = user.idu)
         val responce1 = mainRemote.submitDeclaration(token,newDeclaration.toRemote())
         if(responce1 is Either.Left) return responce1
 

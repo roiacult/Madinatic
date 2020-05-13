@@ -1,6 +1,7 @@
 package com.roacult.madinatic.ui.declaration.adddeclaration
 
 import com.roacult.domain.entities.Declaration
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.usecases.declaration.GetCategories
 import com.roacult.domain.usecases.declaration.SubmitDeclaration
@@ -77,7 +78,7 @@ class AddDeclarationViewModel(
         scope.launchInteractor(submitDeclaration, Declaration("", title,desc, "", adrress!!.name,
             adrress!!.geoCord(),
             categorie!!.idc,
-            null,
+            DeclarationState.NOT_VALIDATED,
             null,
             null,
             docs.map { it.toAttachment() }

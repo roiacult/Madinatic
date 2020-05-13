@@ -1,10 +1,9 @@
 package com.roacult.data.remote.entities
 
-
 import com.google.gson.annotations.SerializedName
+import com.roacult.data.utils.toAttachmentType
+import com.roacult.data.utils.toRemote
 import com.roacult.domain.entities.Attachment
-import com.roacult.domain.utils.toAttachmentType
-import com.roacult.domain.utils.toRemote
 
 data class RemoteAttachment(
     @SerializedName("created_on") val createdOn: String,

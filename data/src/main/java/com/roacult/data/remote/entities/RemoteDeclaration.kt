@@ -2,6 +2,8 @@ package com.roacult.data.remote.entities
 
 
 import com.google.gson.annotations.SerializedName
+import com.roacult.data.utils.toDeclarationState
+import com.roacult.data.utils.toRemote
 import com.roacult.domain.entities.Declaration
 
 data class RemoteDeclaration(
@@ -26,7 +28,7 @@ data class RemoteDeclaration(
             this.address,
             this.geoCord,
             this.categorie,
-            this.status,
+            this.status.toDeclarationState(),
             this.modifiedAt,
             this.validatedAt,
             this.remoteAttachments.map { it.toAttachment() }
@@ -43,7 +45,7 @@ fun Declaration.toRemote() : RemoteDeclaration {
         this.address,
         this.geo_cord,
         this.categorie,
-        this.status ?: "",
+        this.status.toRemote(),
         this.modified_at,
         this.validated_at,
         this.attachment.map { it.toRemote() }
