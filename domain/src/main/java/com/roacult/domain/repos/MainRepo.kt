@@ -22,4 +22,6 @@ interface MainRepo {
     suspend fun fetchCategories(): Either<DeclarationFailure, List<Categorie>>
 
     suspend fun submitDeclaration(declaration: Declaration): Either<DeclarationFailure, None>
+
+    suspend fun fetchDeclrations(page: Int): Either<DeclarationFailure, List<Declaration>>
 }

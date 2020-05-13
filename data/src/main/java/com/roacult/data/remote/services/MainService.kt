@@ -54,4 +54,11 @@ interface MainService {
         @Part image : MultipartBody.Part
     ) : Call<ResponseBody>
 
+
+    @GET(APIROOTS.DECLARATION)
+    fun getDeclarationPage(
+        @Header("Authorization") key: String,
+        @Query("page") page : Int
+    ) : Call<List<RemoteDeclaration>>
+
 }

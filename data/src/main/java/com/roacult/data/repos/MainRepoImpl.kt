@@ -91,4 +91,13 @@ class MainRepoImpl(
         //if every thing went ok we return success
         return Either.Right(None())
     }
+
+    /**
+     * fetch declaration page
+     * */
+    override suspend fun fetchDeclrations(page: Int): Either<DeclarationFailure, List<Declaration>> {
+        return mainRemote.fetchDeclarations(authLocal.getToken(),page).map {
+            it.map { it.toDeclaration() }
+        }
+    }
 }

@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        
         <variable
             name="declaration"
             type="com.roacult.domain.entities.Declaration" />

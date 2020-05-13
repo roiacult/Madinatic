@@ -3,6 +3,7 @@ package com.roacult.data.remote
 import com.roacult.data.remote.entities.*
 import com.roacult.data.remote.services.MainService
 import com.roacult.domain.entities.Categorie
+import com.roacult.domain.entities.Declaration
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.profile.EditInfoParams
@@ -176,4 +177,28 @@ class MainRemote(
             })
     }
 
+    suspend fun fetchDeclarations(token: String, page: Int): Either<DeclarationFailure, List<RemoteDeclaration>>
+            = suspendCoroutine {coroutine->
+        service.getDeclarationPage(token,page)
+            .enqueue(object : Callback<List<RemoteDeclaration>> {
+                override fun onFailure(call: Call<List<RemoteDeclaration>>, t: Throwable) {
+                    Timber.v("fetchDeclarations failed")
+                    coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+                }
+
+                override fun onResponse(
+                    call: Call<List<RemoteDeclaration>>,
+                    response: Response<List<RemoteDeclaration>>
+                ) {
+                    val body = response.body()
+                    if (body == null || !response.isSuccessful) {
+                        Timber.v("fetchDeclarations failled $response")
+                        coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                    } else {
+                        Timber.v("fetchDeclarations succeeded")
+                        coroutine.resume(Either.Right(body))
+                    }
+                }
+            })
+    }
 }
