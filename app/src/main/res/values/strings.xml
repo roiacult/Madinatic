@@ -86,6 +86,7 @@
     <string name="max_doc_fail">max number of docs is 5</string>
     <string name="patience_please">please wait while we upload all documents</string>
     <string name="location_gps_fail">we can\'t select location please unable gps</string>
+    <string name="read_more">Read more</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>
