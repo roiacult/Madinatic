@@ -45,7 +45,7 @@ fun Declaration.toRemote() : RemoteDeclaration {
         this.address,
         this.geo_cord,
         this.categorie,
-        this.status.toRemote(),
+        this.state.toRemote(),
         this.modified_at,
         this.validated_at,
         this.attachment.map { it.toRemote() }

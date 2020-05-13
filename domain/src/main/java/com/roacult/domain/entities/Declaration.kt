@@ -8,12 +8,12 @@ data class Declaration (
     val address: String,
     val geo_cord: String,
     val categorie: String,
-    val status: DeclarationState,
+    val state: DeclarationState,
     val modified_at: String?,
     val validated_at: String?,
     val attachment: List<Attachment>
 )
 
 enum class DeclarationState{
-    VALIDATED, NOT_VALIDATED, REFUSED, LACK_OF_INFO, UNDER_TREATMENT, TREATED, ARCHIVED
+    VALIDATED, TREATED, ARCHIVED, NOT_VALIDATED, UNDER_TREATMENT, REFUSED, LACK_OF_INFO
 }

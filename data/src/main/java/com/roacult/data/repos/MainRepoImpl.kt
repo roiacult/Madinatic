@@ -70,7 +70,7 @@ class MainRepoImpl(
      * */
     override suspend fun submitDeclaration(declaration: Declaration): Either<DeclarationFailure, None> {
 
-        //get token from local storage
+        //get token & user from local storage
         val token = authLocal.getToken()
         val user = mainLocal.getUser()
 

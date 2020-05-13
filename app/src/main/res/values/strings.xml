@@ -87,6 +87,13 @@
     <string name="patience_please">please wait while we upload all documents</string>
     <string name="location_gps_fail">we can\'t select location please unable gps</string>
     <string name="read_more">Read more</string>
+    <string name="validated">validated</string>
+    <string name="archived">Archived</string>
+    <string name="not_valid">not validated yet</string>
+    <string name="under_trait">Under Treatment</string>
+    <string name="treated">Treated</string>
+    <string name="refused">Refused</string>
+    <string name="leack_info">Leak of info</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>

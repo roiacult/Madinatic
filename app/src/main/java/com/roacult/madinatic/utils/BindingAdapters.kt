@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.madinatic.R
 import com.squareup.picasso.Picasso
 import java.io.File
@@ -46,6 +47,38 @@ fun TextView.loadName(path : String) {
 }
 
 @BindingAdapter("setState")
-fun LinearLayout.setState() {
+fun LinearLayout.setState(state : DeclarationState) {
+    val image = this.findViewById<ImageView>(R.id.stateBadge)
+    val text = this.findViewById<TextView>(R.id.stateText)
 
+    when(state) {
+        DeclarationState.VALIDATED -> {
+            image.setImageResource(R.drawable.valide)
+            text.setText(R.string.validated)
+        }
+        DeclarationState.ARCHIVED -> {
+            image.setImageResource(R.drawable.valide)
+            text.setText(R.string.archived)
+        }
+        DeclarationState.TREATED -> {
+            image.setImageResource(R.drawable.valide)
+            text.setText(R.string.treated)
+        }
+        DeclarationState.NOT_VALIDATED -> {
+            image.setImageResource(R.drawable.under_trait)
+            text.setText(R.string.not_valid)
+        }
+        DeclarationState.UNDER_TREATMENT -> {
+            image.setImageResource(R.drawable.under_trait)
+            text.setText(R.string.under_trait)
+        }
+        DeclarationState.REFUSED -> {
+            image.setImageResource(R.drawable.refused)
+            text.setText(R.string.refused)
+        }
+        DeclarationState.LACK_OF_INFO -> {
+            image.setImageResource(R.drawable.leack_info)
+            text.setText(R.string.leack_info)
+        }
+    }
 }

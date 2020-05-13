@@ -8,6 +8,7 @@
             name="declaration"
             type="com.roacult.domain.entities.Declaration" />
     </data>
+
     <com.google.android.material.card.MaterialCardView
         app:cardElevation="2dp"
         android:foreground="?android:selectableItemBackground"
@@ -72,17 +73,20 @@
                 android:layout_marginTop="2dp"
                 android:gravity="center"
                 android:orientation="horizontal"
+                app:setState="@{declaration.state}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4">
 
                 <ImageView
+                    android:id="@+id/stateBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="2dp"
-                    app:srcCompat="@drawable/check_circle_outline" />
+                    app:srcCompat="@drawable/valide" />
 
                 <TextView
+                    android:id="@+id/stateText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/subtitleTextColor"
@@ -98,6 +102,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:text="@{declaration.address}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
@@ -137,6 +142,7 @@
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/subtitleTextColor"
                 android:textSize="16sp"
+                android:text="@{declaration.desc}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/desciptionTitle"
