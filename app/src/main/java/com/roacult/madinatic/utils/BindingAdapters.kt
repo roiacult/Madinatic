@@ -5,6 +5,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.roacult.domain.entities.Attachment
+import com.roacult.domain.entities.AttachmentType
 import com.roacult.domain.entities.DeclarationState
 import com.roacult.madinatic.R
 import com.squareup.picasso.Picasso
@@ -44,6 +46,17 @@ fun TextView.loadName(path : String) {
     val name = pathes[pathes.size-1]
 
     text = name
+}
+
+@BindingAdapter("loadDeclarationImage")
+fun ImageView.loadDeclarationImage(attachments: List<Attachment>) {
+    val types = attachments.map { it.filetype }
+    if(types.contains(AttachmentType.IMAGE)){
+        val index = types.indexOf(AttachmentType.IMAGE)
+        loadImage(attachments[index].src)
+    }else {
+        //TODO load place holder for declaration
+    }
 }
 
 @BindingAdapter("setState")

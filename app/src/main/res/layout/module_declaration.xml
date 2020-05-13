@@ -34,6 +34,7 @@
 
             <ImageView
                 tools:src="@tools:sample/backgrounds/scenic"
+                app:loadDeclarationImage="@{declaration.attachment}"
                 android:scaleType="centerCrop"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
