@@ -7,6 +7,13 @@ import com.roacult.data.utils.toGeoCoordination
 import com.roacult.data.utils.toRemote
 import com.roacult.domain.entities.Declaration
 
+data class RemoteDeclarationPage(
+    @SerializedName("count") val count: Int,
+    @SerializedName("next") val next: String,
+    @SerializedName("previous") val previous: String,
+    @SerializedName("results") val results: List<RemoteDeclaration>
+)
+
 data class RemoteDeclaration(
     @SerializedName("did") val id : String,
     @SerializedName("title") val title: String,

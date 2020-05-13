@@ -120,3 +120,14 @@ fun String.toGeoCoordination() : GeoCoordination {
 fun GeoCoordination.toRemote() : String {
     return "[${this.lat},${this.long}]"
 }
+
+fun String.getNext() : Int {
+//    http://157.230.19.233/api/declarations/?page=2
+    val index = this.indexOf("page=")+5
+    val subString = this.substring(index)
+    val lastIndex = if(subString.contains("&"))
+        subString.indexOf("&")
+    else subString.length
+
+    return subString.substring(0,lastIndex).toInt()
+}

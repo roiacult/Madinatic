@@ -20,6 +20,7 @@ sealed class ProfileFailures : Failure() {
 }
 
 sealed class DeclarationFailure : Failure() {
+    object PageNotFoundFailure : DeclarationFailure()
     object InternetConnection : DeclarationFailure()
     object UnkonwError : DeclarationFailure()
 }

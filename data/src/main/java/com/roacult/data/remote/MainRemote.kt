@@ -177,18 +177,18 @@ class MainRemote(
             })
     }
 
-    suspend fun fetchDeclarations(token: String, page: Int): Either<DeclarationFailure, List<RemoteDeclaration>>
+    suspend fun fetchDeclarations(token: String, page: Int): Either<DeclarationFailure, RemoteDeclarationPage>
             = suspendCoroutine {coroutine->
         service.getDeclarationPage(token,page)
-            .enqueue(object : Callback<List<RemoteDeclaration>> {
-                override fun onFailure(call: Call<List<RemoteDeclaration>>, t: Throwable) {
+            .enqueue(object : Callback<RemoteDeclarationPage> {
+                override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {
                     Timber.v("fetchDeclarations failed")
                     coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
                 }
 
                 override fun onResponse(
-                    call: Call<List<RemoteDeclaration>>,
-                    response: Response<List<RemoteDeclaration>>
+                    call: Call<RemoteDeclarationPage>,
+                    response: Response<RemoteDeclarationPage>
                 ) {
                     val body = response.body()
                     if (body == null || !response.isSuccessful) {

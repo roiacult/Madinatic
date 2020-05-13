@@ -7,12 +7,18 @@ import com.roacult.kero.team7.jstarter_domain.functional.CouroutineDispatchers
 import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.EitherInteractor
 
-class GetDeclarations (
+class GetDeclarationPage (
     dispathcher : CouroutineDispatchers,
     private val repo : MainRepo
-) : EitherInteractor<Int, List<Declaration>, DeclarationFailure>(dispathcher) {
+) : EitherInteractor<Int, DeclarationPage, DeclarationFailure>(dispathcher) {
 
-    override suspend fun invoke(executeParams: Int): Either<DeclarationFailure, List<Declaration>> {
+    override suspend fun invoke(executeParams: Int): Either<DeclarationFailure, DeclarationPage> {
         return repo.fetchDeclrations(executeParams)
     }
 }
+
+data class DeclarationPage(
+    val count: Int,
+    val next: Int,
+    val declarations : List<Declaration>
+)

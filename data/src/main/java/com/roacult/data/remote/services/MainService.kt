@@ -1,9 +1,6 @@
 package com.roacult.data.remote.services
 
-import com.roacult.data.remote.entities.RemoteCategorie
-import com.roacult.data.remote.entities.RemoteDeclaration
-import com.roacult.data.remote.entities.RemoteUpdatePassword
-import com.roacult.data.remote.entities.UserRemoteEntity
+import com.roacult.data.remote.entities.*
 import com.roacult.data.utils.APIROOTS
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -59,6 +56,6 @@ interface MainService {
     fun getDeclarationPage(
         @Header("Authorization") key: String,
         @Query("page") page : Int
-    ) : Call<List<RemoteDeclaration>>
+    ) : Call<RemoteDeclarationPage>
 
 }

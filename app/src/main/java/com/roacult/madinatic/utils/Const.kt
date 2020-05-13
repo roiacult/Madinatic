@@ -19,3 +19,4 @@ object UserBunndle {
     const val CREATEDON ="createdOn"
 }
 
+const val PAGE_SIZE = 4
