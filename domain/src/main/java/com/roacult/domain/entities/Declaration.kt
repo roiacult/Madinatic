@@ -6,12 +6,17 @@ data class Declaration (
     val desc: String,
     val citizen: String,
     val address: String,
-    val geo_cord: String,
+    val coordination: GeoCoordination,
     val categorie: String,
     val state: DeclarationState,
     val modified_at: String?,
     val validated_at: String?,
     val attachment: List<Attachment>
+)
+
+data class GeoCoordination(
+    val lat: Double,
+    val long: Double
 )
 
 enum class DeclarationState{

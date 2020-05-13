@@ -5,8 +5,11 @@ import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.roacult.domain.entities.AttachmentType
 import com.roacult.domain.entities.DeclarationState
+import com.roacult.domain.entities.GeoCoordination
 import org.koin.core.scope.Scope
 import retrofit2.Retrofit
+import timber.log.Timber
+import java.lang.Exception
 
 fun List<String>.serializeList(gson: Gson): String {
     return try {
@@ -93,4 +96,27 @@ fun String.toDeclarationState() : DeclarationState {
         REMOTEDECLARATIONSTATES.ARCHIVED -> DeclarationState.ARCHIVED
         else -> DeclarationState.NOT_VALIDATED
     }
+}
+
+fun String.toGeoCoordination() : GeoCoordination {
+    //  "[  lat  ,  long  ]"
+    //  "[123.123,12345678]"
+
+    val coord  = this.split(",")
+
+    return try {
+        GeoCoordination(
+            coord[0].substring(1,coord[0].length).toDouble(),
+            coord[1].substring(0,coord[1].length-1).toDouble()
+        )
+    }catch (exception : Exception) {
+        Timber.v("parsing failed.... $this ")
+        GeoCoordination(
+            0.0,0.0
+        )
+    }
+}
+
+fun GeoCoordination.toRemote() : String {
+    return "[${this.lat},${this.long}]"
 }
