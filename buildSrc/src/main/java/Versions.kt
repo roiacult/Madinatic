@@ -48,7 +48,7 @@ object Versions{
         const val core_ktx = "1.2.0-rc01"
         const val viewPager2 = "1.0.0"
         const val constraintLayout  = "2.0.0-beta4"
-        const val paging  ="2.1.2"
+        const val paging  ="2.1.1"
     }
     const val jstarterVersion  = "1.0.1"
     const val lottieVersion  ="3.3.1"

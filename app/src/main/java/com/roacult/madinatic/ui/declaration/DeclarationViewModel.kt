@@ -17,6 +17,7 @@ import com.roacult.madinatic.base.State
 import com.roacult.madinatic.utils.StringProvider
 import com.roacult.madinatic.utils.getPagedListConfig
 import com.roacult.madinatic.utils.states.*
+import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -41,13 +42,14 @@ class DeclarationViewModel(
 
     init { liveData.observeForever(observer) }
 
-   suspend fun loadInitial() : Either<Throwable,DeclarationPage> {
-       return loadPage(1)
+   fun loadInitial(callback: (Either<DeclarationFailure,DeclarationPage>)->Unit){
+       return loadPage(1,callback)
    }
 
-    suspend fun loadPage(page: Int) : Either<Throwable,DeclarationPage>  = suspendCoroutine {coroutine->
+    fun loadPage(page: Int,callback: (Either<DeclarationFailure,DeclarationPage>)->Unit){
         setState { copy(declarationState = Loading()) }
         scope.launchInteractor(getDeclarationPage,page){
+            callback(it)
             it.either({
                 //TODO handle all type of failures here
 
@@ -56,12 +58,8 @@ class DeclarationViewModel(
                     else -> stringProvider.getStringFromResource(R.string.unknown_error)
                 }
                 setState { copy(declarationState = Fail(it),errorMsg = Event(msg)) }
-                if(it == DeclarationFailure.PageNotFoundFailure)
-                    coroutine.resume(Either.Right(DeclarationPage(0,1,null, emptyList())))
-                else coroutine.resume(Either.Left(Throwable()))
             },{
                 setState { copy(declarationState = Success(None())) }
-                coroutine.resume(Either.Right(it))
             })
         }
     }

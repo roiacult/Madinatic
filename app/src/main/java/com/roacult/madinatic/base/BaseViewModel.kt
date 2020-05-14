@@ -20,10 +20,8 @@ import kotlinx.coroutines.Job
 
 abstract class BaseViewModel <S : State> (initialState: S) : ViewModel() {
 
-    protected val state: MutableLiveData<S> by lazy {
-        val liveData: MutableLiveData<S> = MutableLiveData()
-        liveData.value = initialState
-        liveData
+    protected val state: MutableLiveData<S> =MutableLiveData<S>().apply {
+        this.value = initialState
     }
 
     private val job = Job()
@@ -38,7 +36,7 @@ abstract class BaseViewModel <S : State> (initialState: S) : ViewModel() {
      * this method will change state in live date
      * */
     protected fun setState(stateChanger: S.() -> S) {
-        state.value = state.value?.stateChanger()
+        state.postValue(state.value?.stateChanger())
     }
 
     /**

@@ -1,20 +1,18 @@
 package com.roacult.madinatic.ui.declaration
 
-import com.airbnb.epoxy.TypedEpoxyController
+import com.airbnb.epoxy.EpoxyModel
+import com.airbnb.epoxy.paging.PagedListEpoxyController
 import com.roacult.domain.entities.Declaration
-import com.roacult.madinatic.declaration
+import com.roacult.madinatic.DeclarationBindingModel_
 
 class DeclarationController(
     private val viewModel: DeclarationViewModel
-) : TypedEpoxyController<List<Declaration>>(){
+) : PagedListEpoxyController<Declaration>(){
 
-    override fun buildModels(data: List<Declaration>?) {
-        data?.forEach {
-            declaration {
-                id(it.id)
-                declaration(it)
-                viewModel(viewModel)
-            }
-        }
+    override fun buildItemModel(currentPosition: Int, item: Declaration?): EpoxyModel<*> {
+        return DeclarationBindingModel_()
+            .viewModel(viewModel)
+            .declaration(item!!)
+            .id(item.id)
     }
 }

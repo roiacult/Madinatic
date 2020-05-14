@@ -123,6 +123,8 @@ fun GeoCoordination.toRemote() : String {
 
 fun String.getNext() : Int {
 //    http://157.230.19.233/api/declarations/?page=2
+    if(!this.contains("page="))
+        return 1
     val index = this.indexOf("page=")+5
     val subString = this.substring(index)
     val lastIndex = if(subString.contains("&"))
