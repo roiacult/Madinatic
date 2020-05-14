@@ -31,10 +31,8 @@ class DeclarationDataSource(
         callback: LoadInitialCallback<Int, Declaration>
     ) {
         viewModel.loadInitial {
-            if (it is Either.Left)
-                callback.onRetryableError(Throwable())
-            else {
-                val result = (it as Either.Right).b
+            if (it is Either.Right){
+                val result = it.b
                 next = result.next
                 previous = result.previous
                 callback.onResult(
@@ -53,10 +51,8 @@ class DeclarationDataSource(
             return
         }
          viewModel.loadPage(next!!) {
-             if (it is Either.Left)
-                 callback.onRetryableError(Throwable())
-             else {
-                 val result = (it as Either.Right).b
+             if (it is Either.Right){
+                 val result = it.b
                  next = result.next
                  previous = result.previous
                  callback.onResult(result.declarations, result.next)
@@ -72,10 +68,8 @@ class DeclarationDataSource(
         }
 
         viewModel.loadPage(previous!!) {
-            if(it is Either.Left)
-                callback.onRetryableError(Throwable())
-            else {
-                val result = (it as Either.Right).b
+            if(it is Either.Right){
+                val result = it.b
                 next = result.next
                 previous = result.previous
                 callback.onResult(result.declarations,result.next)

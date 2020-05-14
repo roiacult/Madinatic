@@ -39,7 +39,6 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
                 if(declarationState.getContentIfNotHandlled() != null)
                     viewModel.invalidate()
                 controller.viewState = ViewState.EMPTY
-                //test if paged list is empty then show error view
             }
             is Success -> controller.viewState=ViewState.SUCCESS
         }
