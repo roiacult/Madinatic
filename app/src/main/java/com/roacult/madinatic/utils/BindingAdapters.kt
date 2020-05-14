@@ -39,6 +39,16 @@ fun ImageView.loadIcon(path : String) {
     }
 }
 
+@BindingAdapter("loadicon")
+fun ImageView.loadIcon(attachment : Attachment) {
+
+    if (attachment.filetype == AttachmentType.PDF) {
+        setImageResource(R.drawable.ic_pdf)
+    }else {
+        setImageResource(R.drawable.ic_document)
+    }
+}
+
 @BindingAdapter("loadTitle")
 fun TextView.loadName(path : String) {
 

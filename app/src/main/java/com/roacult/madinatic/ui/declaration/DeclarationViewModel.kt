@@ -3,6 +3,7 @@ package com.roacult.madinatic.ui.declaration
 import androidx.lifecycle.Observer
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.google.gson.Gson
 import com.roacult.domain.entities.Declaration
 import com.roacult.domain.entities.GeoCoordination
 import com.roacult.domain.exceptions.DeclarationFailure
@@ -23,6 +24,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class DeclarationViewModel(
     private val getDeclarationPage: GetDeclarationPage,
+    private val gson: Gson,
     private val stringProvider: StringProvider
 ) : BaseViewModel<DeclarationViewState>(DeclarationViewState()) {
 
@@ -77,7 +79,8 @@ class DeclarationViewModel(
     }
 
     fun readMoreClicked(declaration : Declaration) {
-        //TODO
+        val json = gson.toJson(declaration)
+        setState { copy(moreDetailsClickEvent = Event(json)) }
     }
 
     fun gpsClicked(localisation : GeoCoordination) {
@@ -94,5 +97,6 @@ data class DeclarationViewState(
     val errorMsg : Event<String>? = null,
     val declarationState: Async<None> = Uninitialized,
     val declarations : PagedList<Declaration>? = null,
-    val gpsCoordination: Event<GeoCoordination>? = null
+    val gpsCoordination: Event<GeoCoordination>? = null,
+    val moreDetailsClickEvent : Event<String>? = null
 ) : State

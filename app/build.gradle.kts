@@ -68,6 +68,7 @@ dependencies {
     implementation(Dependencies.scalLayout)
     implementation(Dependencies.filepicker)
     implementation(Dependencies.locationPicker)
+    implementation(Dependencies.indicator)
 
     implementation(Dependencies.Jstarter.domain)
 

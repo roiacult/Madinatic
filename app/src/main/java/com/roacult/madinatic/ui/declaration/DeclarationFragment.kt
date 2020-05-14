@@ -12,8 +12,8 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.DeclarationBinding
 import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationFragmentV2
+import com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsFragment
 import com.roacult.madinatic.utils.extensions.getGoogleMapUrl
-import com.roacult.madinatic.utils.extensions.openGoogleMap
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,8 +34,18 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.declarations?.let(controller::submitList)
             it.gpsCoordination?.getContentIfNotHandled()?.let(::openMap)
+            it.moreDetailsClickEvent?.getContentIfNotHandled()?.let(::moreDetailsEvent)
             handleDeclarationState(it.declarationState)
         }
+    }
+
+    private fun moreDetailsEvent(json: String) {
+        vm.navigate(FragmentNavigation(
+            destinationClass = DeclarationDetailsFragment::class.java,
+            fragmentArguments = Bundle().apply {
+                putString(DeclarationDetailsFragment.DECLARATION,json)
+            }
+        ))
     }
 
     private fun openMap(geoCoordination: GeoCoordination) {

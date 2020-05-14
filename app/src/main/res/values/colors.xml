@@ -26,4 +26,5 @@
     <color name="white">#FFF</color>
     <color name="add_product_back">#DBDBDB</color>
     <color name="collection_plus">#D4D1D1</color>
+    <color name="indicatorColor">#40000000</color>
 </resources>
