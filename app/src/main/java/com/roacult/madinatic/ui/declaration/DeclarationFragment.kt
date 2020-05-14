@@ -35,6 +35,8 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
             vm.navigate(FragmentNavigation(destinationClass = AddDeclarationFragmentV2::class.java))
             true
         }
+
+        binding.toolbar.title = getString(R.string.app_name)
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.VERTICAL
         }

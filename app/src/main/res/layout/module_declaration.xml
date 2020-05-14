@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="260dp" />
+                app:layout_constraintGuide_begin="200dp" />
 
             <ImageView
                 tools:src="@tools:sample/backgrounds/scenic"
@@ -156,7 +156,7 @@
                 tools:text="there is a problem with gaz in tjis area please act and make a move" />
 
             <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:onClick="@{(v)-> viewModel.readMoreClicked(declaration)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
