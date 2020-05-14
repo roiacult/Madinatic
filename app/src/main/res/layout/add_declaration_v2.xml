@@ -9,13 +9,13 @@
         <variable name="state" type="ViewState"/>
     </data>
     <FrameLayout
+        android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:background="@color/background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

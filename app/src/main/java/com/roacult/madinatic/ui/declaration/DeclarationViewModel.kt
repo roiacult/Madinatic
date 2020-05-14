@@ -64,6 +64,11 @@ class DeclarationViewModel(
         }
     }
 
+
+    fun invalidate() {
+        dataSourceFactory.sourceLiveData.value?.invalidate()
+    }
+
     fun readMoreClicked(declaration : Declaration) {
         //TODO
     }

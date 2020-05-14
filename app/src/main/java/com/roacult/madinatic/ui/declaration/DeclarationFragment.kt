@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.DeclarationBinding
 import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationFragmentV2
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
+import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DeclarationFragment : BaseFragment<DeclarationBinding>() {
@@ -26,7 +28,20 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
         viewModel.observe(this) {
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.declarations?.let(controller::submitList)
-            //TODO observe declaration state HERE
+            handleDeclarationState(it.declarationState)
+        }
+    }
+
+    private fun handleDeclarationState(declarationState: Async<None>) {
+        when(declarationState) {
+            is Loading -> controller.viewState = ViewState.LOADING
+            is Fail<*,*> -> {
+                if(declarationState.getContentIfNotHandlled() != null)
+                    viewModel.invalidate()
+                controller.viewState = ViewState.EMPTY
+                //test if paged list is empty then show error view
+            }
+            is Success -> controller.viewState=ViewState.SUCCESS
         }
     }
 
