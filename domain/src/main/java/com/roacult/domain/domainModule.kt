@@ -1,9 +1,6 @@
 package com.roacult.domain
 
-import com.roacult.domain.usecases.auth.Login
-import com.roacult.domain.usecases.auth.Register
-import com.roacult.domain.usecases.auth.ResetPassword
-import com.roacult.domain.usecases.auth.UserState
+import com.roacult.domain.usecases.auth.*
 import com.roacult.domain.usecases.declaration.GetCategories
 import com.roacult.domain.usecases.declaration.GetDeclarationPage
 import com.roacult.domain.usecases.declaration.SubmitDeclaration
@@ -19,6 +16,7 @@ val domainModule = module {
     single { ResetPassword(get(),get()) }
     single { Register(get(),get()) }
     single { UserState(get(),get()) }
+    single { Logout(get()) }
 
     single { UserObservable(get(),get()) }
     single { EditUserInfo(get(),get()) }

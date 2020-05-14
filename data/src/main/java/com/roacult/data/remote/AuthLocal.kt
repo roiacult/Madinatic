@@ -32,4 +32,11 @@ class AuthLocal (
     fun getUserState(): Boolean {
         return prefrence.getString(PREFRENCES.TOKEN,"") != ""
     }
+
+    fun logout() {
+        prefrence.edit().apply {
+            clear()
+            apply()
+        }
+    }
 }

@@ -51,6 +51,11 @@ class AuthRepoImpl(
         return authLocal.getUserState()
     }
 
+    override fun logout(): None {
+        authLocal.logout()
+        return None()
+    }
+
     /**
      * store data locally
      * */

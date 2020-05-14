@@ -1,11 +1,14 @@
 package com.roacult.madinatic.ui.profile
 
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.view.View
 import com.roacult.domain.entities.User
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.ProfileBinding
+import com.roacult.madinatic.ui.MainActivity
 import com.roacult.madinatic.utils.extensions.toBunndle
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +28,17 @@ class ProfileFragment : BaseFragment<ProfileBinding>() {
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.clickEvent?.getContentIfNotHandled()?.let(::handlClickEvent)
             it.user?.apply { binding.user = this }
+            it.logout?.getContentIfNotHandled()?.apply {
+                logout()
+            }
         }
+    }
+
+    private fun logout() {
+        val intent = Intent(context, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startActivity(intent)
     }
 
     private fun initViews() {

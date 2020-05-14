@@ -205,6 +205,28 @@
                     android:textColor="@color/black_white_icons"
                     android:textSize="17sp"
                     tools:ignore="RtlCompat,RtlSymmetry" />
+
+                <TextView
+                    android:onClick="@{(v)->viewModel.logout()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/mtrl_background_outlined"
+                    android:drawableStart="@drawable/back"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/logout"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black_white_icons"
+                    android:textSize="17sp"
+                    tools:ignore="RtlCompat,RtlSymmetry" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
         <iammert.com.view.scalinglib.ScalingLayout

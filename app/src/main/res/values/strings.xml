@@ -94,6 +94,7 @@
     <string name="treated">Treated</string>
     <string name="refused">Refused</string>
     <string name="leack_info">Leak of info</string>
+    <string name="logout">logout</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>

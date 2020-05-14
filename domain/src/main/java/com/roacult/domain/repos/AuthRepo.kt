@@ -15,4 +15,5 @@ interface AuthRepo {
 
     suspend fun getUserState() : Boolean
 
+    fun logout(): None
 }
