@@ -55,7 +55,8 @@ fun ImageView.loadDeclarationImage(attachments: List<Attachment>) {
         val index = types.indexOf(AttachmentType.IMAGE)
         loadImage(attachments[index].src)
     }else {
-        //TODO load place holder for declaration
+        this.scaleType = ImageView.ScaleType.CENTER
+        this.setImageResource(R.drawable.ic_place_holder)
     }
 }
 

@@ -24,7 +24,6 @@ class ProfileViewModel(
     fun refresh() {
         launchEitherObservableInteractor(userObservable, None(),{
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.unknown_error))) }
-            //TODO launch interactor to fetch user entity here
         },{
             setState { copy(user=it) }
         })
