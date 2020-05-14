@@ -26,6 +26,8 @@ class DeclarationViewModel(
     private val stringProvider: StringProvider
 ) : BaseViewModel<DeclarationViewState>(DeclarationViewState()) {
 
+    private var lastTimeInvalidated: Long = System.currentTimeMillis()/1000
+
     private val dataSourceFactory: DeclarationDataSourceFactory by lazy {
         DeclarationDataSourceFactory(this)
     }
@@ -51,8 +53,6 @@ class DeclarationViewModel(
         scope.launchInteractor(getDeclarationPage,page){
             callback(it)
             it.either({
-                //TODO handle all type of failures here
-
                 val msg =when(it){
                     DeclarationFailure.InternetConnection -> stringProvider.getStringFromResource(R.string.internet_prblm)
                     else -> stringProvider.getStringFromResource(R.string.unknown_error)
@@ -65,7 +65,14 @@ class DeclarationViewModel(
     }
 
 
-    fun invalidate() {
+    fun invalidate(checkTime: Boolean = false) {
+        if(checkTime) {
+            val currentTime = System.currentTimeMillis()/1000
+            if((currentTime - lastTimeInvalidated) < 60) {
+                return
+            }
+        }
+        lastTimeInvalidated = System.currentTimeMillis()/1000
         dataSourceFactory.sourceLiveData.value?.invalidate()
     }
 

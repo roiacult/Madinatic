@@ -13,8 +13,9 @@ class DeclarationDataSourceFactory(
     val sourceLiveData = MutableLiveData<DeclarationDataSource>()
 
     override fun create(): DataSource<Int, Declaration> {
-        sourceLiveData.postValue(DeclarationDataSource(viewModel))
-        return DeclarationDataSource(viewModel)
+        val dataSource = DeclarationDataSource(viewModel)
+        sourceLiveData.postValue(dataSource)
+        return dataSource
     }
 }
 

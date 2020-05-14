@@ -37,10 +37,14 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
             is Loading -> controller.viewState = ViewState.LOADING
             is Fail<*,*> -> {
                 if(declarationState.getContentIfNotHandlled() != null)
-                    viewModel.invalidate()
+                    viewModel.invalidate(checkTime = true)
                 controller.viewState = ViewState.EMPTY
+                binding.refresh.isRefreshing = false
             }
-            is Success -> controller.viewState=ViewState.SUCCESS
+            is Success -> {
+                controller.viewState=ViewState.SUCCESS
+                binding.refresh.isRefreshing = false
+            }
         }
     }
 
@@ -53,6 +57,9 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
         binding.toolbar.title = getString(R.string.app_name)
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.VERTICAL
+        }
+        binding.refresh.setOnRefreshListener {
+            viewModel.invalidate()
         }
         binding.declarations.layoutManager = manager
         binding.declarations.setController(controller)
