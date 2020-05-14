@@ -1,14 +1,19 @@
 package com.roacult.madinatic.ui.declaration
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.roacult.domain.entities.GeoCoordination
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.DeclarationBinding
 import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationFragmentV2
+import com.roacult.madinatic.utils.extensions.getGoogleMapUrl
+import com.roacult.madinatic.utils.extensions.openGoogleMap
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,8 +33,13 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
         viewModel.observe(this) {
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.declarations?.let(controller::submitList)
+            it.gpsCoordination?.getContentIfNotHandled()?.let(::openMap)
             handleDeclarationState(it.declarationState)
         }
+    }
+
+    private fun openMap(geoCoordination: GeoCoordination) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(geoCoordination.getGoogleMapUrl())))
     }
 
     private fun handleDeclarationState(declarationState: Async<None>) {

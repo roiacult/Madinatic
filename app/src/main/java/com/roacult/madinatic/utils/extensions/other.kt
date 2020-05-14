@@ -2,13 +2,16 @@ package com.roacult.madinatic.utils.extensions
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.roacult.domain.entities.Attachment
-import com.roacult.domain.entities.AttachmentType
-import com.roacult.domain.entities.User
+import com.roacult.domain.entities.*
+import com.roacult.madinatic.base.BaseFragment
+import com.roacult.madinatic.utils.GOOGLE_MAP_BASE_URl
 import com.roacult.madinatic.utils.UserBunndle
 import java.util.regex.Pattern
+
 
 fun putStringsInBundle(vararg pairs: Pair<String, String >): Bundle {
     return Bundle().apply {
@@ -93,3 +96,13 @@ fun String.toAttachment() : Attachment {
         "","","",type,this
     )
 }
+
+fun<D : ViewDataBinding> BaseFragment<D>.openGoogleMap(lat: Double,long: Double) {
+    val gmmIntentUri = Uri.parse("geo:$lat,$long")
+    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+    mapIntent.setPackage("com.google.android.apps.maps")
+    startActivity(mapIntent)
+}
+
+fun GeoCoordination.getGoogleMapUrl() : String =
+    GOOGLE_MAP_BASE_URl+this.lat+","+this.long

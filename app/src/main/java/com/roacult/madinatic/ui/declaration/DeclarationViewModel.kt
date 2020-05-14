@@ -81,7 +81,7 @@ class DeclarationViewModel(
     }
 
     fun gpsClicked(localisation : GeoCoordination) {
-        //TODO
+        setState { copy(gpsCoordination = Event(localisation)) }
     }
 
     override fun onCleared() {
@@ -93,5 +93,6 @@ class DeclarationViewModel(
 data class DeclarationViewState(
     val errorMsg : Event<String>? = null,
     val declarationState: Async<None> = Uninitialized,
-    val declarations : PagedList<Declaration>? = null
+    val declarations : PagedList<Declaration>? = null,
+    val gpsCoordination: Event<GeoCoordination>? = null
 ) : State
