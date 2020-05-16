@@ -12,6 +12,7 @@ import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.DeclarationDettailsBinding
 import com.roacult.madinatic.utils.AppBarStateChangeListener
 import com.roacult.madinatic.utils.extensions.getGoogleMapUrl
+import com.roacult.madinatic.utils.states.ViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DeclarationDetailsFragment : FullScreenFragment<DeclarationDettailsBinding>() {
@@ -66,6 +67,8 @@ class DeclarationDetailsFragment : FullScreenFragment<DeclarationDettailsBinding
     private fun initViews() {
         viewModel.formatJson(arguments!!.getString(DECLARATION,""))
         binding.declaration = viewModel.declaration
+        binding.state = if(viewModel.declaration.attachment.isEmpty()) ViewState.EMPTY
+        else ViewState.SUCCESS
         slideShowAdapter.setImages(viewModel.declaration.attachment.filter { it.filetype==AttachmentType.IMAGE }.map {
             it.src
         })

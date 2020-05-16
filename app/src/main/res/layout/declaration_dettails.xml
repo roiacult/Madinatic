@@ -4,9 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.roacult.madinatic.utils.states.ViewState"/>
+        <import type="android.view.View"/>
         <variable
             name="declaration"
             type="com.roacult.domain.entities.Declaration" />
+        <variable
+            name="state"
+            type="com.roacult.madinatic.utils.states.ViewState" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -203,6 +208,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <TextView
+                            tools:visibility="gone"
+                            android:visibility="@{state != ViewState.EMPTY ? View.VISIBLE : View.GONE}"
                             android:id="@+id/textView6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -214,11 +221,29 @@
                             android:layout_marginEnd="8dp"
                             android:text="@string/documents" />
                         <com.airbnb.epoxy.EpoxyRecyclerView
+                            tools:visibility="gone"
+                            android:visibility="@{state != ViewState.EMPTY ? View.VISIBLE : View.GONE}"
                             android:id="@+id/attachments"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
+
+                        <ImageView
+                            android:visibility="@{state == ViewState.EMPTY ? View.VISIBLE : View.GONE}"
+                            android:layout_marginTop="16dp"
+                            app:srcCompat="@drawable/leack_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"/>
+                        <TextView
+                            android:visibility="@{state == ViewState.EMPTY ? View.VISIBLE : View.GONE}"
+                            android:gravity="center"
+                            android:layout_marginBottom="32dp"
+                            android:text="@string/there_is_no_documents_in_this_declaration"
+                            android:textSize="16sp"
+                            android:textColor="@color/black_white_icons"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
