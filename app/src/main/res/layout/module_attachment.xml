@@ -13,6 +13,7 @@
             type="com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsViewModel" />
     </data>
     <com.google.android.material.card.MaterialCardView
+        android:onClick="@{(v)->viewModel.downloadDoc(attachment)}"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:cardElevation="0dp"

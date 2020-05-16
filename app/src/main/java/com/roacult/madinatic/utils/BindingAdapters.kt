@@ -119,5 +119,3 @@ fun LinearLayout.setState(state : DeclarationState) {
         }
     }
 }
-
-//@BindingAdapter("load")

@@ -45,6 +45,12 @@ class DeclarationDetailsFragment : FullScreenFragment<DeclarationDettailsBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+
+        viewModel.observe(this){
+            it.downloadClickEvent?.getContentIfNotHandled()?.apply {
+                startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(this.src)))
+            }
+        }
     }
 
     private fun setToolbarTitle(show: Boolean) {

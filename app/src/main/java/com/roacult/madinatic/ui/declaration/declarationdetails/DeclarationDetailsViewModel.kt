@@ -18,10 +18,10 @@ class DeclarationDetailsViewModel(
     }
 
     fun downloadDoc(attachment: Attachment){
-
+        setState { copy(downloadClickEvent = Event(attachment)) }
     }
 }
 
 data class DeclarationDetailsState(
-    val errorMsg : Event<String>? = null
+    val downloadClickEvent : Event<Attachment>? = null
 ) : State
