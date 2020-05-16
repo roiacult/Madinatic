@@ -10,9 +10,10 @@ class DeclarationDetailsViewModel(
     private val gson: Gson
 ) : BaseViewModel<DeclarationDetailsState>(DeclarationDetailsState()) {
 
+    lateinit var declaration : Declaration
 
-    fun formatJson(json: String): Declaration{
-        return gson.fromJson(json,Declaration::class.java)
+    fun formatJson(json: String){
+        declaration = gson.fromJson(json,Declaration::class.java)
     }
 }
 

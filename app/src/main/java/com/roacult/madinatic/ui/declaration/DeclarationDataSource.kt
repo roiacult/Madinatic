@@ -38,7 +38,7 @@ class DeclarationDataSource(
                 previous = result.previous
                 callback.onResult(
                     result.declarations,
-                    1, result.count,
+                    0, result.count,
                     previous, next
                 )
             }

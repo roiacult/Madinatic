@@ -20,8 +20,7 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/profile_holder"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:loadicon="@{attachment}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 <!--        <TextView-->
 <!--            tools:text="@string"-->

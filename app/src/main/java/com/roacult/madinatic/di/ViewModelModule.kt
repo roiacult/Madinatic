@@ -5,6 +5,7 @@ import com.roacult.madinatic.ui.auth.LoginViewModel
 import com.roacult.madinatic.ui.auth.RegisterViewModel
 import com.roacult.madinatic.ui.declaration.DeclarationViewModel
 import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationViewModel
+import com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsViewModel
 import com.roacult.madinatic.ui.profile.EditInfoViewModel
 import com.roacult.madinatic.ui.profile.ProfileViewModel
 import com.roacult.madinatic.ui.profile.UpdatePasswordViewModel
@@ -22,4 +23,5 @@ val viewModelModule =  module{
     viewModel { UpdatePasswordViewModel(get(),get()) }
     viewModel { AddDeclarationViewModel(get(),get(),get()) }
     viewModel { DeclarationViewModel(get(),get(),get())}
+    viewModel { DeclarationDetailsViewModel(get()) }
 }
