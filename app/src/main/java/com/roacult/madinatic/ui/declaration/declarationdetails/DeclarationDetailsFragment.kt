@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.roacult.domain.entities.AttachmentType
 import com.roacult.madinatic.R
@@ -37,6 +38,9 @@ class DeclarationDetailsFragment : FullScreenFragment<DeclarationDettailsBinding
     private val slideShowAdapter by lazy {
         DeclarationSlideShowAdapter(context!!)
     }
+    private val controller by lazy {
+        AttachmentController(viewModel)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,6 +73,12 @@ class DeclarationDetailsFragment : FullScreenFragment<DeclarationDettailsBinding
         binding.floatingActionButton2.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.declaration.coordination.getGoogleMapUrl())))
         }
+        val manager = LinearLayoutManager(context).apply {
+            orientation = LinearLayoutManager.VERTICAL
+        }
+        binding.attachments.layoutManager = manager
+        binding.attachments.setController(controller)
+        controller.setData(viewModel.declaration.attachment)
     }
 
     companion object {

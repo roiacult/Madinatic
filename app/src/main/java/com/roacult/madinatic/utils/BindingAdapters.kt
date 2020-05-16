@@ -75,6 +75,7 @@ fun ImageView.loadDeclarationImage(attachments: List<Attachment>) {
     val types = attachments.map { it.filetype }
     if(types.contains(AttachmentType.IMAGE)){
         val index = types.indexOf(AttachmentType.IMAGE)
+        this.scaleType = ImageView.ScaleType.CENTER_CROP
         loadImage(attachments[index].src)
     }else {
         this.scaleType = ImageView.ScaleType.CENTER

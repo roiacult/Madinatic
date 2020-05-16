@@ -78,10 +78,10 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.VERTICAL
         }
+        binding.declarations.layoutManager = manager
+        binding.declarations.setController(controller)
         binding.refresh.setOnRefreshListener {
             viewModel.invalidate()
         }
-        binding.declarations.layoutManager = manager
-        binding.declarations.setController(controller)
     }
 }

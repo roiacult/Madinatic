@@ -214,6 +214,7 @@
                             android:layout_marginEnd="8dp"
                             android:text="@string/documents" />
                         <com.airbnb.epoxy.EpoxyRecyclerView
+                            android:id="@+id/attachments"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
                             android:layout_width="match_parent"

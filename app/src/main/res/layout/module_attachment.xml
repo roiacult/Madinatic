@@ -13,7 +13,10 @@
             type="com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsViewModel" />
     </data>
     <com.google.android.material.card.MaterialCardView
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:cardElevation="0dp"
+        android:layout_marginBottom="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -24,15 +27,16 @@
             android:background="@drawable/mtrl_background_outlined"
             android:layout_width="match_parent"
             android:gravity="center_vertical"
-            android:layout_height="70dp">
+            android:layout_height="60dp">
 
             <ImageView
                 android:layout_weight="0"
                 android:layout_marginStart="8dp"
                 tools:src="@drawable/ic_pdf"
                 app:loadicon="@{attachment}"
-                android:layout_width="35dp"
-                android:layout_height="35dp"/>
+                android:layout_marginTop="1dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
 
             <TextView
                 tools:text="ahdgdc-csdhbc-svdjbs.pdf"
@@ -51,8 +55,8 @@
                 android:layout_weight="0"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_width="35dp"
-                android:layout_height="35dp"/>
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
