@@ -42,11 +42,23 @@ fun ImageView.loadIcon(path : String) {
 @BindingAdapter("loadicon")
 fun ImageView.loadIcon(attachment : Attachment) {
 
-    if (attachment.filetype == AttachmentType.PDF) {
-        setImageResource(R.drawable.ic_pdf)
-    }else {
-        setImageResource(R.drawable.ic_document)
+    when (attachment.filetype) {
+        AttachmentType.PDF -> {
+            setImageResource(R.drawable.ic_pdf)
+        }
+        AttachmentType.IMAGE -> {
+            setImageResource(R.drawable.file_image_outline)
+        }
+        else -> {
+            setImageResource(R.drawable.ic_document)
+        }
     }
+}
+
+@BindingAdapter("loadtext")
+fun TextView.loadText(attachment : Attachment) {
+    val paths = attachment.src.split("/")
+    text = paths[paths.size-1]
 }
 
 @BindingAdapter("loadTitle")
@@ -106,3 +118,5 @@ fun LinearLayout.setState(state : DeclarationState) {
         }
     }
 }
+
+//@BindingAdapter("load")

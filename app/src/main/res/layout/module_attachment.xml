@@ -7,29 +7,53 @@
         <variable
             name="attachment"
             type="com.roacult.domain.entities.Attachment" />
+
+        <variable
+            name="viewModel"
+            type="com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        app:cardElevation="0dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:focusable="true">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/mtrl_background_outlined"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="70dp">
 
-        <com.github.florent37.shapeofview.shapes.CircleView
-            android:id="@+id/circleView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/profile_holder"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_weight="0"
+                android:layout_marginStart="8dp"
+                tools:src="@drawable/ic_pdf"
+                app:loadicon="@{attachment}"
+                android:layout_width="35dp"
+                android:layout_height="35dp"/>
 
-<!--        <TextView-->
-<!--            tools:text="@string"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/circleView"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+            <TextView
+                tools:text="ahdgdc-csdhbc-svdjbs.pdf"
+                app:loadtext="@{attachment}"
+                android:layout_weight="1"
+                android:textColor="@color/titleTextColor"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:layout_marginStart="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:onClick="@{(v)->viewModel.downloadDoc(attachment)}"
+                app:srcCompat="@drawable/ic_file_download_black_24dp"
+                android:layout_weight="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
