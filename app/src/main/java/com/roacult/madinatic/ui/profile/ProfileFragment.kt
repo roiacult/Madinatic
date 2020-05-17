@@ -10,6 +10,8 @@ import com.roacult.madinatic.databinding.ProfileBinding
 import com.roacult.madinatic.ui.MainActivity
 import com.roacult.madinatic.ui.profile.alldeclarations.AllDeclarationFragment
 import com.roacult.madinatic.ui.profile.editinfo.EditInfoFragment
+import com.roacult.madinatic.ui.profile.unfinished.UnfinishedDeclarationFragment
+import com.roacult.madinatic.ui.profile.unfinished.UnfinishedDeclarationViewModel
 import com.roacult.madinatic.ui.profile.updatepass.UpdatePasswordFragment
 import com.roacult.madinatic.utils.AppBarStateChangeListener
 import com.roacult.madinatic.utils.extensions.toBunndle
@@ -113,7 +115,7 @@ class ProfileFragment : BaseFragment<ProfileBinding>() {
             }
 
             ProfileClickEvent.UPDATES -> {
-                //TODO navigate to update fragment
+                vm.navigate(FragmentNavigation(destinationClass = UnfinishedDeclarationFragment::class.java))
             }
         }
     }
