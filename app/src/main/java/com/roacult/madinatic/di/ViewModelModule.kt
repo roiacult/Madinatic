@@ -10,6 +10,7 @@ import com.roacult.madinatic.ui.profile.editinfo.EditInfoViewModel
 import com.roacult.madinatic.ui.profile.ProfileViewModel
 import com.roacult.madinatic.ui.profile.alldeclarations.AllDeclarationViewModel
 import com.roacult.madinatic.ui.profile.unfinished.UnfinishedDeclarationViewModel
+import com.roacult.madinatic.ui.profile.unfinished.adddoc.AddDocViewModel
 import com.roacult.madinatic.ui.profile.updatepass.UpdatePasswordViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -28,4 +29,5 @@ val viewModelModule =  module{
     viewModel { DeclarationDetailsViewModel(get()) }
     viewModel { AllDeclarationViewModel(get(),get(),get()) }
     viewModel { UnfinishedDeclarationViewModel(get(),get(),get()) }
+    viewModel { AddDocViewModel(get(),get(),get(),get()) }
 }
