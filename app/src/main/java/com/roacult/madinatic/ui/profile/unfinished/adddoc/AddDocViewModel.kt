@@ -19,6 +19,7 @@ import com.roacult.madinatic.utils.AddDeclarationCallback
 import com.roacult.madinatic.utils.StringProvider
 import com.roacult.madinatic.utils.extensions.toAttachment
 import com.roacult.madinatic.utils.states.*
+import timber.log.Timber
 
 class AddDocViewModel(
     getCategories : GetCategories,
@@ -38,6 +39,7 @@ class AddDocViewModel(
                 }
                 setState { copy(errorMsg = Event(msg),categories = Fail(it)) }
             },{
+                Timber.v("categories Success $it")
                 setState { copy(categories = Success(it.map { it.toView() })) }
             })
         }
@@ -55,20 +57,9 @@ class AddDocViewModel(
         }
 
         setState { copy(addDeclaration = Loading()) }
-    }
-
-    override fun addDocClick() {
-        val currentDoc = state.value!!.declarationDoc
-
-        if(currentDoc.size >= 5){
-            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.max_doc_fail))) }
-            return
-        }
-
-        setState { copy(addDocClickEvent = Event(None())) }
         scope.launchInteractor(addDoc, AddDocumentsParams(
             declaration.id,
-            currentDoc.map { it.toAttachment() }
+            docs.map { it.toAttachment() }
         )){
             it.either({
                 val msg =when(it){
@@ -80,6 +71,17 @@ class AddDocViewModel(
                 setState { copy(addDeclaration = Success(it)) }
             })
         }
+    }
+
+    override fun addDocClick() {
+        val currentDoc = state.value!!.declarationDoc
+
+        if(currentDoc.size >= 5){
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.max_doc_fail))) }
+            return
+        }
+
+        setState { copy(addDocClickEvent = Event(None())) }
     }
 
     fun addDoc(filePath: String) {

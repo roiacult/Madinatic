@@ -131,11 +131,10 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
 
     private fun handleCategories(categories: Async<List<CategorieView>>) {
         if(categories is Success) {
-            val cat = categories()
-            if(cat.size == binding.type.adapter?.count) return
+            val cat = categories().filter { it.idc == viewModel.declaration.categorie }
             binding.type.adapter = SpinnerAdapter(
                 context!!,android.R.layout.simple_dropdown_item_1line,
-                categories().filter { it.idc == viewModel.declaration.categorie }
+                cat
             )
         }else {
             val hintCategorie = CategorieView(HINT_VIEW_ID,getString(R.string.type_dec),"")
