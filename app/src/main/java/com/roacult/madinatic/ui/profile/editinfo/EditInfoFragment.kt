@@ -1,4 +1,4 @@
-package com.roacult.madinatic.ui.profile
+package com.roacult.madinatic.ui.profile.editinfo
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK

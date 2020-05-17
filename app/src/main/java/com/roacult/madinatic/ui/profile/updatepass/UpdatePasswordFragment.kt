@@ -1,4 +1,4 @@
-package com.roacult.madinatic.ui.profile
+package com.roacult.madinatic.ui.profile.updatepass
 
 import android.os.Bundle
 import android.view.View

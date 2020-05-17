@@ -1,4 +1,4 @@
-package com.roacult.madinatic.ui.profile
+package com.roacult.madinatic.ui.profile.editinfo
 
 import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.ProfileFailures
@@ -18,7 +18,9 @@ import timber.log.Timber
 class EditInfoViewModel(
     private val editInfo : EditUserInfo,
     private val stringProvider: StringProvider
-) : BaseViewModel<EditInfoState>(EditInfoState()) {
+) : BaseViewModel<EditInfoState>(
+    EditInfoState()
+) {
 
     var firstTime = true
 

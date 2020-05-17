@@ -1,19 +1,18 @@
 package com.roacult.madinatic.ui.profile
 
 import android.content.Intent
-import android.content.Intent.getIntent
 import android.os.Bundle
 import android.view.View
 import com.google.android.material.appbar.AppBarLayout
-import com.roacult.domain.entities.User
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.ProfileBinding
 import com.roacult.madinatic.ui.MainActivity
+import com.roacult.madinatic.ui.profile.editinfo.EditInfoFragment
+import com.roacult.madinatic.ui.profile.updatepass.UpdatePasswordFragment
 import com.roacult.madinatic.utils.AppBarStateChangeListener
 import com.roacult.madinatic.utils.extensions.toBunndle
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
-import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment<ProfileBinding>() {

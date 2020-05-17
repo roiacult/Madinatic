@@ -1,4 +1,4 @@
-package com.roacult.madinatic.ui.profile
+package com.roacult.madinatic.ui.profile.updatepass
 
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.profile.ChangePassword
@@ -14,7 +14,9 @@ import com.roacult.madinatic.utils.states.*
 class UpdatePasswordViewModel(
     private val changePassword: ChangePassword,
     private val stringProvider: StringProvider
-) : BaseViewModel<UpdatePasswordState>(UpdatePasswordState()){
+) : BaseViewModel<UpdatePasswordState>(
+    UpdatePasswordState()
+){
 
 
     fun updatePassword(oldPass:String,newpass:String,newPass2:String){

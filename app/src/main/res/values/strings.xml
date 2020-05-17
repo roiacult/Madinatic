@@ -50,8 +50,8 @@
     <string name="madina_tic">MADINA TIC</string>
     <string name="date_of_birth">date of birth</string>
     <string name="invalid_date">invalid date</string>
-    <string name="modifier_votre_profile">All declaration</string>
-    <string name="modifier_votre_mots_de_passe">updates</string>
+    <string name="all_declaration">All declaration</string>
+    <string name="updates">updates</string>
     <string name="announce">Announce</string>
     <string name="save">enregistrer</string>
     <string name="cancel">Annuler</string>
