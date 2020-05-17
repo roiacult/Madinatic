@@ -8,6 +8,7 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.ProfileBinding
 import com.roacult.madinatic.ui.MainActivity
+import com.roacult.madinatic.ui.profile.alldeclarations.AllDeclarationFragment
 import com.roacult.madinatic.ui.profile.editinfo.EditInfoFragment
 import com.roacult.madinatic.ui.profile.updatepass.UpdatePasswordFragment
 import com.roacult.madinatic.utils.AppBarStateChangeListener
@@ -108,7 +109,7 @@ class ProfileFragment : BaseFragment<ProfileBinding>() {
                 startActivity(intent)
             }
             ProfileClickEvent.ALLDECLARATIONS -> {
-                //TODO navigate to all declaration
+                vm.navigate(FragmentNavigation(destinationClass = AllDeclarationFragment::class.java))
             }
 
             ProfileClickEvent.UPDATES -> {

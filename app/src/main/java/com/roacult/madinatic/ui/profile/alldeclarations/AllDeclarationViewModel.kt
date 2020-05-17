@@ -78,7 +78,7 @@ class AllDeclarationViewModel(
         lastTimeInvalidated = System.currentTimeMillis()/1000
         dataSourceFactory.sourceLiveData.value?.invalidate()
     }
-    
+
     override fun readMoreClicked(declaration : Declaration) {
         val json = gson.toJson(declaration)
         setState { copy(moreDetailsClickEvent = Event(json)) }
