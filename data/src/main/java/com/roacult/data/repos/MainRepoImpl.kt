@@ -7,8 +7,10 @@ import com.roacult.data.remote.AuthLocal
 import com.roacult.data.remote.MainRemote
 import com.roacult.data.remote.entities.toRemote
 import com.roacult.data.utils.getNext
+import com.roacult.data.utils.toRemote
 import com.roacult.domain.entities.Categorie
 import com.roacult.domain.entities.Declaration
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
@@ -116,7 +118,25 @@ class MainRepoImpl(
     override suspend fun fetchUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage> {
         val user = mainLocal.getUser()
         val token = authLocal.getToken()
-        return mainRemote.fetchDeclarations(token,user.idu,page).map {
+        return mainRemote.fetchDeclarations(token,user.idu,page = page).map {
+            DeclarationPage(
+                it.count,
+                it.next?.getNext(),
+                it.previous?.getNext(),
+                it.results.map {
+                    it.toDeclaration()
+                }
+            )
+        }
+    }
+
+    /**
+     * fetch unfinished user declaration page
+     * */
+    override suspend fun fetchUnfinishedUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage> {
+        val user = mainLocal.getUser()
+        val token = authLocal.getToken()
+        return mainRemote.fetchDeclarations(token,user.idu,DeclarationState.LACK_OF_INFO.toRemote(),page).map {
             DeclarationPage(
                 it.count,
                 it.next?.getNext(),
