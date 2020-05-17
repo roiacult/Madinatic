@@ -6,6 +6,7 @@ import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.declaration.DeclarationPage
+import com.roacult.domain.usecases.profile.AddDocumentsParams
 import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
@@ -29,4 +30,6 @@ interface MainRepo {
     suspend fun fetchUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage>
 
     suspend fun fetchUnfinishedUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage>
+
+    suspend fun postDocuments(documentsParams: AddDocumentsParams): Either<DeclarationFailure, None>
 }
