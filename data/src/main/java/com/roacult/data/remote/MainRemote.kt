@@ -177,28 +177,32 @@ class MainRemote(
             })
     }
 
-    suspend fun fetchDeclarations(token: String, page: Int): Either<DeclarationFailure, RemoteDeclarationPage>
+    suspend fun fetchDeclarations(token: String,uid : String? = null, page: Int): Either<DeclarationFailure, RemoteDeclarationPage>
             = suspendCoroutine {coroutine->
-        service.getDeclarationPage(token,page)
-            .enqueue(object : Callback<RemoteDeclarationPage> {
-                override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {
-                    Timber.v("fetchDeclarations failed")
-                    coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
-                }
+        val call = if(uid == null)
+            service.getDeclarationPage(token,page)
+        else
+            service.getDeclarationPage(token,uid,page)
 
-                override fun onResponse(
-                    call: Call<RemoteDeclarationPage>,
-                    response: Response<RemoteDeclarationPage>
-                ) {
-                    val body = response.body()
-                    if (body == null || !response.isSuccessful) {
-                        Timber.v("fetchDeclarations failled $response")
-                        coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
-                    } else {
-                        Timber.v("fetchDeclarations succeeded")
-                        coroutine.resume(Either.Right(body))
-                    }
+        call.enqueue(object : Callback<RemoteDeclarationPage> {
+            override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {
+                Timber.v("fetchDeclarations failed")
+                coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+            }
+
+            override fun onResponse(
+                call: Call<RemoteDeclarationPage>,
+                response: Response<RemoteDeclarationPage>
+            ) {
+                val body = response.body()
+                if (body == null || !response.isSuccessful) {
+                    Timber.v("fetchDeclarations failled $response")
+                    coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                } else {
+                    Timber.v("fetchDeclarations succeeded")
+                    coroutine.resume(Either.Right(body))
                 }
-            })
+            }
+        })
     }
 }

@@ -25,4 +25,6 @@ interface MainRepo {
     suspend fun submitDeclaration(declaration: Declaration): Either<DeclarationFailure, None>
 
     suspend fun fetchDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage>
+
+    suspend fun fetchUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage>
 }

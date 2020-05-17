@@ -58,4 +58,11 @@ interface MainService {
         @Query("page") page : Int
     ) : Call<RemoteDeclarationPage>
 
+    @GET(APIROOTS.DECLARATION)
+    fun getDeclarationPage(
+        @Header("Authorization") key: String,
+        @Query("citizen") uid : String,
+        @Query("page") page : Int
+    ) : Call<RemoteDeclarationPage>
+
 }

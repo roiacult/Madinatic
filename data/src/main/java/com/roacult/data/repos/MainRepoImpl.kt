@@ -98,7 +98,25 @@ class MainRepoImpl(
      * fetch declaration page
      * */
     override suspend fun fetchDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage> {
-        return mainRemote.fetchDeclarations(authLocal.getToken(),page).map {
+        return mainRemote.fetchDeclarations(authLocal.getToken(),page = page).map {
+            DeclarationPage(
+                it.count,
+                it.next?.getNext(),
+                it.previous?.getNext(),
+                it.results.map {
+                    it.toDeclaration()
+                }
+            )
+        }
+    }
+
+    /**
+     * fetch user declaration page
+     * */
+    override suspend fun fetchUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage> {
+        val user = mainLocal.getUser()
+        val token = authLocal.getToken()
+        return mainRemote.fetchDeclarations(token,user.idu,page).map {
             DeclarationPage(
                 it.count,
                 it.next?.getNext(),
