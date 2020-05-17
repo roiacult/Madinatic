@@ -69,6 +69,12 @@ class AllDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>() {
     }
 
     private fun initViews() {
+
+        binding.toolbar.setNavigationIcon(R.drawable.back)
+        binding.toolbar.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.VERTICAL
         }
