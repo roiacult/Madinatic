@@ -30,22 +30,18 @@ class ProfileViewModel(
     }
 
     fun clickEvent(clickEvent: ProfileClickEvent) {
+        if(clickEvent == ProfileClickEvent.LOGOUT)
+            logoutInteractor(None())
         setState { copy(clickEvent = Event(clickEvent)) }
-    }
-
-    fun logout() {
-        logoutInteractor(None())
-        setState { copy(logout = Event(None())) }
     }
 }
 
 data class ProfileState (
     val clickEvent: Event<ProfileClickEvent>? = null,
     val errorMsg : Event<String>? = null,
-    val user : User? = null,
-    val logout : Event<None>? = null
+    val user : User? = null
 ) : State
 
 enum class ProfileClickEvent{
-    CHANGEPASSWORD,CHANGEINFO
+    CHANGEPASSWORD,CHANGEINFO,LOGOUT,ALLDECLARATIONS,UPDATES
 }

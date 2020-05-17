@@ -97,6 +97,7 @@
     <string name="logout">logout</string>
     <string name="no_internet">no internet connection</string>
     <string name="there_is_no_documents_in_this_declaration">there is no documents in \nthis declaration</string>
+    <string name="edit_your_information">Edit your information</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>

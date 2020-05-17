@@ -47,22 +47,30 @@ class ProfileFragment : BaseFragment<ProfileBinding>() {
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.clickEvent?.getContentIfNotHandled()?.let(::handlClickEvent)
             it.user?.apply { binding.user = this }
-            it.logout?.getContentIfNotHandled()?.apply {
-                logout()
-            }
         }
-    }
-
-    private fun logout() {
-        val intent = Intent(context, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        startActivity(intent)
     }
 
     private fun initViews() {
         binding.viewModel = viewModel
         binding.appbar.addOnOffsetChangedListener(appBarStateListener)
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.edit_info -> {
+                    handlClickEvent(ProfileClickEvent.CHANGEINFO)
+                    true
+                }
+                R.id.changepass -> {
+                    handlClickEvent(ProfileClickEvent.CHANGEPASSWORD)
+                    true
+                }
+                R.id.logout -> {
+                    handlClickEvent(ProfileClickEvent.LOGOUT)
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 
     private fun setToolbarTitle(show: Boolean) {
@@ -91,6 +99,20 @@ class ProfileFragment : BaseFragment<ProfileBinding>() {
             }
             ProfileClickEvent.CHANGEPASSWORD -> {
                 vm.navigate(FragmentNavigation(destinationClass = UpdatePasswordFragment::class.java))
+            }
+
+            ProfileClickEvent.LOGOUT -> {
+                val intent = Intent(context, MainActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(intent)
+            }
+            ProfileClickEvent.ALLDECLARATIONS -> {
+                //TODO navigate to all declaration
+            }
+
+            ProfileClickEvent.UPDATES -> {
+                //TODO navigate to update fragment
             }
         }
     }
