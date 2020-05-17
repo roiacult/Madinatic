@@ -24,7 +24,7 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
 
     private val viewModel: UnfinishedDeclarationViewModel by viewModel()
     private val controller by lazy {
-        DeclarationController(viewModel)
+        DeclarationController(viewModel,getString(R.string.all_dec_updated))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,7 +59,7 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
             is Fail<*, *> -> {
                 if(declarationState.getContentIfNotHandlled() != null)
                     viewModel.invalidate(checkTime = true)
-                controller.viewState = ViewState.EMPTY
+                controller.viewState = ViewState.FAIL
                 binding.refresh.isRefreshing = false
             }
             is Success -> {

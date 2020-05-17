@@ -24,7 +24,7 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
 
     private val viewModel: DeclarationViewModel by viewModel()
     private val controller by lazy {
-        DeclarationController(viewModel)
+        DeclarationController(viewModel,getString(R.string.no_declaration_is_submitted_yet))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,11 +59,11 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
             is Fail<*,*> -> {
                 if(declarationState.getContentIfNotHandlled() != null)
                     viewModel.invalidate(checkTime = true)
-                controller.viewState = ViewState.EMPTY
+                controller.viewState = ViewState.FAIL
                 binding.refresh.isRefreshing = false
             }
             is Success -> {
-                controller.viewState=ViewState.SUCCESS
+                controller.viewState = ViewState.SUCCESS
                 binding.refresh.isRefreshing = false
             }
         }

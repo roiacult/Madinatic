@@ -23,7 +23,7 @@ class AllDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>() {
 
     private val viewModel : AllDeclarationViewModel by viewModel()
     private val controller by lazy {
-        DeclarationController(viewModel)
+        DeclarationController(viewModel,getString(R.string.no_dec))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

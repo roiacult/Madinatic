@@ -101,6 +101,9 @@
     <string name="all_your_dec">All your declarations</string>
     <string name="add_doc">Add document</string>
     <string name="declaration_need_update">Declarations need to be updated</string>
+    <string name="no_declaration_is_submitted_yet">no declaration is submitted yet</string>
+    <string name="all_dec_updated">All declaration are updated</string>
+    <string name="no_dec">you didn\'t submit any declaration yet</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>
