@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="@string/all_declaration"
+            app:title="@string/all_your_dec"
             android:background="@color/primaryColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
