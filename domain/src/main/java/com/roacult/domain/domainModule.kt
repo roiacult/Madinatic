@@ -6,6 +6,7 @@ import com.roacult.domain.usecases.declaration.GetDeclarationPage
 import com.roacult.domain.usecases.declaration.SubmitDeclaration
 import com.roacult.domain.usecases.profile.ChangePassword
 import com.roacult.domain.usecases.profile.EditUserInfo
+import com.roacult.domain.usecases.profile.UserDeclarationPage
 import com.roacult.domain.usecases.profile.UserObservable
 import org.koin.dsl.module
 
@@ -25,4 +26,5 @@ val domainModule = module {
     single { GetCategories(get(),get()) }
     single { SubmitDeclaration(get(),get()) }
     single { GetDeclarationPage(get(),get()) }
+    single { UserDeclarationPage(get(),get()) }
 }
