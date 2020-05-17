@@ -29,6 +29,12 @@ class AddDocViewModel(
 ) : BaseViewModel<AddDocState>(AddDocState()) , AddDeclarationCallback {
 
     lateinit var declaration: Declaration
+    private var firstTime = true
+
+    var title = ""
+    var description = ""
+    var address = Address("",0.0,0.0)
+    var categorie: String =""
 
     init {
         scope.launchInteractor(getCategories, None()){
@@ -46,7 +52,16 @@ class AddDocViewModel(
     }
 
     fun saveData(json: String){
+        if(!firstTime) return
+
+        firstTime = false
         declaration = gson.fromJson(json,Declaration::class.java)
+
+        title = declaration.title
+        description = declaration.desc
+        address = Address(declaration.address,declaration.coordination.lat,declaration.coordination.long)
+        categorie = declaration.categorie
+
     }
 
     fun save() {
@@ -98,3 +113,9 @@ data class AddDocState(
     val declarationDoc : List<String> = emptyList(),
     val addDeclaration : Async<None> = Uninitialized
 ) : State
+
+data class Address(
+    val name: String,
+    val lat: Double,
+    val long: Double
+)

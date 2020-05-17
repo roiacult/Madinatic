@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -34,6 +35,7 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
     private val controller by lazy {
         DeclarationDocController(viewModel)
     }
+    private var firstTime = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -131,11 +133,16 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
 
     private fun handleCategories(categories: Async<List<CategorieView>>) {
         if(categories is Success) {
-            val cat = categories().filter { it.idc == viewModel.declaration.categorie }
+            val cat = categories()
             binding.type.adapter = SpinnerAdapter(
                 context!!,android.R.layout.simple_dropdown_item_1line,
                 cat
             )
+            val index = cat.map { it.idc  }.indexOf(viewModel.categorie)
+            if(index >= 0 && firstTime) {
+                firstTime = false
+                binding.type.setSelection(index)
+            }
         }else {
             val hintCategorie = CategorieView(HINT_VIEW_ID,getString(R.string.type_dec),"")
             binding.type.adapter = SpinnerAdapter(
@@ -148,22 +155,19 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
 
     private fun initViews() {
         viewModel.saveData(arguments!!.getString(DECLARATION,""))
-        binding.toolbar.title = getString(R.string.add_doc)
-        // disable all views except add document view
-        binding.title.isEnabled = false
-        binding.title.setText(viewModel.declaration.title)
-        binding.desciption.isEnabled = false
-        binding.desciption.setText(viewModel.declaration.desc)
-        binding.type.isEnabled = false
-        binding.materialButton.isEnabled = false
-        binding.materialButton.text = viewModel.declaration.address
+        syncData()
 
+        binding.toolbar.title = getString(R.string.add_doc)
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
+
         binding.epoxyRecyclerView.layoutManager = manager
         binding.epoxyRecyclerView.setController(controller)
-        binding.save.setOnClickListener { viewModel.save() }
+        binding.save.setOnClickListener {
+            saveData()
+            viewModel.save()
+        }
 
         binding.toolbar.setNavigationIcon(R.drawable.back)
         binding.toolbar.setNavigationOnClickListener {
@@ -173,6 +177,18 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
         binding.cancel.setOnClickListener {
             activity?.onBackPressed()
         }
+    }
+
+    private fun syncData() {
+        binding.title.setText(viewModel.title)
+        binding.desciption.setText(viewModel.description)
+        binding.materialButton.text = viewModel.address.name
+    }
+
+    private fun saveData(){
+        viewModel.title = binding.title.text.toString()
+        viewModel.description = binding.desciption.text.toString()
+        viewModel.categorie = (binding.type.selectedItem as CategorieView).idc
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -203,6 +219,11 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
                 showFilePicker()
             } else showMessage(R.string.upload_permission_denied)
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        saveData()
     }
 
     companion object {

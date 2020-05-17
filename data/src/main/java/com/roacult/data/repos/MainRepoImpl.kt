@@ -138,6 +138,7 @@ class MainRepoImpl(
     override suspend fun fetchUnfinishedUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage> {
         val user = mainLocal.getUser()
         val token = authLocal.getToken()
+        //TODO fetch not_validated to
         return mainRemote.fetchDeclarations(token,user.idu,DeclarationState.LACK_OF_INFO.toRemote(),page).map {
             DeclarationPage(
                 it.count,
