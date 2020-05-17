@@ -5,9 +5,10 @@ import com.airbnb.epoxy.TypedEpoxyController
 import com.roacult.madinatic.AddDocHeaderBindingModel_
 import com.roacult.madinatic.addDoc
 import com.roacult.madinatic.addImage
+import com.roacult.madinatic.utils.AddDeclarationCallback
 
 class DeclarationDocController(
-    private val viewModel: AddDeclarationViewModel
+    private val viewModel: AddDeclarationCallback
 ) : TypedEpoxyController<List<String>>() {
 
     @AutoModel lateinit var header : AddDocHeaderBindingModel_

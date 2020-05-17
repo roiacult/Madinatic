@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationViewModel" />
+            type="com.roacult.madinatic.utils.AddDeclarationCallback" />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:onClick="@{(v)-> viewModel.addDocClick()}"

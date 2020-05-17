@@ -12,6 +12,7 @@ import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.AllDeclarationsBinding
 import com.roacult.madinatic.ui.DeclarationController
 import com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsFragment
+import com.roacult.madinatic.ui.profile.unfinished.adddoc.AddDocFragment
 import com.roacult.madinatic.utils.extensions.getGoogleMapUrl
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import com.roacult.madinatic.utils.states.*
@@ -40,13 +41,12 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
     }
 
     private fun moreDetailsEvent(json: String) {
-//        vm.navigate(FragmentNavigation(
-//            destinationClass = DeclarationDetailsFragment::class.java,
-//            fragmentArguments = Bundle().apply {
-//                putString(DeclarationDetailsFragment.DECLARATION,json)
-//            }
-//        ))
-        //TODO open add product fragment
+        vm.navigate(FragmentNavigation(
+            destinationClass = AddDocFragment::class.java,
+            fragmentArguments = Bundle().apply {
+                putString(AddDocFragment.DECLARATION,json)
+            }
+        ))
     }
 
     private fun openMap(geoCoordination: GeoCoordination) {

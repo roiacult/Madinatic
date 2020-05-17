@@ -12,6 +12,7 @@ import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
+import com.roacult.madinatic.utils.AddDeclarationCallback
 import com.roacult.madinatic.utils.StringProvider
 import com.roacult.madinatic.utils.extensions.toAttachment
 import com.roacult.madinatic.utils.states.*
@@ -20,7 +21,7 @@ class AddDeclarationViewModel(
     getCategories : GetCategories,
     private val submitDeclaration: SubmitDeclaration,
     private val stringProvider: StringProvider
-)  :BaseViewModel<AddDeclarationState>(AddDeclarationState()) {
+)  :BaseViewModel<AddDeclarationState>(AddDeclarationState()) , AddDeclarationCallback {
 
     var adrress : Address? = null
     var title = ""
@@ -96,7 +97,7 @@ class AddDeclarationViewModel(
         }
     }
 
-    fun addDocClick() {
+    override fun addDocClick() {
         val currentDoc = state.value!!.declarationDoc
 
         if(currentDoc.size >= 5){
