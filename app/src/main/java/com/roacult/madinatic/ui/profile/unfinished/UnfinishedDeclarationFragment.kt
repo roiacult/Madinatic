@@ -11,8 +11,7 @@ import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.AllDeclarationsBinding
 import com.roacult.madinatic.ui.DeclarationController
-import com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsFragment
-import com.roacult.madinatic.ui.profile.unfinished.adddoc.AddDocFragment
+import com.roacult.madinatic.ui.profile.unfinished.update_declaration.UpdateDeclarationFragment
 import com.roacult.madinatic.utils.extensions.getGoogleMapUrl
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import com.roacult.madinatic.utils.states.*
@@ -42,9 +41,9 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
 
     private fun moreDetailsEvent(json: String) {
         vm.navigate(FragmentNavigation(
-            destinationClass = AddDocFragment::class.java,
+            destinationClass = UpdateDeclarationFragment::class.java,
             fragmentArguments = Bundle().apply {
-                putString(AddDocFragment.DECLARATION,json)
+                putString(UpdateDeclarationFragment.DECLARATION,json)
             }
         ))
     }

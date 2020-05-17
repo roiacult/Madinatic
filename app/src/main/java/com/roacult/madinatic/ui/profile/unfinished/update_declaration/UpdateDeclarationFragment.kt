@@ -1,4 +1,4 @@
-package com.roacult.madinatic.ui.profile.unfinished.adddoc
+package com.roacult.madinatic.ui.profile.unfinished.update_declaration
 
 import android.Manifest
 import android.app.Activity
@@ -28,7 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.regex.Pattern
 
-class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
+class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() {
     override val layutIdRes = R.layout.add_declaration_v2
 
     private val viewModel: AddDocViewModel by viewModel()
@@ -81,7 +81,7 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
                     0 -> {
                         CropImage.activity()
                             .setCropShape(CropImageView.CropShape.RECTANGLE)
-                            .start(context, this@AddDocFragment)
+                            .start(context, this@UpdateDeclarationFragment)
                     }
                     1 -> {
                         addFile()
@@ -123,7 +123,7 @@ class AddDocFragment : FullScreenFragment<AddDeclarationV2Binding>() {
 
     private fun showFilePicker() {
         MaterialFilePicker().apply {
-            withSupportFragment(this@AddDocFragment)
+            withSupportFragment(this@UpdateDeclarationFragment)
             withCloseMenu(true)
             withRequestCode(PICKFILE_REQUEST_CODE)
             withFilter(Pattern.compile(".*\\.(pdf|docx|doc|txt)$"))

@@ -1,19 +1,19 @@
-package com.roacult.madinatic.ui.profile.unfinished.adddoc
+package com.roacult.madinatic.ui.profile.unfinished.update_declaration
 
 import com.google.gson.Gson
 import com.roacult.domain.entities.Declaration
-import com.roacult.domain.entities.DeclarationState
-import com.roacult.domain.entities.GeoCoordination
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.usecases.declaration.GetCategories
-import com.roacult.domain.usecases.profile.AddDoc
+import com.roacult.domain.usecases.profile.UpdateDeclaration
 import com.roacult.domain.usecases.profile.AddDocumentsParams
+import com.roacult.domain.usecases.profile.DeclarationUpdate
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
 import com.roacult.madinatic.ui.declaration.adddeclaration.CategorieView
+import com.roacult.madinatic.ui.declaration.adddeclaration.HINT_VIEW_ID
 import com.roacult.madinatic.ui.declaration.adddeclaration.toView
 import com.roacult.madinatic.utils.AddDeclarationCallback
 import com.roacult.madinatic.utils.StringProvider
@@ -23,7 +23,7 @@ import timber.log.Timber
 
 class AddDocViewModel(
     getCategories : GetCategories,
-    private val addDoc : AddDoc,
+    private val updateDeclaration : UpdateDeclaration,
     private val gson : Gson,
     private val stringProvider: StringProvider
 ) : BaseViewModel<AddDocState>(AddDocState()) , AddDeclarationCallback {
@@ -65,15 +65,37 @@ class AddDocViewModel(
     }
 
     fun save() {
+
+        if(title.isEmpty()){
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.title_empty))) }
+            return
+        }
+
+        if(categorie == HINT_VIEW_ID) {
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.categorie_empty))) }
+            return
+        }
+
+        if(description.isEmpty()){
+            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.desc_empty))) }
+            return
+        }
+
         val docs = state.value!!.declarationDoc
         if(docs.isEmpty()) {
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.images_empty))) }
             return
         }
 
+        val newTitle = if(title==declaration.title) null else title
+        val newDesc = if(description==declaration.desc) null else description
+        val newAddress = if(address.lat==declaration.coordination.lat && address.long ==declaration.coordination.long)
+            null else address
+        val newCategorie = if(categorie==declaration.categorie) null else categorie
+
         setState { copy(addDeclaration = Loading()) }
-        scope.launchInteractor(addDoc, AddDocumentsParams(
-            declaration.id,
+        scope.launchInteractor(updateDeclaration, AddDocumentsParams(
+            DeclarationUpdate(declaration.id,newTitle,newCategorie,newDesc,newAddress?.name,newAddress?.lat,newAddress?.long),
             docs.map { it.toAttachment() }
         )){
             it.either({

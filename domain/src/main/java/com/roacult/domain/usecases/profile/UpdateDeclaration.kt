@@ -8,7 +8,7 @@ import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.EitherInteractor
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 
-class AddDoc (
+class UpdateDeclaration (
     dispatcher: CouroutineDispatchers,
     private val repo : MainRepo
 ) : EitherInteractor<AddDocumentsParams, None, DeclarationFailure>(dispatcher) {
@@ -19,6 +19,16 @@ class AddDoc (
 }
 
 data class AddDocumentsParams(
-    val delcaration : String,
+    val delcaration : DeclarationUpdate,
     val docs : List<Attachment>
+)
+
+data class DeclarationUpdate(
+    val id: String,
+    val title: String?,
+    val categorie: String?,
+    val desc: String?,
+    val address: String?,
+    val lat: Double?,
+    val long: Double?
 )

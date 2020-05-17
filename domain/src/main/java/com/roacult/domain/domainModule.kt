@@ -25,5 +25,5 @@ val domainModule = module {
     single { GetDeclarationPage(get(),get()) }
     single { UserDeclarationPage(get(),get()) }
     single { UserUnfinishedDeclaration(get(),get()) }
-    single { AddDoc(get(),get()) }
+    single { UpdateDeclaration(get(),get()) }
 }
