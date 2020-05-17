@@ -11,6 +11,7 @@ import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.databinding.DeclarationBinding
+import com.roacult.madinatic.ui.DeclarationController
 import com.roacult.madinatic.ui.declaration.adddeclaration.AddDeclarationFragmentV2
 import com.roacult.madinatic.ui.declaration.declarationdetails.DeclarationDetailsFragment
 import com.roacult.madinatic.utils.extensions.getGoogleMapUrl

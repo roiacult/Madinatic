@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.roacult.madinatic.ui.declaration.DeclarationViewModel" />
+            type="com.roacult.madinatic.utils.DeclarationControllerCallback" />
 
     </data>
 

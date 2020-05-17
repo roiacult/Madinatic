@@ -15,6 +15,7 @@ import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
+import com.roacult.madinatic.utils.DeclarationControllerCallback
 import com.roacult.madinatic.ui.DeclarationDataSourceFactory
 import com.roacult.madinatic.utils.PagingCallback
 import com.roacult.madinatic.utils.StringProvider
@@ -26,7 +27,8 @@ class DeclarationViewModel(
     private val gson: Gson,
     private val stringProvider: StringProvider
 ) : BaseViewModel<DeclarationViewState>(DeclarationViewState()) ,
-    PagingCallback<DeclarationFailure, DeclarationPage> {
+    PagingCallback<DeclarationFailure, DeclarationPage> ,
+    DeclarationControllerCallback {
 
     private var lastTimeInvalidated: Long = System.currentTimeMillis()/1000
 
@@ -78,12 +80,12 @@ class DeclarationViewModel(
         dataSourceFactory.sourceLiveData.value?.invalidate()
     }
 
-    fun readMoreClicked(declaration : Declaration) {
+    override fun readMoreClicked(declaration : Declaration) {
         val json = gson.toJson(declaration)
         setState { copy(moreDetailsClickEvent = Event(json)) }
     }
 
-    fun gpsClicked(localisation : GeoCoordination) {
+    override fun gpsClicked(localisation : GeoCoordination) {
         setState { copy(gpsCoordination = Event(localisation)) }
     }
 
