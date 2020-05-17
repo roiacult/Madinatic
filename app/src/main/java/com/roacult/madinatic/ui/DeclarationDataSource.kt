@@ -1,26 +1,30 @@
-package com.roacult.madinatic.ui.declaration
+package com.roacult.madinatic.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.roacult.domain.entities.Declaration
+import com.roacult.domain.exceptions.DeclarationFailure
+import com.roacult.domain.usecases.declaration.DeclarationPage
 import com.roacult.kero.team7.jstarter_domain.functional.Either
+import com.roacult.madinatic.utils.PagingCallback
 
 class DeclarationDataSourceFactory(
-    private val viewModel: DeclarationViewModel
+    private val viewModel: PagingCallback<DeclarationFailure,DeclarationPage>
 ) : DataSource.Factory<Int,Declaration>() {
 
     val sourceLiveData = MutableLiveData<DeclarationDataSource>()
 
     override fun create(): DataSource<Int, Declaration> {
-        val dataSource = DeclarationDataSource(viewModel)
+        val dataSource =
+            DeclarationDataSource(viewModel)
         sourceLiveData.postValue(dataSource)
         return dataSource
     }
 }
 
 class DeclarationDataSource(
-    private val viewModel: DeclarationViewModel
+    private val viewModel: PagingCallback<DeclarationFailure,DeclarationPage>
 ) : PageKeyedDataSource<Int,Declaration>() {
 
     private var next: Int? = null

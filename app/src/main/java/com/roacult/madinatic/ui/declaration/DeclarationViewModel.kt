@@ -15,18 +15,18 @@ import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseViewModel
 import com.roacult.madinatic.base.State
+import com.roacult.madinatic.ui.DeclarationDataSourceFactory
+import com.roacult.madinatic.utils.PagingCallback
 import com.roacult.madinatic.utils.StringProvider
 import com.roacult.madinatic.utils.getPagedListConfig
 import com.roacult.madinatic.utils.states.*
-import timber.log.Timber
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 class DeclarationViewModel(
     private val getDeclarationPage: GetDeclarationPage,
     private val gson: Gson,
     private val stringProvider: StringProvider
-) : BaseViewModel<DeclarationViewState>(DeclarationViewState()) {
+) : BaseViewModel<DeclarationViewState>(DeclarationViewState()) ,
+    PagingCallback<DeclarationFailure, DeclarationPage> {
 
     private var lastTimeInvalidated: Long = System.currentTimeMillis()/1000
 
@@ -46,11 +46,11 @@ class DeclarationViewModel(
 
     init { liveData.observeForever(observer) }
 
-   fun loadInitial(callback: (Either<DeclarationFailure,DeclarationPage>)->Unit){
+   override fun loadInitial(callback: (Either<DeclarationFailure,DeclarationPage>)->Unit){
        return loadPage(1,callback)
    }
 
-    fun loadPage(page: Int,callback: (Either<DeclarationFailure,DeclarationPage>)->Unit){
+    override fun loadPage(page: Int,callback: (Either<DeclarationFailure,DeclarationPage>)->Unit){
         setState { copy(declarationState = Loading()) }
         scope.launchInteractor(getDeclarationPage,page){
             callback(it)
