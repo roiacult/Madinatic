@@ -16,11 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_height="330dp"
             android:layout_width="match_parent">
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapse"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:toolbarId="@+id/toolbar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:contentScrim="?attr/colorPrimary">
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,6 +96,13 @@
                         tools:text="Algeria.Tlemcen"
                         android:textSize="17sp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    app:layout_collapseMode="pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"/>
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.core.widget.NestedScrollView
@@ -228,6 +238,7 @@
                     android:textSize="17sp"
                     tools:ignore="RtlCompat,RtlSymmetry" />
             </LinearLayout>
+
         </androidx.core.widget.NestedScrollView>
         <iammert.com.view.scalinglib.ScalingLayout
             android:background="@color/secondaryColor"
@@ -237,7 +248,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             app:radiusFactor="1"
-            app:layout_behavior=".utils.ScaleBehavior"
+            app:layout_behavior="iammert.com.view.scalinglib.ScalingLayoutBehavior"
             android:layout_gravity="center_horizontal">
             <LinearLayout
                 android:layout_marginStart="4dp"
@@ -252,7 +263,7 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     android:drawablePadding="4dp"
-                    android:drawableTop="@drawable/settings_outline"
+                    android:drawableTop="@drawable/all_profile"
                     android:text="@string/modifier_votre_profile"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="14sp"
@@ -263,7 +274,7 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     android:drawablePadding="4dp"
-                    android:drawableTop="@drawable/lock_outline_profile"
+                    android:drawableTop="@drawable/leack_info_profile"
                     android:text="@string/modifier_votre_mots_de_passe"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="14sp"
