@@ -2,8 +2,12 @@ package com.roacult.madinatic.ui.profile.unfinished.adddoc
 
 import com.google.gson.Gson
 import com.roacult.domain.entities.Declaration
+import com.roacult.domain.entities.DeclarationState
+import com.roacult.domain.entities.GeoCoordination
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.usecases.declaration.GetCategories
+import com.roacult.domain.usecases.profile.AddDoc
+import com.roacult.domain.usecases.profile.AddDocumentsParams
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
@@ -13,10 +17,12 @@ import com.roacult.madinatic.ui.declaration.adddeclaration.CategorieView
 import com.roacult.madinatic.ui.declaration.adddeclaration.toView
 import com.roacult.madinatic.utils.AddDeclarationCallback
 import com.roacult.madinatic.utils.StringProvider
+import com.roacult.madinatic.utils.extensions.toAttachment
 import com.roacult.madinatic.utils.states.*
 
 class AddDocViewModel(
     getCategories : GetCategories,
+    private val addDoc : AddDoc,
     private val gson : Gson,
     private val stringProvider: StringProvider
 ) : BaseViewModel<AddDocState>(AddDocState()) , AddDeclarationCallback {
@@ -60,6 +66,20 @@ class AddDocViewModel(
         }
 
         setState { copy(addDocClickEvent = Event(None())) }
+        scope.launchInteractor(addDoc, AddDocumentsParams(
+            declaration.id,
+            currentDoc.map { it.toAttachment() }
+        )){
+            it.either({
+                val msg =when(it){
+                    DeclarationFailure.InternetConnection -> stringProvider.getStringFromResource(R.string.internet_prblm)
+                    else -> stringProvider.getStringFromResource(R.string.unknown_error)
+                }
+                setState { copy(errorMsg = Event(msg),addDeclaration = Fail(it)) }
+            },{
+                setState { copy(addDeclaration = Success(it)) }
+            })
+        }
     }
 
     fun addDoc(filePath: String) {
