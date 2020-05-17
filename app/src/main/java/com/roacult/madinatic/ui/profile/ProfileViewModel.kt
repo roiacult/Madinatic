@@ -30,9 +30,11 @@ class ProfileViewModel(
     }
 
     fun clickEvent(clickEvent: ProfileClickEvent) {
-        if(clickEvent == ProfileClickEvent.LOGOUT)
-            logoutInteractor(None())
         setState { copy(clickEvent = Event(clickEvent)) }
+    }
+
+    fun logout() {
+        logoutInteractor(None())
     }
 }
 
