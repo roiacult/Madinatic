@@ -13,7 +13,8 @@ import com.roacult.madinatic.utils.states.ViewState
 
 class DeclarationController(
     private val viewModel: DeclarationControllerCallback,
-    private val msg: String
+    private val msg: String,
+    private val button: String
 ) : PagedListEpoxyController<Declaration>(){
 
     @AutoModel lateinit var progress : ProgressBindingModel_
@@ -38,6 +39,7 @@ class DeclarationController(
     override fun buildItemModel(currentPosition: Int, item: Declaration?): EpoxyModel<*> {
         return DeclarationBindingModel_()
             .viewModel(viewModel)
+            .button(button)
             .declaration(item!!)
             .id(item.id)
     }

@@ -23,7 +23,7 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
 
     private val viewModel: UnfinishedDeclarationViewModel by viewModel()
     private val controller by lazy {
-        DeclarationController(viewModel,getString(R.string.all_dec_updated))
+        DeclarationController(viewModel,getString(R.string.all_dec_updated),getString(R.string.update))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

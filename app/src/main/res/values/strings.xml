@@ -104,6 +104,8 @@
     <string name="no_declaration_is_submitted_yet">no declaration is submitted yet</string>
     <string name="all_dec_updated">All declaration are updated</string>
     <string name="no_dec">you didn\'t submit any declaration yet</string>
+    <string name="update">update</string>
+    <string name="update_dec">update declaration</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>

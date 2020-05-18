@@ -24,7 +24,7 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
 
     private val viewModel: DeclarationViewModel by viewModel()
     private val controller by lazy {
-        DeclarationController(viewModel,getString(R.string.no_declaration_is_submitted_yet))
+        DeclarationController(viewModel,getString(R.string.no_declaration_is_submitted_yet),getString(R.string.read_more))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

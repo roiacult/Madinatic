@@ -162,9 +162,10 @@ class MainRepoImpl(
     override suspend fun postDocuments(documentsParams: AddDocumentsParams): Either<DeclarationFailure, None> {
 
         val token = authLocal.getToken()
+        val user = mainLocal.getUser()
 
         // put new data to declaration
-        val responce = mainRemote.putNewData(token,documentsParams.delcaration)
+        val responce = mainRemote.putNewData(token,user.idu,documentsParams.delcaration)
         if(responce is Either.Left) return responce
 
         //post all files

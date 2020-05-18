@@ -83,15 +83,9 @@ class UpdateDeclarationViewModel(
 
         val docs = state.value!!.declarationDoc
 
-        val newTitle = if(title==declaration.title) null else title
-        val newDesc = if(description==declaration.desc) null else description
-        val newAddress = if(address.lat==declaration.coordination.lat && address.long ==declaration.coordination.long)
-            null else address
-        val newCategorie = if(categorie==declaration.categorie) null else categorie
-
         setState { copy(addDeclaration = Loading()) }
         scope.launchInteractor(updateDeclaration, AddDocumentsParams(
-            DeclarationUpdate(declaration.id,newTitle,newCategorie,newDesc,newAddress?.name,newAddress?.lat,newAddress?.long),
+            DeclarationUpdate(declaration.id,title,categorie,description,address.name,address.lat,address.long),
             docs.map { it.toAttachment() }
         )){
             it.either({

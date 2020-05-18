@@ -25,10 +25,10 @@ data class AddDocumentsParams(
 
 data class DeclarationUpdate(
     val id: String,
-    val title: String?,
-    val categorie: String?,
-    val desc: String?,
-    val address: String?,
-    val lat: Double?,
-    val long: Double?
+    val title: String,
+    val categorie: String,
+    val desc: String,
+    val address: String,
+    val lat: Double,
+    val long: Double
 )

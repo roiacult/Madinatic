@@ -157,7 +157,7 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
         viewModel.saveData(arguments!!.getString(DECLARATION,""))
         syncData()
 
-        binding.toolbar.title = getString(R.string.add_doc)
+        binding.toolbar.title = getString(R.string.update_dec)
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }

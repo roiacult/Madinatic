@@ -216,19 +216,20 @@ class MainRemote(
         })
     }
 
-    suspend fun putNewData(token: String, updates: DeclarationUpdate): Either<DeclarationFailure,None>
+    suspend fun putNewData(token: String,uid: String, updates: DeclarationUpdate): Either<DeclarationFailure,None>
             = suspendCoroutine{coroutine->
+
+        val geoCord = "[${updates.lat},${updates.long}]"
+
         val map = hashMapOf<String, RequestBody>()
 
-        if(updates.title != null) map["title"] = updates.title!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        if(updates.desc != null) map["desc"] = updates.desc!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        if(updates.categorie != null) map["dtype"] = updates.categorie!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        if(updates.address != null) map["address"] = updates.address!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        if(updates.lat != null && updates.long != null) {
-            val geoCord = "[${updates.lat!!},${updates.long}]"
-            map["geo_cord"] = geoCord.toRequestBody("text/plain".toMediaTypeOrNull())
-        }
+        map["title"] = updates.title.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["desc"] = updates.desc.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["dtype"] = updates.categorie.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["address"] = updates.address.toRequestBody("text/plain".toMediaTypeOrNull())
+        map["geo_cord"] = geoCord.toRequestBody("text/plain".toMediaTypeOrNull())
         map["status"] = DeclarationState.NOT_VALIDATED.toRemote().toRequestBody("text/plain".toMediaTypeOrNull())
+        map["citizen"] = uid.toRequestBody("text/plain".toMediaTypeOrNull())
 
         service.putDeclaration(token,updates.id,map)
             .enqueue(object : Callback<ResponseBody> {
