@@ -231,6 +231,7 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
                 viewModel.deleteDeclaration()
             }
             setNegativeButton(R.string.cancel){_,_->}
+            show()
         }
     }
 

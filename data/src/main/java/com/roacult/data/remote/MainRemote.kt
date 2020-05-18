@@ -296,8 +296,7 @@ class MainRemote(
                 }
 
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    val body = response.body()
-                    if (body == null || response.code() != 204 ) {
+                    if (response.code() != 204 ) {
                         Timber.v("deleteDeclaration failled $response")
                         coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
                     } else {
