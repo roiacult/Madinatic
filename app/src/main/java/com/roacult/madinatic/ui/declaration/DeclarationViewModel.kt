@@ -7,7 +7,9 @@ import com.google.gson.Gson
 import com.roacult.domain.entities.Declaration
 import com.roacult.domain.entities.GeoCoordination
 import com.roacult.domain.exceptions.DeclarationFailure
+import com.roacult.domain.usecases.declaration.DeclarationOrdering
 import com.roacult.domain.usecases.declaration.DeclarationPage
+import com.roacult.domain.usecases.declaration.DeclarationPageParam
 import com.roacult.domain.usecases.declaration.GetDeclarationPage
 import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.None
@@ -32,6 +34,8 @@ class DeclarationViewModel(
 
     private var lastTimeInvalidated: Long = System.currentTimeMillis()/1000
 
+    var orderingType: DeclarationOrdering? = null
+
     private val dataSourceFactory: DeclarationDataSourceFactory by lazy {
         DeclarationDataSourceFactory(this)
     }
@@ -54,7 +58,9 @@ class DeclarationViewModel(
 
     override fun loadPage(page: Int,callback: (Either<DeclarationFailure,DeclarationPage>)->Unit){
         setState { copy(declarationState = Loading()) }
-        scope.launchInteractor(getDeclarationPage,page){
+        scope.launchInteractor(getDeclarationPage, DeclarationPageParam(
+            page,orderingType
+        )){
             callback(it)
             it.either({
                 val msg =when(it){

@@ -18,6 +18,7 @@
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/ordering"
                 android:entries="@array/ordering"
                 app:layout_scrollFlags="noScroll"
                 android:layout_width="match_parent"

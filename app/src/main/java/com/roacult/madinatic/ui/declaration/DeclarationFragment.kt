@@ -4,9 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roacult.domain.entities.GeoCoordination
+import com.roacult.domain.usecases.declaration.DeclarationOrdering
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
@@ -83,6 +85,27 @@ class DeclarationFragment : BaseFragment<DeclarationBinding>() {
         binding.declarations.setController(controller)
         binding.refresh.setOnRefreshListener {
             viewModel.invalidate()
+        }
+
+        binding.ordering.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewModel.orderingType = when(position){
+                    1 -> {
+                        DeclarationOrdering.NEW_TO_OLD
+                    }
+                    2 -> {
+                        DeclarationOrdering.OLD_TO_NEW
+                    }
+                    else  -> null
+                }
+                viewModel.invalidate()
+            }
         }
     }
 }
