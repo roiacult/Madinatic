@@ -6,11 +6,15 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import com.roacult.kero.team7.jstarter_domain.interactors.None
@@ -22,6 +26,10 @@ import com.roacult.madinatic.ui.declaration.adddeclaration.DeclarationDocControl
 import com.roacult.madinatic.ui.declaration.adddeclaration.HINT_VIEW_ID
 import com.roacult.madinatic.ui.declaration.adddeclaration.SpinnerAdapter
 import com.roacult.madinatic.utils.states.*
+import com.schibstedspain.leku.LATITUDE
+import com.schibstedspain.leku.LOCATION_ADDRESS
+import com.schibstedspain.leku.LONGITUDE
+import com.schibstedspain.leku.LocationPickerActivity
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,6 +43,24 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
     private val controller by lazy {
         DeclarationDocController(viewModel)
     }
+
+    private val fusedLocationClient by lazy {
+        LocationServices.getFusedLocationProviderClient(activity!!)
+    }
+
+    private val locationRequest by lazy{
+        LocationRequest.create().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+    }
+    private val locationBuilder by lazy{
+        LocationSettingsRequest.Builder().apply {
+            addLocationRequest(locationRequest)
+        }
+    }
+
     private var firstTime = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -174,6 +200,8 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
             activity?.onBackPressed()
         }
 
+        binding.materialButton.setOnClickListener(::checkLocationSettings)
+
         binding.cancel.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -191,6 +219,41 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
         viewModel.categorie = (binding.type.selectedItem as CategorieView).idc
     }
 
+    private fun checkLocationSettings(v:View) {
+        LocationServices.getSettingsClient(activity!!).checkLocationSettings(locationBuilder.build())
+            .addOnCompleteListener {
+                try{
+                    it.getResult(ApiException::class.java)
+                    requestLocationAndStartLocationPicker()
+                } catch (exception: ApiException) {
+                    when(exception.statusCode){
+                        LocationSettingsStatusCodes.RESOLUTION_REQUIRED->{
+                            val resolvable = (exception as ResolvableApiException)
+                            startIntentSenderForResult(
+                                resolvable.resolution.intentSender,
+                                GPS_ACTIVATION_CODE,null, 0, 0, 0, null
+                            )
+                        }
+                    }
+                }
+            }
+    }
+
+    fun requestLocationAndStartLocationPicker(){
+        fusedLocationClient.requestLocationUpdates(locationRequest,
+            object : LocationCallback(){},
+            Looper.getMainLooper())
+        val locationPickerIntent = LocationPickerActivity.Builder()
+            .withGeolocApiKey(getString(R.string.google_api_key))
+            .withDefaultLocaleSearchZone()
+            .shouldReturnOkOnBackPressed()
+            .withSatelliteViewHidden()
+            .withGooglePlacesEnabled()
+            .withGoogleTimeZoneEnabled()
+            .build(context!!)
+        startActivityForResult(locationPickerIntent, MAP_REQUEST_CODE)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == PICKFILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -204,6 +267,18 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
             if (resultCode == Activity.RESULT_OK) {
                 val result = CropImage.getActivityResult(data)
                 viewModel.addDoc(result.uri.path!!)
+            }
+        }else if(requestCode == MAP_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val latitude = data.getDoubleExtra(LATITUDE, 0.0)
+            val longitude = data.getDoubleExtra(LONGITUDE, 0.0)
+            val address = data.getStringExtra(LOCATION_ADDRESS)
+            if(address != null)  binding.materialButton.text = address
+            viewModel.address = Address(address ?: "",latitude,longitude)
+        }else if (requestCode==GPS_ACTIVATION_CODE){
+            if(resultCode == Activity.RESULT_OK) {
+                requestLocationAndStartLocationPicker()
+            }else {
+                showMessage(R.string.location_gps_fail)
             }
         }
     }
@@ -230,6 +305,8 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
 
         const val PICKFILE_REQUEST_CODE = 984
         const val REQUEST_STORAGE_PERMISSION = 875
+        const val MAP_REQUEST_CODE =958
+        const val GPS_ACTIVATION_CODE = 123
 
         const val DECLARATION = "com.roacult.madinatic:declaration"
     }
