@@ -6,14 +6,22 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:background="@color/surface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
+                android:background="@color/primaryColor"
                 app:menu="@menu/home_menu"
                 app:layout_scrollFlags="scroll|enterAlways"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:entries="@array/ordering"
+                app:layout_scrollFlags="noScroll"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

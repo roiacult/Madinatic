@@ -111,4 +111,10 @@
         <item>upload photo</item>
         <item>upload a file</item>
     </string-array>
+
+    <string-array name="ordering">
+        <item>random</item>
+        <item>new to old</item>
+        <item>old to new</item>
+    </string-array>
 </resources>
