@@ -86,8 +86,8 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
                     successDialogue()
                 else {
                     showMessage("declaration deleted successfully")
-                    vm.refresh()
                     activity?.onBackPressed()
+                    vm.refresh()
                 }
             }
         }

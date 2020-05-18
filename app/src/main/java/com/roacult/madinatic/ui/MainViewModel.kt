@@ -8,6 +8,7 @@ import com.roacult.madinatic.base.NavigationState
 import com.roacult.madinatic.base.NavigationViewModel
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import com.roacult.madinatic.utils.states.Event
+import timber.log.Timber
 
 class MainViewModel(
     private val userState : UserState

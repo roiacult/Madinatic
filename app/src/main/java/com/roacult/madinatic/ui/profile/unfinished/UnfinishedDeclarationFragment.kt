@@ -16,6 +16,7 @@ import com.roacult.madinatic.utils.extensions.getGoogleMapUrl
 import com.roacult.madinatic.utils.navigation.FragmentNavigation
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>() {
 
@@ -39,11 +40,14 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
         }
 
         vm.observe(this){
+            Timber.v("observing vm state $it")
+            Timber.v("refresh --> ${it.refresh}")
             it.refresh?.getContentIfNotHandled()?.let(::refresh)
         }
     }
 
     private fun refresh(none: None) {
+        Timber.v("refresh is consumed here ....")
         viewModel.invalidate(checkTime = false)
     }
 
