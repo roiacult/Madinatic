@@ -6,6 +6,7 @@ import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.declaration.DeclarationPage
+import com.roacult.domain.usecases.declaration.DeclarationPageParam
 import com.roacult.domain.usecases.profile.AddDocumentsParams
 import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
@@ -25,7 +26,7 @@ interface MainRepo {
 
     suspend fun submitDeclaration(declaration: Declaration): Either<DeclarationFailure, None>
 
-    suspend fun fetchDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage>
+    suspend fun fetchDeclrations(page: DeclarationPageParam): Either<DeclarationFailure, DeclarationPage>
 
     suspend fun fetchUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage>
 

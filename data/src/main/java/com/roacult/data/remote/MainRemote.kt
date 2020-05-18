@@ -3,11 +3,11 @@ package com.roacult.data.remote
 import com.roacult.data.remote.entities.*
 import com.roacult.data.remote.services.MainService
 import com.roacult.data.utils.toRemote
-import com.roacult.domain.entities.Categorie
-import com.roacult.domain.entities.Declaration
 import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
+import com.roacult.domain.usecases.declaration.DeclarationOrdering
+import com.roacult.domain.usecases.declaration.DeclarationPageParam
 import com.roacult.domain.usecases.profile.DeclarationUpdate
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
@@ -181,18 +181,50 @@ class MainRemote(
     }
 
     suspend fun fetchDeclarations(
-        token: String,uid : String? = null,
+        token: String,
+        pageParam: DeclarationPageParam
+    ): Either<DeclarationFailure, RemoteDeclarationPage> = suspendCoroutine {coroutine->
+
+        val call = if(pageParam.ordering == null)
+            service.getDeclarationPage(token,pageParam.page)
+        else if(pageParam.ordering == DeclarationOrdering.OLD_TO_NEW)
+            service.getDeclarationPageOrderd(token,"created_on",pageParam.page)
+        else
+            service.getDeclarationPageOrderd(token,"-created_on",pageParam.page)
+
+        call.enqueue(object : Callback<RemoteDeclarationPage> {
+            override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {
+                Timber.v("fetchDeclarations failed")
+                coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+            }
+
+            override fun onResponse(
+                call: Call<RemoteDeclarationPage>,
+                response: Response<RemoteDeclarationPage>
+            ) {
+                val body = response.body()
+                if (body == null || !response.isSuccessful) {
+                    Timber.v("fetchDeclarations failled $response")
+                    coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                } else {
+                    Timber.v("fetchDeclarations succeeded")
+                    coroutine.resume(Either.Right(body))
+                }
+            }
+        })
+    }
+
+    suspend fun fetchUserDeclarations(
+        token: String,
+        uid : String,
         status: String? = null,
         status2: String? = null,
         page: Int
-    ): Either<DeclarationFailure, RemoteDeclarationPage>
-            = suspendCoroutine {coroutine->
-        val call = if(uid == null && status == null)
-            service.getDeclarationPage(token,page)
-        else if(uid !=null && status == null)
+    ): Either<DeclarationFailure, RemoteDeclarationPage> = suspendCoroutine {coroutine->
+        val call =if(status == null)
             service.getDeclarationPage(token,uid,page)
         else
-            service.getDeclarationPage(token,uid!!,status!!,status2!!,page)
+            service.getDeclarationPage(token,uid,status,status2!!,page)
 
         call.enqueue(object : Callback<RemoteDeclarationPage> {
             override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {

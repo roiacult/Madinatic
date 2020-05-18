@@ -10,11 +10,20 @@ import com.roacult.kero.team7.jstarter_domain.interactors.EitherInteractor
 class GetDeclarationPage (
     dispathcher : CouroutineDispatchers,
     private val repo : MainRepo
-) : EitherInteractor<Int, DeclarationPage, DeclarationFailure>(dispathcher) {
+) : EitherInteractor<DeclarationPageParam, DeclarationPage, DeclarationFailure>(dispathcher) {
 
-    override suspend fun invoke(executeParams: Int): Either<DeclarationFailure, DeclarationPage> {
+    override suspend fun invoke(executeParams: DeclarationPageParam): Either<DeclarationFailure, DeclarationPage> {
         return repo.fetchDeclrations(executeParams)
     }
+}
+
+data class DeclarationPageParam(
+    val page: Int,
+    val ordering: DeclarationOrdering? = null
+)
+
+enum class DeclarationOrdering {
+    NEW_TO_OLD, OLD_TO_NEW
 }
 
 data class DeclarationPage(

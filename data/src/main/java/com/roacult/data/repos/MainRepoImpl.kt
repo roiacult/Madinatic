@@ -16,6 +16,7 @@ import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.repos.MainRepo
 import com.roacult.domain.usecases.declaration.DeclarationPage
+import com.roacult.domain.usecases.declaration.DeclarationPageParam
 import com.roacult.domain.usecases.profile.AddDocumentsParams
 import com.roacult.domain.usecases.profile.ChangePasswordParam
 import com.roacult.domain.usecases.profile.EditInfoParams
@@ -101,8 +102,8 @@ class MainRepoImpl(
     /**
      * fetch declaration page
      * */
-    override suspend fun fetchDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage> {
-        return mainRemote.fetchDeclarations(authLocal.getToken(),page = page).map {
+    override suspend fun fetchDeclrations(page: DeclarationPageParam): Either<DeclarationFailure, DeclarationPage> {
+        return mainRemote.fetchDeclarations(authLocal.getToken(),page).map {
             DeclarationPage(
                 it.count,
                 it.next?.getNext(),
@@ -120,7 +121,7 @@ class MainRepoImpl(
     override suspend fun fetchUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage> {
         val user = mainLocal.getUser()
         val token = authLocal.getToken()
-        return mainRemote.fetchDeclarations(token,user.idu,page = page).map {
+        return mainRemote.fetchUserDeclarations(token,user.idu,page = page).map {
             DeclarationPage(
                 it.count,
                 it.next?.getNext(),
@@ -139,7 +140,7 @@ class MainRepoImpl(
         val user = mainLocal.getUser()
         val token = authLocal.getToken()
         //TODO fetch not_validated to
-        return mainRemote.fetchDeclarations(
+        return mainRemote.fetchUserDeclarations(
             token,user.idu,
             DeclarationState.LACK_OF_INFO.toRemote(),
             DeclarationState.NOT_VALIDATED.toRemote(),
