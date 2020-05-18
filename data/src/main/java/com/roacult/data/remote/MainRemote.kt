@@ -180,14 +180,19 @@ class MainRemote(
             })
     }
 
-    suspend fun fetchDeclarations(token: String,uid : String? = null,status : String? = null, page: Int): Either<DeclarationFailure, RemoteDeclarationPage>
+    suspend fun fetchDeclarations(
+        token: String,uid : String? = null,
+        status: String? = null,
+        status2: String? = null,
+        page: Int
+    ): Either<DeclarationFailure, RemoteDeclarationPage>
             = suspendCoroutine {coroutine->
         val call = if(uid == null && status == null)
             service.getDeclarationPage(token,page)
         else if(uid !=null && status == null)
             service.getDeclarationPage(token,uid,page)
         else
-            service.getDeclarationPage(token,uid!!,status!!,page)
+            service.getDeclarationPage(token,uid!!,status!!,status2!!,page)
 
         call.enqueue(object : Callback<RemoteDeclarationPage> {
             override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {

@@ -139,7 +139,12 @@ class MainRepoImpl(
         val user = mainLocal.getUser()
         val token = authLocal.getToken()
         //TODO fetch not_validated to
-        return mainRemote.fetchDeclarations(token,user.idu,DeclarationState.LACK_OF_INFO.toRemote(),page).map {
+        return mainRemote.fetchDeclarations(
+            token,user.idu,
+            DeclarationState.LACK_OF_INFO.toRemote(),
+            DeclarationState.NOT_VALIDATED.toRemote(),
+            page
+        ).map {
             DeclarationPage(
                 it.count,
                 it.next?.getNext(),

@@ -31,7 +31,7 @@ import java.util.regex.Pattern
 class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() {
     override val layutIdRes = R.layout.add_declaration_v2
 
-    private val viewModel: AddDocViewModel by viewModel()
+    private val viewModel: UpdateDeclarationViewModel by viewModel()
     private val controller by lazy {
         DeclarationDocController(viewModel)
     }

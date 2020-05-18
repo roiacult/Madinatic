@@ -21,7 +21,7 @@ import com.roacult.madinatic.utils.extensions.toAttachment
 import com.roacult.madinatic.utils.states.*
 import timber.log.Timber
 
-class AddDocViewModel(
+class UpdateDeclarationViewModel(
     getCategories : GetCategories,
     private val updateDeclaration : UpdateDeclaration,
     private val gson : Gson,
@@ -82,10 +82,6 @@ class AddDocViewModel(
         }
 
         val docs = state.value!!.declarationDoc
-        if(docs.isEmpty()) {
-            setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.images_empty))) }
-            return
-        }
 
         val newTitle = if(title==declaration.title) null else title
         val newDesc = if(description==declaration.desc) null else description
