@@ -29,5 +29,5 @@ val viewModelModule =  module{
     viewModel { DeclarationDetailsViewModel(get()) }
     viewModel { AllDeclarationViewModel(get(),get(),get()) }
     viewModel { UnfinishedDeclarationViewModel(get(),get(),get()) }
-    viewModel { UpdateDeclarationViewModel(get(),get(),get(),get()) }
+    viewModel { UpdateDeclarationViewModel(get(),get(),get(),get(),get()) }
 }

@@ -3,6 +3,7 @@ package com.roacult.madinatic.ui.profile.unfinished.update_declaration
 import com.google.gson.Gson
 import com.roacult.domain.entities.Declaration
 import com.roacult.domain.exceptions.DeclarationFailure
+import com.roacult.domain.usecases.declaration.DeleteDeclaration
 import com.roacult.domain.usecases.declaration.GetCategories
 import com.roacult.domain.usecases.profile.UpdateDeclaration
 import com.roacult.domain.usecases.profile.AddDocumentsParams
@@ -24,6 +25,7 @@ import timber.log.Timber
 class UpdateDeclarationViewModel(
     getCategories : GetCategories,
     private val updateDeclaration : UpdateDeclaration,
+    private val deleteDeclaration: DeleteDeclaration,
     private val gson : Gson,
     private val stringProvider: StringProvider
 ) : BaseViewModel<AddDocState>(AddDocState()) , AddDeclarationCallback {
@@ -100,7 +102,7 @@ class UpdateDeclarationViewModel(
                 }
                 setState { copy(errorMsg = Event(msg),addDeclaration = Fail(it)) }
             },{
-                setState { copy(addDeclaration = Success(it)) }
+                setState { copy(addDeclaration = Success(OperationType.UPDATING)) }
             })
         }
     }
@@ -124,6 +126,18 @@ class UpdateDeclarationViewModel(
 
     fun deleteDeclaration() {
 
+        setState { copy(addDeclaration = Loading()) }
+        scope.launchInteractor(deleteDeclaration,declaration.id){
+            it.either({
+                val msg =when(it){
+                    DeclarationFailure.InternetConnection -> stringProvider.getStringFromResource(R.string.internet_prblm)
+                    else -> stringProvider.getStringFromResource(R.string.unknown_error)
+                }
+                setState { copy(errorMsg = Event(msg),addDeclaration = Fail(it)) }
+            },{
+                setState { copy(addDeclaration = Success(OperationType.DELETE)) }
+            })
+        }
     }
 }
 
@@ -132,7 +146,7 @@ data class AddDocState(
     val categories : Async<List<CategorieView>> = Uninitialized,
     val addDocClickEvent : Event<None>? = null,
     val declarationDoc : List<String> = emptyList(),
-    val addDeclaration : Async<None> = Uninitialized
+    val addDeclaration : Async<OperationType> = Uninitialized
 ) : State
 
 data class Address(
@@ -140,3 +154,7 @@ data class Address(
     val lat: Double,
     val long: Double
 )
+
+enum class OperationType{
+    UPDATING,DELETE
+}

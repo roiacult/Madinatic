@@ -76,13 +76,19 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
         }
     }
 
-    private fun handleSubmition(addDeclaration: Async<None>) {
+    private fun handleSubmition(addDeclaration: Async<OperationType>) {
         when(addDeclaration){
             is Loading -> binding.state = ViewState.LOADING
             is Fail<*, *> -> binding.state = ViewState.EMPTY
             is Success -> {
                 binding.state = ViewState.EMPTY
-                successDialogue()
+                if(addDeclaration() == OperationType.UPDATING)
+                    successDialogue()
+                else {
+                    showMessage("declaration deleted successfully")
+                    vm.refresh()
+                    activity?.onBackPressed()
+                }
             }
         }
     }
@@ -191,7 +197,7 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.delete_declaration-> {
-                    viewModel.deleteDeclaration()
+                    showConfirmDeleteDialog()
                     true
                 }
                 else -> false
@@ -214,6 +220,17 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
 
         binding.cancel.setOnClickListener {
             activity?.onBackPressed()
+        }
+    }
+
+    private fun showConfirmDeleteDialog() {
+        AlertDialog.Builder(context!!).apply {
+            setTitle(R.string.delete_dec_title)
+            setMessage(R.string.delete_dec_msg)
+            setPositiveButton(R.string.delete){_,_->
+                viewModel.deleteDeclaration()
+            }
+            setNegativeButton(R.string.cancel){_,_->}
         }
     }
 

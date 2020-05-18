@@ -37,10 +37,15 @@ class MainViewModel(
             copy(bottomNavState = Event(true))
         }
     }
+
+    fun refresh() {
+        setState { copy(refresh = Event(None())) }
+    }
 }
 
 data class MainState(
     val bottomNavState : Event<Boolean>? = null,
     override val navigationEvent: Event<FragmentNavigation>? = null,
-    val userState : Event<Boolean>? = null
+    val userState : Event<Boolean>? = null,
+    val refresh: Event<None>? = null
 ) : NavigationState

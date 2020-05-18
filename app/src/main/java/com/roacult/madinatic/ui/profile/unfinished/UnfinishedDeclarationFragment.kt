@@ -37,6 +37,14 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
             it.moreDetailsClickEvent?.getContentIfNotHandled()?.let(::moreDetailsEvent)
             handleDeclarationState(it.declarationState)
         }
+
+        vm.observe(this){
+            it.refresh?.getContentIfNotHandled()?.let(::refresh)
+        }
+    }
+
+    private fun refresh(none: None) {
+        viewModel.invalidate(checkTime = false)
     }
 
     private fun moreDetailsEvent(json: String) {

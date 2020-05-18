@@ -1,6 +1,7 @@
 package com.roacult.domain
 
 import com.roacult.domain.usecases.auth.*
+import com.roacult.domain.usecases.declaration.DeleteDeclaration
 import com.roacult.domain.usecases.declaration.GetCategories
 import com.roacult.domain.usecases.declaration.GetDeclarationPage
 import com.roacult.domain.usecases.declaration.SubmitDeclaration
@@ -26,4 +27,5 @@ val domainModule = module {
     single { UserDeclarationPage(get(),get()) }
     single { UserUnfinishedDeclaration(get(),get()) }
     single { UpdateDeclaration(get(),get()) }
+    single { DeleteDeclaration(get(),get()) }
 }
