@@ -2,10 +2,13 @@ package com.roacult.data.remote
 
 import com.roacult.data.remote.entities.*
 import com.roacult.data.remote.services.MainService
+import com.roacult.data.utils.toRemote
 import com.roacult.domain.entities.Categorie
 import com.roacult.domain.entities.Declaration
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
+import com.roacult.domain.usecases.profile.DeclarationUpdate
 import com.roacult.domain.usecases.profile.EditInfoParams
 import com.roacult.kero.team7.jstarter_domain.functional.Either
 import com.roacult.kero.team7.jstarter_domain.interactors.None
@@ -206,5 +209,39 @@ class MainRemote(
                 }
             }
         })
+    }
+
+    suspend fun putNewData(token: String, updates: DeclarationUpdate): Either<DeclarationFailure,None>
+            = suspendCoroutine{coroutine->
+        val map = hashMapOf<String, RequestBody>()
+
+        if(updates.title != null) map["title"] = updates.title!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        if(updates.desc != null) map["desc"] = updates.desc!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        if(updates.categorie != null) map["dtype"] = updates.categorie!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        if(updates.address != null) map["address"] = updates.address!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        if(updates.lat != null && updates.long != null) {
+            val geoCord = "[${updates.lat!!},${updates.long}]"
+            map["geo_cord"] = geoCord.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+        map["status"] = DeclarationState.NOT_VALIDATED.toRemote().toRequestBody("text/plain".toMediaTypeOrNull())
+
+        service.putDeclaration(token,updates.id,map)
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Timber.v("putDeclaration failled $t")
+                    coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+                }
+
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    val body = response.body()
+                    if (body == null || !response.isSuccessful) {
+                        Timber.v("putDeclaration failled $response")
+                        coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                    } else {
+                        Timber.v("putDeclaration succeeded")
+                        coroutine.resume(Either.Right(None()))
+                    }
+                }
+            })
     }
 }

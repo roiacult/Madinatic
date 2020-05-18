@@ -158,10 +158,14 @@ class MainRepoImpl(
 
         val token = authLocal.getToken()
 
+        // put new data to declaration
+        val responce = mainRemote.putNewData(token,documentsParams.delcaration)
+        if(responce is Either.Left) return responce
+
         //post all files
         for (attachment in documentsParams.docs) {
-            val responce = mainRemote.postDoc(token,attachment.toRemote(documentsParams.delcaration))
-            if(responce is Either.Left) return responce
+            val responce2 = mainRemote.postDoc(token,attachment.toRemote(documentsParams.delcaration.id))
+            if(responce2 is Either.Left) return responce2
         }
 
         return Either.Right(None())

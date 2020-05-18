@@ -73,4 +73,11 @@ interface MainService {
         @Query("page") page : Int
     ) : Call<RemoteDeclarationPage>
 
+    @Multipart
+    @PUT(APIROOTS.DECLARATION+"{id}/")
+    fun putDeclaration(
+        @Header("Authorization") key: String,
+        @Path("id") id: String,
+        @PartMap parts: HashMap<String, RequestBody>
+    ) : Call<ResponseBody>
 }
