@@ -158,6 +158,7 @@ class MainRepoImpl(
     }
 
     /**
+     * put updated data and
      * post new documents
      * */
     override suspend fun postDocuments(documentsParams: AddDocumentsParams): Either<DeclarationFailure, None> {
@@ -176,5 +177,15 @@ class MainRepoImpl(
         }
 
         return Either.Right(None())
+    }
+
+    /**
+     * delete declaration
+     * */
+    override suspend fun deleteDeclaration(declaration: String): Either<DeclarationFailure, None> {
+        return mainRemote.deleteDeclaration(
+            authLocal.getToken(),
+            declaration
+        )
     }
 }

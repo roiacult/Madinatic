@@ -7,6 +7,7 @@ import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.declaration.DeclarationOrdering
+import com.roacult.domain.usecases.declaration.DeclarationPage
 import com.roacult.domain.usecases.declaration.DeclarationPageParam
 import com.roacult.domain.usecases.profile.DeclarationUpdate
 import com.roacult.domain.usecases.profile.EditInfoParams
@@ -274,6 +275,30 @@ class MainRemote(
                     val body = response.body()
                     if (body == null || !response.isSuccessful) {
                         Timber.v("putDeclaration failled $response")
+                        coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                    } else {
+                        Timber.v("putDeclaration succeeded")
+                        coroutine.resume(Either.Right(None()))
+                    }
+                }
+            })
+    }
+
+    suspend fun deleteDeclaration(
+        token: String,
+        declaration: String
+    ): Either<DeclarationFailure, None> = suspendCoroutine {coroutine->
+        service.deleteDeclaration(token,declaration)
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Timber.v("deleteDeclaration failled $t")
+                    coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+                }
+
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    val body = response.body()
+                    if (body == null || !response.isSuccessful) {
+                        Timber.v("deleteDeclaration failled $response")
                         coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
                     } else {
                         Timber.v("putDeclaration succeeded")

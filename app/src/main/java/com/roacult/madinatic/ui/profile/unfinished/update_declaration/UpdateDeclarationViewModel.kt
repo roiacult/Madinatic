@@ -121,6 +121,10 @@ class UpdateDeclarationViewModel(
         list.add(filePath)
         setState { copy(declarationDoc = list) }
     }
+
+    fun deleteDeclaration() {
+
+    }
 }
 
 data class AddDocState(

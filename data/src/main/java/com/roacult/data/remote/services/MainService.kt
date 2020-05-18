@@ -88,4 +88,10 @@ interface MainService {
         @Path("id") id: String,
         @PartMap parts: HashMap<String, RequestBody>
     ) : Call<ResponseBody>
+
+    @DELETE(APIROOTS.DECLARATION+"{id}/")
+    fun deleteDeclaration(
+        @Header("Authorization") key: String,
+        @Path("id") id: String
+    ) : Call<ResponseBody>
 }

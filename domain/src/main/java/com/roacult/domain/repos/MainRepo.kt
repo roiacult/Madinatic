@@ -33,4 +33,6 @@ interface MainRepo {
     suspend fun fetchUnfinishedUserDeclrations(page: Int): Either<DeclarationFailure, DeclarationPage>
 
     suspend fun postDocuments(documentsParams: AddDocumentsParams): Either<DeclarationFailure, None>
+
+    suspend fun deleteDeclaration(declaration: String): Either<DeclarationFailure, None>
 }

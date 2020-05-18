@@ -106,6 +106,7 @@
     <string name="no_dec">you didn\'t submit any declaration yet</string>
     <string name="update">update</string>
     <string name="update_dec">update declaration</string>
+    <string name="delete_this_declaration">delete this declaration</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>

@@ -187,6 +187,16 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
         val manager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
+        binding.toolbar.inflateMenu(R.menu.update_declaration_menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.delete_declaration-> {
+                    viewModel.deleteDeclaration()
+                    true
+                }
+                else -> false
+            }
+        }
 
         binding.epoxyRecyclerView.layoutManager = manager
         binding.epoxyRecyclerView.setController(controller)
