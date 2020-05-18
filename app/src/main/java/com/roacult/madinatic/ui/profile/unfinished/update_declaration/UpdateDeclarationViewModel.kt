@@ -45,8 +45,13 @@ class UpdateDeclarationViewModel(
                 }
                 setState { copy(errorMsg = Event(msg),categories = Fail(it)) }
             },{
-                Timber.v("categories Success $it")
-                setState { copy(categories = Success(it.map { it.toView() })) }
+                val newList = it.map { it.toView() }.toMutableList()
+                newList.add(0, CategorieView(
+                    HINT_VIEW_ID,
+                    stringProvider.getStringFromResource(R.string.type_dec),
+                    ""
+                ))
+                setState { copy(categories = Success(newList)) }
             })
         }
     }

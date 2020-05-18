@@ -70,7 +70,7 @@ class UnfinishedDeclarationFragment : FullScreenFragment<AllDeclarationsBinding>
 
     private fun initViews() {
 
-        binding.toolbar.title = getString(R.string.declaration_need_update)
+        binding.toolbar.title = getString(R.string.update_dec)
         binding.toolbar.setNavigationIcon(R.drawable.back)
         binding.toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
