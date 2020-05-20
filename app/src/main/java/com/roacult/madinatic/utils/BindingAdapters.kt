@@ -24,7 +24,10 @@ fun ImageView.loadImage(url:String?){
 
 @BindingAdapter("loadUri")
 fun ImageView.loadImageUri(path : String) {
-    setImageURI(Uri.fromFile(File(path)))
+    if(path.startsWith("http"))
+        loadImage(path)
+    else
+        setImageURI(Uri.fromFile(File(path)))
 }
 
 @BindingAdapter("loadicon")

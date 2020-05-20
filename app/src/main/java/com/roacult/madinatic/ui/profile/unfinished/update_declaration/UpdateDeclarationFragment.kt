@@ -70,10 +70,16 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
         viewModel.observe(this){
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.addDocClickEvent?.getContentIfNotHandled()?.let(::addDocClick)
-            it.declarationDoc.let(controller::setData)
+            it.declarationDoc.let(::addDocs)
             handleCategories(it.categories)
             handleSubmition(it.addDeclaration)
         }
+    }
+
+    private fun addDocs(docs: List<String>) {
+        val list = docs.toMutableList()
+        list.addAll(viewModel.declaration.attachment.map { it.src })
+        controller.setData(list)
     }
 
     private fun handleSubmition(addDeclaration: Async<OperationType>) {

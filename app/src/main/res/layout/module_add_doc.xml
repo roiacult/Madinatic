@@ -22,7 +22,8 @@
                 app:layout_constraintGuide_percent="0.8"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/guideline12"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline12"/>
             <ImageView
                 app:loadicon="@{path}"
                 tools:src="@tools:sample/backgrounds/scenic"
