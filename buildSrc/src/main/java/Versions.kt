@@ -3,7 +3,7 @@ object Versions{
         const val kotlinVersion  = "1.3.61"
     }
     object Gradle{
-        const val gradleBuildVersion = "3.5.3"
+        const val gradleBuildVersion = "4.0.0"
     }
     object AndroidConfigs{
         const val compileSdk =  29
