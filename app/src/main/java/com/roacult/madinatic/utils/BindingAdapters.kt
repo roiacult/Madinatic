@@ -5,12 +5,40 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.roacult.domain.entities.Attachment
 import com.roacult.domain.entities.AttachmentType
 import com.roacult.domain.entities.DeclarationState
 import com.roacult.madinatic.R
 import com.squareup.picasso.Picasso
 import java.io.File
+
+@BindingAdapter("layoutManager", "mangerDetails")
+fun setLayoutmanager(recyclerView: RecyclerView, layoutManager: LayoutManagerType, managerDetails: Int) {
+    recyclerView.layoutManager = when (layoutManager) {
+        LayoutManagerType.LINEARMANAGER -> {
+            val manager = LinearLayoutManager(recyclerView.context)
+            manager.orientation = managerDetails
+            manager
+        }
+        LayoutManagerType.GRIDMANAGER -> GridLayoutManager(recyclerView.context, managerDetails)
+        LayoutManagerType.STAGGERDMANAGER -> {
+            StaggeredGridLayoutManager(managerDetails, StaggeredGridLayoutManager.VERTICAL).apply {
+                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+            }
+        }
+    }
+}
+
+@BindingAdapter("epoxyController")
+fun EpoxyRecyclerView.setRecyclerData(controller: EpoxyController) {
+    setController(controller)
+}
 
 @BindingAdapter("showInt")
 fun TextView.showInt(int :Int){

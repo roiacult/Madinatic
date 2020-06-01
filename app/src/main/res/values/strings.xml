@@ -110,6 +110,9 @@
     <string name="delete_dec_title">delete declaration</string>
     <string name="delete_dec_msg">this operation can\'t be undone, you sure you want to delete this declaration?</string>
     <string name="delete">delete</string>
+    <string name="announce_email">Email</string>
+    <string name="contact">Contact</string>
+    <string name="announce_phone">Phone</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>
@@ -120,5 +123,12 @@
         <item>random</item>
         <item>new to old</item>
         <item>old to new</item>
+    </string-array>
+
+    <string-array name="announce">
+        <item>current</item>
+        <item>upcoming</item>
+        <item>old announce</item>
+        <item>all</item>
     </string-array>
 </resources>

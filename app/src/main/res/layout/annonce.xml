@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.roacult.madinatic.utils.LayoutManagerType"/>
+        <import type="androidx.recyclerview.widget.LinearLayoutManager"/>
+        <variable
+            name="controller"
+            type="com.airbnb.epoxy.EpoxyController" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:background="@color/surface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:background="@color/primaryColor"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:title="@string/announce"
+                app:navigationIcon="@drawable/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/ordering"
+                android:entries="@array/ordering"
+                app:layout_scrollFlags="noScroll"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                epoxyController="@{controller}"
+                layoutManager="@{LayoutManagerType.LINEARMANAGER}"
+                mangerDetails="@{LinearLayoutManager.VERTICAL}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
