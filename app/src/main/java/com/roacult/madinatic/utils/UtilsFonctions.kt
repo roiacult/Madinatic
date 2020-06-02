@@ -24,3 +24,7 @@ fun getDateTimeFromTimeStamp(mDateFormat: String): String {
     val today = Calendar.getInstance().time
     return dateFormat.format(today)
 }
+
+fun String.toDate(mDateFormat: String): Date? {
+    return SimpleDateFormat(mDateFormat, Locale.US).parse(this)
+}

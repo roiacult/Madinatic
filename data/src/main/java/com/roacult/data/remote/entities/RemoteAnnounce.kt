@@ -29,9 +29,9 @@ data class RemoteAnnounce(
             this.desc,
             this.remoteService.toService(),
             this.status,
-            this.createdOn,
-            this.startAt,
-            this.endAt
+            this.createdOn.substring(0,19),
+            this.startAt.substring(0,19),
+            this.endAt.substring(0,19)
         )
     }
 }

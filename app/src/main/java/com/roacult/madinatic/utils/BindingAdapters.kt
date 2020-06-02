@@ -1,5 +1,6 @@
 package com.roacult.madinatic.utils
 
+import android.graphics.Color
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -155,5 +156,17 @@ fun LinearLayout.setState(state : DeclarationState) {
 
 @BindingAdapter("announceColor")
 fun View.announceColor(announce: Announce) {
-    // TODO change announce color
+    val startDate = announce.startAt.replace('T',' ').toDate(DATE_FORMAT)
+    val endDate = announce.endAt.replace('T',' ').toDate(DATE_FORMAT)
+
+    if(startDate == null || endDate == null ) return
+    val currentTime = System.currentTimeMillis()
+
+    if(startDate.time <= currentTime && currentTime <= endDate.time){
+        setBackgroundColor(Color.RED)
+    }else if(startDate.time > currentTime) {
+        setBackgroundColor(Color.BLUE)
+    }else {
+        setBackgroundColor(Color.GREEN)
+    }
 }

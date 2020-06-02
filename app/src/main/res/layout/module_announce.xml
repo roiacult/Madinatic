@@ -14,6 +14,7 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:layout_marginTop="1dp"
         app:cardElevation="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,9 +25,9 @@
             <View
                 announceColor="@{announce}"
                 android:id="@+id/view"
-                android:layout_width="8dp"
+                android:layout_width="4dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="6dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:alpha="0.8"
@@ -74,7 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                 <TextView
-                    android:text="@{announce.startAt}"
+                    android:text="@{announce.startAt.substring(0,10)+ `\n` + announce.startAt.substring(11)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -85,7 +86,7 @@
                     tools:text="2020-05-01" />
 
                 <TextView
-                    android:text="@{announce.endAt}"
+                    android:text="@{announce.endAt.substring(0,10)+ `\n` + announce.endAt.substring(11)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22dp"
