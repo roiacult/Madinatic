@@ -1,14 +1,13 @@
 package com.roacult.madinatic.ui
 
 import android.os.Bundle
-import android.provider.ContactsContract
 import androidx.databinding.DataBindingUtil
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.ActivityNavigator
 import com.roacult.madinatic.base.BaseFragment
 import com.roacult.madinatic.base.FullScreenFragment
 import com.roacult.madinatic.databinding.MainBinding
-import com.roacult.madinatic.ui.announce.AnounceFragment
+import com.roacult.madinatic.ui.announce.AnnounceFragment
 import com.roacult.madinatic.ui.auth.LoginFragment
 import com.roacult.madinatic.ui.declaration.DeclarationFragment
 import com.roacult.madinatic.ui.profile.ProfileFragment
@@ -33,12 +32,12 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
         }
     }
 
-    private val anounceFragment : AnounceFragment by lazy {
+    private val announceFragment : AnnounceFragment by lazy {
         val fragment = supportFragmentManager.findFragmentByTag(MainFragemtnsTags.ANNOUNCE)
         if (fragment != null) {
-            fragment as AnounceFragment
+            fragment as AnnounceFragment
         } else {
-            val ann = AnounceFragment()
+            val ann = AnnounceFragment()
             supportFragmentManager.inTransaction {
                 add(R.id.main_container, ann, MainFragemtnsTags.ANNOUNCE)
                 hide(ann)
@@ -106,7 +105,7 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
 
         currentFragment = when (viewModel.selectedFragment) {
             R.id.declaration -> declarationFragment
-            R.id.announce -> anounceFragment
+            R.id.announce -> announceFragment
             R.id.profile -> profileFragment
             else -> declarationFragment
         }
@@ -134,12 +133,12 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
                 currentFragment = declarationFragment
             }
             R.id.announce -> {
-                if (currentFragment is AnounceFragment) return false
+                if (currentFragment is AnnounceFragment) return false
                 supportFragmentManager.inTransaction {
                     hide(currentFragment!!)
-                    show(anounceFragment)
+                    show(announceFragment)
                 }
-                currentFragment = anounceFragment
+                currentFragment = announceFragment
             }
             R.id.profile -> {
                 if (currentFragment is ProfileFragment) return false
@@ -172,7 +171,7 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
     override fun navigate(navigation: FragmentNavigation) {
         val selected = when(navigation.destinationClass){
             DeclarationFragment::class.java -> R.id.declaration
-            AnounceFragment::class.java -> R.id.announce
+            AnnounceFragment::class.java -> R.id.announce
             ProfileFragment::class.java ->R.id.profile
             else -> null
         }

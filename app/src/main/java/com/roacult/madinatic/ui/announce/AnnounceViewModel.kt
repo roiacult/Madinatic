@@ -65,6 +65,25 @@ class AnnounceViewModel(
         }
     }
 
+    fun invalidate(checkTime: Boolean = false) {
+        if(checkTime) {
+            val currentTime = System.currentTimeMillis()/1000
+            if((currentTime - lastTimeInvalidated) < 60) {
+                return
+            }
+        }
+        lastTimeInvalidated = System.currentTimeMillis()/1000
+        dataSourceFactory.sourceLiveData.value?.invalidate()
+    }
+
+    fun contactEmail(announce: Announce){
+
+    }
+
+    fun contactPhone(announce: Announce){
+
+    }
+
 }
 
 data class AnnounceState(

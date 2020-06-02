@@ -1,6 +1,7 @@
 package com.roacult.madinatic.utils
 
 import android.net.Uri
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyRecyclerView
+import com.roacult.domain.entities.Announce
 import com.roacult.domain.entities.Attachment
 import com.roacult.domain.entities.AttachmentType
 import com.roacult.domain.entities.DeclarationState
@@ -149,4 +151,9 @@ fun LinearLayout.setState(state : DeclarationState) {
             text.setText(R.string.leack_info)
         }
     }
+}
+
+@BindingAdapter("announceColor")
+fun View.announceColor(announce: Announce) {
+    // TODO change announce color
 }
