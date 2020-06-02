@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.roacult.madinatic.ui.announce.ContactEventType"/>
         <variable
             name="announce"
             type="com.roacult.domain.entities.Announce" />
@@ -131,7 +132,7 @@
                     android:text="@string/contact" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:onClick="@{(v) -> viewModel.contactEmail(announce)}"
+                    android:onClick="@{(v) -> viewModel.contact(announce,ContactEventType.EMAIL)}"
                     android:gravity="center_vertical"
                     android:id="@+id/materialButton2"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -143,7 +144,7 @@
                     app:icon="@drawable/email_outline" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:onClick="@{(v) -> viewModel.contactPhone(announce)}"
+                    android:onClick="@{(v) -> viewModel.contact(announce,ContactEventType.PHONE)}"
                     android:gravity="center_vertical"
                     android:id="@+id/materialButton3"
                     style="@style/Widget.MaterialComponents.Button.TextButton"

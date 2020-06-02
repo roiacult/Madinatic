@@ -1,5 +1,7 @@
 package com.roacult.madinatic.ui.announce
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -24,7 +26,29 @@ class AnnounceFragment : BaseFragment<AnnonceBinding>() {
         viewModel.observe(this) {
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.announces?.let(controller::submitList)
+            it.contactEvent?.getContentIfNotHandled()?.let(::handleContact)
             handleAnnounceState(it.announceState)
+        }
+    }
+
+    private fun handleContact(contactEvent: ContactEvent) {
+        when(contactEvent.type){
+            ContactEventType.EMAIL -> {
+                Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",
+                    contactEvent.announce.service.email,
+                    null
+                )).apply {
+                    val message = "From ${getString(R.string.app_name)} App "
+                    putExtra(Intent.EXTRA_SUBJECT, message)
+                    startActivity(Intent.createChooser(this, "send with ..."))
+                }
+            }
+            ContactEventType.PHONE -> {
+                startActivity(Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse("tel:" + contactEvent.announce.service.phone)
+                ))
+            }
         }
     }
 

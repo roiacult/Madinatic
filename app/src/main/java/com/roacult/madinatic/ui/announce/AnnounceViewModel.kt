@@ -76,18 +76,23 @@ class AnnounceViewModel(
         dataSourceFactory.sourceLiveData.value?.invalidate()
     }
 
-    fun contactEmail(announce: Announce){
-
+    fun contact(announce: Announce,type: ContactEventType){
+        setState { copy(contactEvent = Event(ContactEvent(announce,type))) }
     }
-
-    fun contactPhone(announce: Announce){
-
-    }
-
 }
 
 data class AnnounceState(
     val errorMsg: Event<String>? = null,
     val announceState: Async<None> = Uninitialized,
-    val announces : PagedList<Announce>? = null
+    val announces : PagedList<Announce>? = null,
+    val contactEvent: Event<ContactEvent>? = null
 ) : State
+
+data class ContactEvent(
+    val announce: Announce,
+    val type: ContactEventType
+)
+
+enum class ContactEventType{
+    EMAIL,PHONE
+}

@@ -24,7 +24,6 @@
                 android:background="@color/primaryColor"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:title="@string/announce"
-                app:navigationIcon="@drawable/back"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <androidx.appcompat.widget.AppCompatSpinner
