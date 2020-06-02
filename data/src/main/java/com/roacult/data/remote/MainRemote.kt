@@ -6,6 +6,7 @@ import com.roacult.data.utils.toRemote
 import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
+import com.roacult.domain.usecases.announce.AnnounceFilter
 import com.roacult.domain.usecases.declaration.DeclarationOrdering
 import com.roacult.domain.usecases.declaration.DeclarationPage
 import com.roacult.domain.usecases.declaration.DeclarationPageParam
@@ -305,5 +306,48 @@ class MainRemote(
                     }
                 }
             })
+    }
+
+    suspend fun fetchAnnounce(
+        token: String,
+        page: Int,
+        announceFilter: AnnounceFilter,
+        currentDate: String? = null
+    ): Either<DeclarationFailure, RemoteAnnouncePage> = suspendCoroutine {coroutine->
+
+        val call = when (announceFilter) {
+            AnnounceFilter.CURRENT -> service.getAnnouncePage(token, page,
+                startAtLess = currentDate,
+                endAtGreater = currentDate
+            )
+            AnnounceFilter.UPCOMING -> service.getAnnouncePage(token, page,
+                startAtGreater = currentDate
+            )
+            AnnounceFilter.OLD -> service.getAnnouncePage(token, page,
+                endAtLess = currentDate
+            )
+            AnnounceFilter.ALL -> service.getAnnouncePage(token,page)
+        }
+
+        call.enqueue(object : Callback<RemoteAnnouncePage> {
+            override fun onFailure(call: Call<RemoteAnnouncePage>, t: Throwable) {
+                Timber.v("fetchAnnounce failed")
+                coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+            }
+
+            override fun onResponse(
+                call: Call<RemoteAnnouncePage>,
+                response: Response<RemoteAnnouncePage>
+            ) {
+                val body = response.body()
+                if (body == null || !response.isSuccessful) {
+                    Timber.v("fetchAnnounce failled $response")
+                    coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                } else {
+                    Timber.v("fetchAnnounce succeeded")
+                    coroutine.resume(Either.Right(body))
+                }
+            }
+        })
     }
 }

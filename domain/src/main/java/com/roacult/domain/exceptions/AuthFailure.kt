@@ -24,3 +24,8 @@ sealed class DeclarationFailure : Failure() {
     object InternetConnection : DeclarationFailure()
     object UnkonwError : DeclarationFailure()
 }
+
+sealed class AnnounceFailure : Failure() {
+    object InternetConnection : AnnounceFailure()
+    object UnknownError : AnnounceFailure()
+}

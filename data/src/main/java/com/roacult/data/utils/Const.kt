@@ -13,6 +13,7 @@ object APIROOTS {
     const val DECLARATION = "/api/declarations/"
     const val DECLARATIONTYPE = "/api/declarations_types/"
     const val DECLARATIONDOC = "/api/documents/"
+    const val ANNOUNCE_NESTED = "/api/announce_nested/"
 }
 
 //prefrences keys

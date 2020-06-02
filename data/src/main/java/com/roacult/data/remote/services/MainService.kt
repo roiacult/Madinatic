@@ -94,4 +94,15 @@ interface MainService {
         @Header("Authorization") key: String,
         @Path("id") id: String
     ) : Call<ResponseBody>
+
+    @GET(APIROOTS.ANNOUNCE_NESTED)
+    fun getAnnouncePage(
+        @Header("Authorization") key: String,
+        @Query("page") page : Int,
+        @Query("start_at_greater") startAtGreater: String? = null,
+        @Query("start_at_less") startAtLess: String? = null,
+        @Query("end_at_greater") endAtGreater: String? = null,
+        @Query("end_at_less") endAtLess: String? = null
+    ) : Call<RemoteAnnouncePage>
+
 }

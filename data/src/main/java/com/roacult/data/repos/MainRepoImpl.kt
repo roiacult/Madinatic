@@ -15,6 +15,8 @@ import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.repos.MainRepo
+import com.roacult.domain.usecases.announce.AnnouncePage
+import com.roacult.domain.usecases.announce.AnnouncePageParam
 import com.roacult.domain.usecases.declaration.DeclarationPage
 import com.roacult.domain.usecases.declaration.DeclarationPageParam
 import com.roacult.domain.usecases.profile.AddDocumentsParams
@@ -187,5 +189,24 @@ class MainRepoImpl(
             authLocal.getToken(),
             declaration
         )
+    }
+
+    /**
+     * fetch announce page from remote
+     * */
+    override suspend fun fetchAnnouncePage(announcePageParam: AnnouncePageParam): Either<DeclarationFailure, AnnouncePage> {
+        return mainRemote.fetchAnnounce(
+            authLocal.getToken(),
+            announcePageParam.page,
+            announcePageParam.announceFilter,
+            announcePageParam.currentDate
+        ).map { AnnouncePage(
+            it.count,
+            it.next?.getNext(),
+            it.previous?.getNext(),
+            it.results.map {
+                it.toAnnounce()
+            }
+        )}
     }
 }

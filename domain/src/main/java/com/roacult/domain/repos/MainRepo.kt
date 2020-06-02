@@ -5,6 +5,8 @@ import com.roacult.domain.entities.Declaration
 import com.roacult.domain.entities.User
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
+import com.roacult.domain.usecases.announce.AnnouncePage
+import com.roacult.domain.usecases.announce.AnnouncePageParam
 import com.roacult.domain.usecases.declaration.DeclarationPage
 import com.roacult.domain.usecases.declaration.DeclarationPageParam
 import com.roacult.domain.usecases.profile.AddDocumentsParams
@@ -35,4 +37,6 @@ interface MainRepo {
     suspend fun postDocuments(documentsParams: AddDocumentsParams): Either<DeclarationFailure, None>
 
     suspend fun deleteDeclaration(declaration: String): Either<DeclarationFailure, None>
+
+    suspend fun fetchAnnouncePage(announcePageParam: AnnouncePageParam): Either<DeclarationFailure, AnnouncePage>
 }
