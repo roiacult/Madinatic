@@ -3,6 +3,7 @@ package com.roacult.domain.repos
 import com.roacult.domain.entities.Categorie
 import com.roacult.domain.entities.Declaration
 import com.roacult.domain.entities.User
+import com.roacult.domain.exceptions.AnnounceFailure
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.announce.AnnouncePage
@@ -38,5 +39,5 @@ interface MainRepo {
 
     suspend fun deleteDeclaration(declaration: String): Either<DeclarationFailure, None>
 
-    suspend fun fetchAnnouncePage(announcePageParam: AnnouncePageParam): Either<DeclarationFailure, AnnouncePage>
+    suspend fun fetchAnnouncePage(announcePageParam: AnnouncePageParam): Either<AnnounceFailure, AnnouncePage>
 }

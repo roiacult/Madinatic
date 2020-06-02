@@ -1,6 +1,7 @@
 package com.roacult.domain.usecases.announce
 
 import com.roacult.domain.entities.Announce
+import com.roacult.domain.exceptions.AnnounceFailure
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.repos.MainRepo
 import com.roacult.kero.team7.jstarter_domain.functional.CouroutineDispatchers
@@ -10,9 +11,9 @@ import com.roacult.kero.team7.jstarter_domain.interactors.EitherInteractor
 class GetAnnouncePage(
     dispathcher : CouroutineDispatchers,
     private val repo : MainRepo
-) : EitherInteractor<AnnouncePageParam, AnnouncePage, DeclarationFailure>(dispathcher) {
+) : EitherInteractor<AnnouncePageParam, AnnouncePage, AnnounceFailure>(dispathcher) {
 
-    override suspend fun invoke(executeParams: AnnouncePageParam): Either<DeclarationFailure, AnnouncePage> {
+    override suspend fun invoke(executeParams: AnnouncePageParam): Either<AnnounceFailure, AnnouncePage> {
         return repo.fetchAnnouncePage(executeParams)
     }
 }
@@ -21,7 +22,7 @@ data class AnnouncePage(
     val count: Int,
     val next: Int?,
     val previous: Int?,
-    val declarations : List<Announce>
+    val announces : List<Announce>
 )
 
 data class AnnouncePageParam(

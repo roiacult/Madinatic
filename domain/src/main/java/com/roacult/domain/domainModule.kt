@@ -1,5 +1,6 @@
 package com.roacult.domain
 
+import com.roacult.domain.usecases.announce.GetAnnouncePage
 import com.roacult.domain.usecases.auth.*
 import com.roacult.domain.usecases.declaration.DeleteDeclaration
 import com.roacult.domain.usecases.declaration.GetCategories
@@ -28,4 +29,5 @@ val domainModule = module {
     single { UserUnfinishedDeclaration(get(),get()) }
     single { UpdateDeclaration(get(),get()) }
     single { DeleteDeclaration(get(),get()) }
+    single { GetAnnouncePage(get(),get()) }
 }

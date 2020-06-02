@@ -1,6 +1,7 @@
 package com.roacult.madinatic.di
 
 import com.roacult.madinatic.ui.MainViewModel
+import com.roacult.madinatic.ui.announce.AnnounceViewModel
 import com.roacult.madinatic.ui.auth.LoginViewModel
 import com.roacult.madinatic.ui.auth.RegisterViewModel
 import com.roacult.madinatic.ui.declaration.DeclarationViewModel
@@ -30,4 +31,5 @@ val viewModelModule =  module{
     viewModel { AllDeclarationViewModel(get(),get(),get()) }
     viewModel { UnfinishedDeclarationViewModel(get(),get(),get()) }
     viewModel { UpdateDeclarationViewModel(get(),get(),get(),get(),get()) }
+    viewModel { AnnounceViewModel(get(),get()) }
 }

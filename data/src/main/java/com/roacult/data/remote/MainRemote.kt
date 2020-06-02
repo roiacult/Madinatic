@@ -4,6 +4,7 @@ import com.roacult.data.remote.entities.*
 import com.roacult.data.remote.services.MainService
 import com.roacult.data.utils.toRemote
 import com.roacult.domain.entities.DeclarationState
+import com.roacult.domain.exceptions.AnnounceFailure
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.usecases.announce.AnnounceFilter
@@ -313,7 +314,7 @@ class MainRemote(
         page: Int,
         announceFilter: AnnounceFilter,
         currentDate: String? = null
-    ): Either<DeclarationFailure, RemoteAnnouncePage> = suspendCoroutine {coroutine->
+    ): Either<AnnounceFailure, RemoteAnnouncePage> = suspendCoroutine { coroutine->
 
         val call = when (announceFilter) {
             AnnounceFilter.CURRENT -> service.getAnnouncePage(token, page,
@@ -332,7 +333,7 @@ class MainRemote(
         call.enqueue(object : Callback<RemoteAnnouncePage> {
             override fun onFailure(call: Call<RemoteAnnouncePage>, t: Throwable) {
                 Timber.v("fetchAnnounce failed")
-                coroutine.resume(Either.Left(DeclarationFailure.InternetConnection))
+                coroutine.resume(Either.Left(AnnounceFailure.InternetConnection))
             }
 
             override fun onResponse(
@@ -342,7 +343,7 @@ class MainRemote(
                 val body = response.body()
                 if (body == null || !response.isSuccessful) {
                     Timber.v("fetchAnnounce failled $response")
-                    coroutine.resume(Either.Left(DeclarationFailure.UnkonwError))
+                    coroutine.resume(Either.Left(AnnounceFailure.UnknownError))
                 } else {
                     Timber.v("fetchAnnounce succeeded")
                     coroutine.resume(Either.Right(body))

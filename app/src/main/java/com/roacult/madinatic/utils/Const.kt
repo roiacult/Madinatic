@@ -19,6 +19,8 @@ object UserBunndle {
     const val CREATEDON ="createdOn"
 }
 
+const val DATE_FORMAT = "yyyy-mm-dd hh:mm:ss"
+
 const val PAGE_SIZE = 10
 
 const val GOOGLE_MAP_BASE_URl = "https://www.google.com/maps/dir/?api=1&destination="

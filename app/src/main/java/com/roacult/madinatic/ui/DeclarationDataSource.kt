@@ -30,7 +30,6 @@ class DeclarationDataSource(
     private var next: Int? = null
     private var previous: Int? = null
 
-
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Declaration>

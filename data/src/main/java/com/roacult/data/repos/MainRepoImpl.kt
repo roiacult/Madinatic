@@ -12,6 +12,7 @@ import com.roacult.domain.entities.Categorie
 import com.roacult.domain.entities.Declaration
 import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.entities.User
+import com.roacult.domain.exceptions.AnnounceFailure
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.exceptions.ProfileFailures
 import com.roacult.domain.repos.MainRepo
@@ -194,7 +195,7 @@ class MainRepoImpl(
     /**
      * fetch announce page from remote
      * */
-    override suspend fun fetchAnnouncePage(announcePageParam: AnnouncePageParam): Either<DeclarationFailure, AnnouncePage> {
+    override suspend fun fetchAnnouncePage(announcePageParam: AnnouncePageParam): Either<AnnounceFailure, AnnouncePage> {
         return mainRemote.fetchAnnounce(
             authLocal.getToken(),
             announcePageParam.page,
