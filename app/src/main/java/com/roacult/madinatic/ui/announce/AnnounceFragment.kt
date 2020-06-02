@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import com.roacult.domain.usecases.announce.AnnounceFilter
-import com.roacult.domain.usecases.declaration.DeclarationOrdering
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.BaseFragment
