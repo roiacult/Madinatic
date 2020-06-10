@@ -3,6 +3,7 @@ package com.roacult.madinatic
 import android.app.Application
 import com.pusher.pushnotifications.PushNotifications
 import com.roacult.madinatic.di.getModules
+import com.roacult.madinatic.utils.PUSHER_INSTANCE_ID
 import com.roacult.madinatic.utils.StringProvider
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -27,8 +28,7 @@ class MadinaticApp : Application() ,StringProvider{
             //Module list
             modules(getModules())
         }
-        PushNotifications.start(this,"65b0754a-0713-4b71-bc41-4d2abae63fc6")
-        PushNotifications.addDeviceInterest("blah")
+        PushNotifications.start(this,PUSHER_INSTANCE_ID)
     }
 
     override fun getStringFromResource(resource: Int): String {

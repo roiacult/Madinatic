@@ -19,6 +19,7 @@ object UserBunndle {
     const val CREATEDON ="createdOn"
 }
 
+const val PUSHER_INSTANCE_ID = "65b0754a-0713-4b71-bc41-4d2abae63fc6"
 const val DATE_FORMAT = "yyyy-MM-dd hh:mm:ss"
 
 const val PAGE_SIZE = 10
