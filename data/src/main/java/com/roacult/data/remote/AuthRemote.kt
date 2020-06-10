@@ -1,7 +1,14 @@
 package com.roacult.data.remote
 
+import com.pusher.pushnotifications.BeamsCallback
+import com.pusher.pushnotifications.PushNotifications
+import com.pusher.pushnotifications.PusherCallbackError
+import com.pusher.pushnotifications.auth.AuthData
+import com.pusher.pushnotifications.auth.AuthDataGetter
+import com.pusher.pushnotifications.auth.BeamsTokenProvider
 import com.roacult.data.remote.entities.*
 import com.roacult.data.remote.services.AuthService
+import com.roacult.data.utils.BASE_URL
 import com.roacult.data.utils.TOKEN_PREFEXE
 import com.roacult.domain.exceptions.AuthFailure
 import com.roacult.domain.usecases.auth.LoginParams
@@ -113,5 +120,43 @@ class AuthRemote (
                     }else coroutine.resume(Either.Right(None()))
                 }
             })
+    }
+
+
+    suspend fun authentificatToPusherBeams(
+        token: String,
+        uid: String
+    ) : Either<AuthFailure,None> = suspendCoroutine { coroutine->
+
+        //create BeamsTokenProvider inorder to send http
+        // request to rest api and get Beams-Token
+        val tokenProvider = BeamsTokenProvider(
+            BASE_URL + "api/beams_auth/",
+            object: AuthDataGetter {
+                override fun getAuthData(): AuthData {
+                    return AuthData(
+                        headers = hashMapOf("Authorization" to TOKEN_PREFEXE+token),
+                        queryParams = hashMapOf()
+                    )
+                }
+            }
+        )
+
+        //send request and authenticate
+        PushNotifications.setUserId(uid, tokenProvider,
+            object : BeamsCallback<Void, PusherCallbackError> {
+                override fun onFailure(error: PusherCallbackError) {
+                    Timber.v( "Could not login to Beams: $error")
+                    Timber.v( "Could not login to Beams: ${error.message}")
+                    Timber.v( "Could not login to Beams: ${error.cause}")
+                    coroutine.resume(Either.Left(AuthFailure.AuthFailed))
+                }
+
+                override fun onSuccess(vararg values: Void) {
+                    Timber.v( "Beams login success")
+                    coroutine.resume(Either.Right(None()))
+                }
+            }
+        )
     }
 }

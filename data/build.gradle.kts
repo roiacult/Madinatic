@@ -69,6 +69,10 @@ dependencies {
     implementation(Dependencies.Retrofit.scalarConverter)
     implementation(Dependencies.Retrofit.stetho)
 
+    implementation(Dependencies.Firebase.core)
+    implementation(Dependencies.Firebase.messaging)
+    implementation(Dependencies.Firebase.pusher)
+
     implementation(Dependencies.Room.runtime)
     implementation(Dependencies.Room.room_ktx)
     implementation(Dependencies.Room.rxJava)
