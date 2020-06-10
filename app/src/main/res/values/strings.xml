@@ -114,6 +114,7 @@
     <string name="contact">Contact</string>
     <string name="announce_phone">Phone</string>
     <string name="empty_announce">there is no announces in here</string>
+    <string name="default_notification_channel_id">default_channel</string>
 
     <string-array name="doc_options">
         <item>upload photo</item>
