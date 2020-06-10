@@ -25,6 +25,12 @@ object Dependencies{
 
     }
 
+    object Firebase {
+        const val core = "com.google.firebase:firebase-core:${Versions.Firebase.core}"
+        const val messaging = "com.google.firebase:firebase-messaging:${Versions.Firebase.messaging}"
+        const val pusher = "com.pusher:push-notifications-android:${Versions.Firebase.pusher}"
+    }
+
     const val googleDesign  = "com.google.android.material:material:${Versions.design}"
     const val googleLocationService = "com.google.android.gms:play-services-location:16.0.0"
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"

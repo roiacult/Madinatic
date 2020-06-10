@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "480235507910",
+    "firebase_url": "https://madina-tic-tic.firebaseio.com",
+    "project_id": "madina-tic-tic",
+    "storage_bucket": "madina-tic-tic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480235507910:android:39a721ed454f7f96b107c7",
+        "android_client_info": {
+          "package_name": "com.roacult.madinatic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480235507910-15nv5m8pn5a4ap9m6hutnkkl7bp33ask.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roacult.madinatic",
+            "certificate_hash": "3df85b9c8d49fe2e0237493d9ac2316e330b55d3"
+          }
+        },
+        {
+          "client_id": "480235507910-doupkcovkmv87djlbf53h86qlmaouk28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCxa7PPWVOF7WOft-qO5aDCTYxx3lxLUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480235507910-doupkcovkmv87djlbf53h86qlmaouk28.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

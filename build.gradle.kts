@@ -5,6 +5,7 @@ buildscript {
         addRepositories()
     }
     dependencies {
+        classpath(ClassPaths.googleServices)
         classpath(ClassPaths.gradleBuild)
         classpath(ClassPaths.kotlinGradlePlugin)
 

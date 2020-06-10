@@ -1,7 +1,7 @@
 package com.roacult.data.utils
 
-//TODO add base url here
-const val BASE_URL = "http://157.230.19.233/"
+//base url
+const val BASE_URL = "https://madina-tic.ml/"
 
 //rest api roots
 object APIROOTS {

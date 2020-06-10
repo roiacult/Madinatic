@@ -2,6 +2,7 @@ plugins{
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 kapt{
@@ -69,6 +70,10 @@ dependencies {
     implementation(Dependencies.filepicker)
     implementation(Dependencies.locationPicker)
     implementation(Dependencies.indicator)
+
+    implementation(Dependencies.Firebase.core)
+    implementation(Dependencies.Firebase.messaging)
+    implementation(Dependencies.Firebase.pusher)
 
     implementation(Dependencies.Jstarter.domain)
 

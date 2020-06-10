@@ -2,6 +2,7 @@ package com.roacult.madinatic.ui
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.pusher.pushnotifications.PushNotifications
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.ActivityNavigator
 import com.roacult.madinatic.base.BaseFragment
@@ -69,6 +70,10 @@ class MainActivity : ActivityNavigator<MainViewModel>(){
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.main)
+
+        PushNotifications.start(this,"65b0754a-0713-4b71-bc41-4d2abae63fc6")
+        PushNotifications.addDeviceInterest("blah")
+//        PushNotifications.
 
         if (viewModel.homeStarted) startHome(viewModel.selectedFragment)
 

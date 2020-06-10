@@ -1,6 +1,7 @@
 package com.roacult.madinatic
 
 import android.app.Application
+import com.pusher.pushnotifications.PushNotifications
 import com.roacult.madinatic.di.getModules
 import com.roacult.madinatic.utils.StringProvider
 import org.koin.android.ext.koin.androidContext
@@ -23,9 +24,11 @@ class MadinaticApp : Application() ,StringProvider{
             androidLogger()
             // use the Android context given there
             androidContext(this@MadinaticApp)
-            //Module liste
+            //Module list
             modules(getModules())
         }
+        PushNotifications.start(this,"65b0754a-0713-4b71-bc41-4d2abae63fc6")
+        PushNotifications.addDeviceInterest("blah")
     }
 
     override fun getStringFromResource(resource: Int): String {
