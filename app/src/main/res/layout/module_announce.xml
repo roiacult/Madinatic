@@ -127,19 +127,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0"
                     android:text="@string/contact" />
+
+                <Space
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:onClick="@{(v) -> viewModel.contact(announce,ContactEventType.EMAIL)}"
                     android:gravity="center_vertical"
                     android:id="@+id/materialButton2"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    android:layout_weight="0"
                     android:text="@string/announce_email"
                     app:icon="@drawable/email_outline" />
 
@@ -148,11 +153,11 @@
                     android:gravity="center_vertical"
                     android:id="@+id/materialButton3"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0"
                     android:text="@string/announce_phone"
                     app:icon="@drawable/phone" />
 
