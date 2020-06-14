@@ -20,7 +20,8 @@ data class RemoteAnnounce(
     @SerializedName("status") val status: String,
     @SerializedName("created_on") val createdOn: String,
     @SerializedName("start_at") val startAt: String,
-    @SerializedName("end_at") val endAt: String
+    @SerializedName("end_at") val endAt: String,
+    @SerializedName("image") val image: String?
 ) {
     fun toAnnounce() : Announce {
         return Announce(
@@ -31,7 +32,8 @@ data class RemoteAnnounce(
             this.status,
             this.createdOn.substring(0,19),
             this.startAt.substring(0,19),
-            this.endAt.substring(0,19)
+            this.endAt.substring(0,19),
+            this.image
         )
     }
 }
@@ -45,6 +47,7 @@ fun Announce.toRemote() : RemoteAnnounce {
         this.status,
         this.createdOn,
         this.startAt,
-        this.endAt
+        this.endAt,
+        this.image
     )
 }

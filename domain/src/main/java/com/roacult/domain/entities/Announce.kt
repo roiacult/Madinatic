@@ -8,5 +8,6 @@ data class Announce(
     val status: String,
     val createdOn: String,
     val startAt: String,
-    val endAt: String
+    val endAt: String,
+    val image: String?
 )
