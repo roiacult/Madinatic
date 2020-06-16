@@ -115,6 +115,7 @@
     <string name="announce_phone">Téléphone</string>
     <string name="empty_announce">Il n\'y a aucune annonce ici</string>
     <string name="default_notification_channel_id" translatable="false">default_channel</string>
+    <string name="userNotApproved">Utilisateur non approuvé</string>
 
     <string-array name="doc_options">
         <item>Télécharger des photos</item>

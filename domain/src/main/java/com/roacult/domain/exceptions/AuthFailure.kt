@@ -8,6 +8,7 @@ sealed class AuthFailure : Failure() {
     object InvalidEmail : AuthFailure()
     object AlredySignedIn :AuthFailure()
     object InvalidPassword : AuthFailure()
+    object UserNotApproved : AuthFailure()
 }
 
 

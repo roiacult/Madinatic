@@ -78,6 +78,7 @@ class LoginViewModel(
             AuthFailure.InternetConnection -> stringProvider.getStringFromResource(R.string.internet_prblm)
             AuthFailure.InvalidEmail -> stringProvider.getStringFromResource(R.string.invalid_email)
             AuthFailure.AuthFailed -> stringProvider.getStringFromResource(R.string.login_failure)
+            AuthFailure.UserNotApproved -> stringProvider.getStringFromResource(R.string.userNotApproved)
             else -> stringProvider.getStringFromResource(R.string.unknown_error)
         }
         setState { copy(errorMsg = Event(erroMsg), login = Fail(authFailure)) }

@@ -80,9 +80,11 @@ class AuthRepoImpl(
         // get user entity
         val responce = authRemote.getUserEntity(token)
         if(responce is Either.Left) return responce
-        val userEntity = (responce as Either.Right).b.toEntity()
+        var userEntity = (responce as Either.Right).b
 
-        return connectToPusherBeamsAndStoreData(token,userEntity)
+        if(!userEntity.isApproved) return Either.Left(AuthFailure.UserNotApproved)
+
+        return connectToPusherBeamsAndStoreData(token,userEntity.toEntity())
     }
 
     /**

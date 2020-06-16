@@ -16,7 +16,8 @@ data class UserRemoteEntity(
     @SerializedName("date_of_birth") val dateBirth : String,
     @SerializedName("email") val email : String,
     @SerializedName("address") val address : String,
-    @SerializedName("created_on") val created_on : String
+    @SerializedName("created_on") val created_on : String,
+    @SerializedName("is_approved") val isApproved: Boolean
 ) {
     fun toEntity() : User {
         return User(
@@ -43,6 +44,7 @@ fun User.toRemoteEntity() : UserRemoteEntity {
         this.dateBirth,
         this.email,
         this.address,
-        this.created_on
+        this.created_on,
+        false
     )
 }
