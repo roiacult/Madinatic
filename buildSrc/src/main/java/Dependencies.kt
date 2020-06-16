@@ -44,7 +44,7 @@ object Dependencies{
     const val arcView = "com.github.florent37:shapeofview:1.4.7"
     const val tagView = "co.lujun:androidtagview:1.1.7"
     const val filepicker = "com.nbsp:materialfilepicker:1.9.1"
-    const val locationPicker = "com.schibstedspain.android:leku:6.4.0"
+    const val locationPicker = "com.schibstedspain.android:leku:7.1.0"
     const val indicator = "com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3"
 
     const val scalLayout = "com.github.iammert:ScalingLayout:1.2.1"

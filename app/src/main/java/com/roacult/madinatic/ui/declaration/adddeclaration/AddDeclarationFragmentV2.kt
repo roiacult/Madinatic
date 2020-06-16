@@ -231,11 +231,8 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
             Looper.getMainLooper())
 
         val locationPickerIntent = LocationPickerActivity.Builder()
-            .withGeolocApiKey(getString(R.string.google_api_key))
+            .withGooglePlacesApiKey(getString(R.string.google_map_api_key))
             .withDefaultLocaleSearchZone()
-            .shouldReturnOkOnBackPressed()
-            .withSatelliteViewHidden()
-            .withGooglePlacesEnabled()
             .withGoogleTimeZoneEnabled()
             .build(context!!)
         startActivityForResult(locationPickerIntent, MAP_REQUEST_CODE)

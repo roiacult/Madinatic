@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Madinatic</string>
-<!--    <string name="google_api_key" translatable="false">AIzaSyC8WnR7zKClh_UUYmzCClP7rwbGmqazlaM</string>-->
+    <string name="google_map_api_key" translatable="false">AIzaSyC8WnR7zKClh_UUYmzCClP7rwbGmqazlaM</string>
 
     <string name="unknown_error">Quelque chose s\'est mal passé</string>
     <string name="home">Home</string>
