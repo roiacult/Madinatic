@@ -20,7 +20,6 @@ import com.roacult.madinatic.utils.AddDeclarationCallback
 import com.roacult.madinatic.utils.StringProvider
 import com.roacult.madinatic.utils.extensions.toAttachment
 import com.roacult.madinatic.utils.states.*
-import timber.log.Timber
 
 class UpdateDeclarationViewModel(
     getCategories : GetCategories,
@@ -118,9 +117,21 @@ class UpdateDeclarationViewModel(
         setState { copy(addDocClickEvent = Event(None())) }
     }
 
+    override fun onDocLongClick(doc: String): Boolean {
+        if(doc.startsWith("http")) return false
+        setState { copy(deleteDocConfirmation = Event(doc)) }
+        return false
+    }
+
     fun addDoc(filePath: String) {
         val list = state.value!!.declarationDoc.toMutableList()
         list.add(filePath)
+        setState { copy(declarationDoc = list) }
+    }
+
+    fun deleteDoc(doc: String){
+        val list = state.value!!.declarationDoc.toMutableList()
+        list.remove(doc)
         setState { copy(declarationDoc = list) }
     }
 
@@ -146,6 +157,7 @@ data class AddDocState(
     val categories : Async<List<CategorieView>> = Uninitialized,
     val addDocClickEvent : Event<None>? = null,
     val declarationDoc : List<String> = emptyList(),
+    val deleteDocConfirmation: Event<String>? = null,
     val addDeclaration : Async<OperationType> = Uninitialized
 ) : State
 

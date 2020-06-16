@@ -108,7 +108,9 @@
     <string name="update_dec">Mise à jour de déclaration</string>
     <string name="delete_this_declaration">Supprimer cette déclaration</string>
     <string name="delete_dec_title">Supprimer la déclaration</string>
+    <string name="delete_doc_title">Supprimer le document</string>
     <string name="delete_dec_msg">Cette opération ne peut pas être annulée, vous êtes sûr de vouloir supprimer cette déclaration?</string>
+    <string name="delete_doc_msg">Cette opération ne peut pas être annulée, vous êtes sûr de vouloir supprimer cette document?</string>
     <string name="delete">Supprimer</string>
     <string name="announce_email">E-mail</string>
     <string name="contact">Contact</string>

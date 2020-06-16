@@ -38,6 +38,11 @@ fun setLayoutmanager(recyclerView: RecyclerView, layoutManager: LayoutManagerTyp
     }
 }
 
+@BindingAdapter("onLongClick")
+fun View.onLongClick(action : (View)->Boolean){
+    this.setOnLongClickListener{ action(it) }
+}
+
 @BindingAdapter("epoxyController")
 fun EpoxyRecyclerView.setRecyclerData(controller: EpoxyController) {
     setController(controller)

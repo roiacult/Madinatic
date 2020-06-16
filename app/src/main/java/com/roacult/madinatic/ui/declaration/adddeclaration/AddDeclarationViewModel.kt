@@ -6,7 +6,6 @@ import com.roacult.domain.entities.GeoCoordination
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.usecases.declaration.GetCategories
 import com.roacult.domain.usecases.declaration.SubmitDeclaration
-import com.roacult.domain.usecases.declaration.SubmitionParams
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.kero.team7.jstarter_domain.interactors.launchInteractor
 import com.roacult.madinatic.R
@@ -108,9 +107,21 @@ class AddDeclarationViewModel(
         setState { copy(addDocClickEvent = Event(None())) }
     }
 
+    override fun onDocLongClick(doc: String): Boolean {
+        if(doc.startsWith("http")) return false
+        setState { copy(deleteDocConfirmation = Event(doc)) }
+        return false
+    }
+
     fun addDoc(filePath: String) {
         val list = state.value!!.declarationDoc.toMutableList()
         list.add(filePath)
+        setState { copy(declarationDoc = list) }
+    }
+
+    fun deleteDoc(doc: String){
+        val list = state.value!!.declarationDoc.toMutableList()
+        list.remove(doc)
         setState { copy(declarationDoc = list) }
     }
 
@@ -121,6 +132,7 @@ data class AddDeclarationState(
     val addDeclaration : Async<None> = Uninitialized,
     val categories : Async<List<CategorieView>> = Uninitialized,
     val addDocClickEvent : Event<None>? = null,
+    val deleteDocConfirmation: Event<String>? = null,
     val declarationDoc : List<String> = emptyList()
 ) : State
 

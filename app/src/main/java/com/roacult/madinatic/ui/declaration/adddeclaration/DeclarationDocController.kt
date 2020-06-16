@@ -25,6 +25,7 @@ class DeclarationDocController(
                 addImage {
                     id(it)
                     image(it)
+                    viewModel(viewModel)
                 }
 
             }
@@ -32,6 +33,7 @@ class DeclarationDocController(
                 addDoc {
                     id(it)
                     path(it)
+                    viewModel(viewModel)
                 }
             }
         }

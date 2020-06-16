@@ -6,6 +6,10 @@
         <variable
             name="image"
             type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.roacult.madinatic.utils.AddDeclarationCallback" />
     </data>
     <com.google.android.material.card.MaterialCardView
         app:cardCornerRadius="10dp"
@@ -16,6 +20,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp">
             <ImageView
+                app:onLongClick="@{(v) -> viewModel.onDocLongClick(image)}"
                 tools:src="@tools:sample/backgrounds/scenic"
                 app:loadUri="@{image}"
                 android:scaleType="centerCrop"

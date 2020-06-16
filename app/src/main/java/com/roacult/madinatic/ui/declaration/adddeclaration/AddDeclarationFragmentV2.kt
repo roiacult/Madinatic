@@ -66,8 +66,21 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
             it.errorMsg?.getContentIfNotHandled()?.let(::onError)
             it.addDocClickEvent?.getContentIfNotHandled()?.let(::addDocClick)
             it.declarationDoc.let(controller::setData)
+            it.deleteDocConfirmation?.getContentIfNotHandled()?.let(::confirmDeleteDoc)
             handleCategories(it.categories)
             handleSubmition(it.addDeclaration)
+        }
+    }
+
+    private fun confirmDeleteDoc(doc: String) {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(R.string.delete_doc_title)
+            setMessage(R.string.delete_doc_msg)
+            setNegativeButton(R.string.cancel){_,_->}
+            setPositiveButton(R.string.delete){_,_->
+                viewModel.deleteDoc(doc)
+            }
+            show()
         }
     }
 
