@@ -12,6 +12,7 @@ import com.roacult.madinatic.databinding.RegisterBinding
 import com.roacult.madinatic.utils.states.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import java.text.SimpleDateFormat
 
 class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
 
@@ -67,8 +68,11 @@ class RegistrationFragment : FullScreenFragment<RegisterBinding>() {
     private fun showDatePicker() {
         DatePickerDialog(context!!,
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                binding.dateBirth.setText("$year-${month+1}-$dayOfMonth")
-            },2020,1,1).show()
+                binding.dateBirth.text = "$year-${month+1}-$dayOfMonth"
+            },2020,1,1).apply {
+            this.datePicker.maxDate = 1024358400000L
+            show()
+        }
     }
 
     private fun showSuccDialgue() {
