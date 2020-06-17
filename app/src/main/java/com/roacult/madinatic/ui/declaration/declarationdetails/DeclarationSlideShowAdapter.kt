@@ -30,7 +30,8 @@ class DeclarationSlideShowAdapter(
             view.scaleType = ImageView.ScaleType.CENTER
             view.setImageResource(R.drawable.ic_place_holder)
         }else {
-            Picasso.get().load(images[position]).into(view)
+
+            Picasso.get().load(images[position].replace("http","https")).into(view)
         }
         container.addView(view)
         return view

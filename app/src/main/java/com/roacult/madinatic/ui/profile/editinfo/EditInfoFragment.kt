@@ -101,7 +101,7 @@ class EditInfoFragment : FullScreenFragment<ProfileChangeInfoBinding>() {
         if(viewModel.image != null ){
             binding.avatarImage.setImageURI(Uri.fromFile(File(viewModel.image!!)))
         }else if(user.image != null) {
-            Picasso.get().load(user.image).into(binding.avatarImage)
+            Picasso.get().load(user.image!!.replace("http","https")).into(binding.avatarImage)
         }
     }
 

@@ -55,7 +55,9 @@ fun TextView.showInt(int :Int){
 
 @BindingAdapter("loadImage")
 fun ImageView.loadImage(url:String?){
-    if(url != null && url.isNotEmpty() ) Picasso.get().load(url).into(this)
+    if(url != null && url.isNotEmpty() ){
+        Picasso.get().load(url.replace("http","https")).into(this)
+    }
 }
 
 @BindingAdapter("loadUri")
