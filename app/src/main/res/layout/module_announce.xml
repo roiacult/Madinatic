@@ -25,7 +25,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:visibility="@{announce.image == null ? View.VISIBLE : View.GONE}"
+                android:visibility="@{announce.image == null ? View.GONE : View.VISIBLE}"
                 loadImage="@{announce.image}"
                 android:scaleType="centerCrop"
                 android:id="@+id/imageView2"

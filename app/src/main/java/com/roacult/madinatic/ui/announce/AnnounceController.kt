@@ -6,6 +6,7 @@ import com.airbnb.epoxy.paging.PagedListEpoxyController
 import com.roacult.domain.entities.Announce
 import com.roacult.madinatic.*
 import com.roacult.madinatic.utils.states.ViewState
+import timber.log.Timber
 
 class AnnounceController(
     private val viewModel: AnnounceViewModel,
@@ -32,6 +33,7 @@ class AnnounceController(
     }
 
     override fun buildItemModel(currentPosition: Int, item: Announce?): EpoxyModel<*> {
+        Timber.v("Announce ${item!!.aid} image --> ${item.image}")
         return AnnounceBindingModel_()
             .id(item!!.aid)
             .viewModel(viewModel)
