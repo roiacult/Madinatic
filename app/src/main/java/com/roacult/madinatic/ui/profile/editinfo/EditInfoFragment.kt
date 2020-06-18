@@ -137,6 +137,9 @@ class EditInfoFragment : FullScreenFragment<ProfileChangeInfoBinding>() {
         DatePickerDialog(context!!,
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 binding.materialButton.text = "$year-${month+1}-$dayOfMonth"
-            },2020,1,1).show()
+            },2020,1,1).apply {
+            this.datePicker.maxDate = 1024358400000L
+            show()
+        }
     }
 }
