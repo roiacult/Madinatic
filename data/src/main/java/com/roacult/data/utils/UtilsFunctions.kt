@@ -82,6 +82,7 @@ fun DeclarationState.toRemote() : String {
         DeclarationState.UNDER_TREATMENT -> REMOTEDECLARATIONSTATES.UNDER_TREATMENT
         DeclarationState.TREATED -> REMOTEDECLARATIONSTATES.TREATED
         DeclarationState.ARCHIVED -> REMOTEDECLARATIONSTATES.ARCHIVED
+        DeclarationState.DRAFT -> REMOTEDECLARATIONSTATES.DRAFT
     }
 }
 

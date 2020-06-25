@@ -147,6 +147,7 @@ class MainRepoImpl(
             token,user.idu,
             DeclarationState.LACK_OF_INFO.toRemote(),
             DeclarationState.NOT_VALIDATED.toRemote(),
+            DeclarationState.DRAFT.toRemote(),
             page
         ).map {
             DeclarationPage(

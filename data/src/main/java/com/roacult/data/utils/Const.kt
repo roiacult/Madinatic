@@ -37,6 +37,7 @@ object REMOTEDECLARATIONSTATES {
     const val UNDER_TREATMENT = "under_treatment"
     const val TREATED = "treated"
     const val ARCHIVED = "archived"
+    const val DRAFT = "draft"
 }
 
 const val DATABASE_NAME = ""

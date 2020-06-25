@@ -222,12 +222,13 @@ class MainRemote(
         uid : String,
         status: String? = null,
         status2: String? = null,
+        status3: String? = null,
         page: Int
     ): Either<DeclarationFailure, RemoteDeclarationPage> = suspendCoroutine {coroutine->
         val call =if(status == null)
             service.getDeclarationPage(token,uid,page)
         else
-            service.getDeclarationPage(token,uid,status,status2!!,page)
+            service.getDeclarationPage(token,uid,status,status2!!,status3!!,page)
 
         call.enqueue(object : Callback<RemoteDeclarationPage> {
             override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {

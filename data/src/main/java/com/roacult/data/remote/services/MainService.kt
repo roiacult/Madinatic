@@ -78,6 +78,7 @@ interface MainService {
         @Query("citizen") uid : String,
         @Query("status") status : String,
         @Query("status") status2 : String,
+        @Query("status") status3 : String,
         @Query("page") page : Int
     ) : Call<RemoteDeclarationPage>
 
