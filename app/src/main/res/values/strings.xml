@@ -119,6 +119,7 @@
     <string name="default_notification_channel_id" translatable="false">default_channel</string>
     <string name="userNotApproved">Utilisateur non approuvé</string>
     <string name="d_poser">Déposer</string>
+    <string name="draft">Brouillon</string>
 
     <string-array name="doc_options">
         <item>Télécharger des photos</item>

@@ -158,6 +158,10 @@ fun LinearLayout.setState(state : DeclarationState) {
             image.setImageResource(R.drawable.leack_info)
             text.setText(R.string.leack_info)
         }
+        DeclarationState.DRAFT -> {
+            image.setImageResource(R.drawable.leack_info)
+            text.setText(R.string.draft)
+        }
     }
 }
 
