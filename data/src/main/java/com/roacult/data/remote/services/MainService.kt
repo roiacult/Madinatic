@@ -55,14 +55,16 @@ interface MainService {
     @GET(APIROOTS.DECLARATION)
     fun getDeclarationPage(
         @Header("Authorization") key: String,
-        @Query("page") page : Int
+        @Query("page") page : Int,
+        @Query("status") filters: List<String>
     ) : Call<RemoteDeclarationPage>
 
     @GET(APIROOTS.DECLARATION)
     fun getDeclarationPageOrderd(
         @Header("Authorization") key: String,
         @Query("ordering") ordering : String,
-        @Query("page") page : Int
+        @Query("page") page : Int,
+        @Query("status") filters: List<String>
     ) : Call<RemoteDeclarationPage>
 
     @GET(APIROOTS.DECLARATION)

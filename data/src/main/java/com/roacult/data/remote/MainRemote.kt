@@ -188,12 +188,23 @@ class MainRemote(
         pageParam: DeclarationPageParam
     ): Either<DeclarationFailure, RemoteDeclarationPage> = suspendCoroutine {coroutine->
 
-        val call = if(pageParam.ordering == null)
-            service.getDeclarationPage(token,pageParam.page)
-        else if(pageParam.ordering == DeclarationOrdering.OLD_TO_NEW)
-            service.getDeclarationPageOrderd(token,"created_on",pageParam.page)
-        else
-            service.getDeclarationPageOrderd(token,"-created_on",pageParam.page)
+
+        val statusFilter = listOf(
+            DeclarationState.VALIDATED,
+            DeclarationState.VALIDATED,
+            DeclarationState.TREATED,
+            DeclarationState.ARCHIVED,
+            DeclarationState.NOT_VALIDATED,
+            DeclarationState.UNDER_TREATMENT,
+            DeclarationState.REFUSED,
+            DeclarationState.LACK_OF_INFO
+        )
+
+        val call = when (pageParam.ordering) {
+            null -> service.getDeclarationPage(token,pageParam.page,statusFilter.map { it.toRemote() })
+            DeclarationOrdering.OLD_TO_NEW -> service.getDeclarationPageOrderd(token,"created_on",pageParam.page,statusFilter.map { it.toRemote() })
+            else -> service.getDeclarationPageOrderd(token,"-created_on",pageParam.page,statusFilter.map { it.toRemote() })
+        }
 
         call.enqueue(object : Callback<RemoteDeclarationPage> {
             override fun onFailure(call: Call<RemoteDeclarationPage>, t: Throwable) {
