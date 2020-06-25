@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
@@ -189,9 +190,15 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
         }
         binding.epoxyRecyclerView.layoutManager = manager
         binding.epoxyRecyclerView.setController(controller)
+
+        binding.deposer.setOnClickListener {
+            saveData()
+            viewModel.save(DeclarationState.NOT_VALIDATED)
+        }
+
         binding.save.setOnClickListener {
             saveData()
-            viewModel.save()
+            viewModel.save(DeclarationState.DRAFT)
         }
 
         binding.toolbar.setNavigationIcon(R.drawable.back)
@@ -200,10 +207,6 @@ class AddDeclarationFragmentV2 : FullScreenFragment<AddDeclarationV2Binding>() {
         }
 
         binding.materialButton.setOnClickListener(::checkLocationSettings)
-
-        binding.cancel.setOnClickListener {
-            activity?.onBackPressed()
-        }
     }
 
     private fun syncData() {

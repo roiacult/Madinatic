@@ -1,6 +1,7 @@
 package com.roacult.domain.usecases.profile
 
 import com.roacult.domain.entities.Attachment
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.repos.MainRepo
 import com.roacult.kero.team7.jstarter_domain.functional.CouroutineDispatchers
@@ -28,6 +29,7 @@ data class DeclarationUpdate(
     val title: String,
     val categorie: String,
     val desc: String,
+    val state: DeclarationState,
     val address: String,
     val lat: Double,
     val long: Double

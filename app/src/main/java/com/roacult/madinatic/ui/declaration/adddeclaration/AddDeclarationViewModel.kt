@@ -47,7 +47,7 @@ class AddDeclarationViewModel(
         }
     }
 
-    fun save() {
+    fun save(declarationState: DeclarationState) {
 
         if(title.isEmpty()){
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.title_empty))) }
@@ -79,7 +79,7 @@ class AddDeclarationViewModel(
         scope.launchInteractor(submitDeclaration, Declaration("", title,desc, "", adrress!!.name,
             GeoCoordination(adrress!!.lat,adrress!!.long),
             categorie!!.idc,
-            DeclarationState.NOT_VALIDATED,
+            declarationState,
             null,
             null,
             docs.map { it.toAttachment() }

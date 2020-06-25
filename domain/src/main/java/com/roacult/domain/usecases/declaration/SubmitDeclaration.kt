@@ -17,9 +17,3 @@ class SubmitDeclaration(
         return repo.submitDeclaration(executeParams)
     }
 }
-
-
-data class SubmitionParams(
-    val declaration : Declaration,
-    val submitionDocs : List<String>
-)

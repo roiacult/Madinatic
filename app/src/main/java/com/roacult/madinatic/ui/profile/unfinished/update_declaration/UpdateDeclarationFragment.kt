@@ -1,6 +1,7 @@
 package com.roacult.madinatic.ui.profile.unfinished.update_declaration
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,6 +18,7 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.nbsp.materialfilepicker.MaterialFilePicker
 import com.nbsp.materialfilepicker.ui.FilePickerActivity
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.kero.team7.jstarter_domain.interactors.None
 import com.roacult.madinatic.R
 import com.roacult.madinatic.base.FullScreenFragment
@@ -225,9 +227,15 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
 
         binding.epoxyRecyclerView.layoutManager = manager
         binding.epoxyRecyclerView.setController(controller)
+
         binding.save.setOnClickListener {
             saveData()
-            viewModel.save()
+            viewModel.save(DeclarationState.DRAFT)
+        }
+
+        binding.deposer.setOnClickListener {
+            saveData()
+            viewModel.save(DeclarationState.NOT_VALIDATED)
         }
 
         binding.toolbar.setNavigationIcon(R.drawable.back)
@@ -236,10 +244,6 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
         }
 
         binding.materialButton.setOnClickListener(::checkLocationSettings)
-
-        binding.cancel.setOnClickListener {
-            activity?.onBackPressed()
-        }
     }
 
     private fun showConfirmDeleteDialog() {
@@ -286,6 +290,7 @@ class UpdateDeclarationFragment : FullScreenFragment<AddDeclarationV2Binding>() 
             }
     }
 
+    @SuppressLint("MissingPermission")
     fun requestLocationAndStartLocationPicker(){
         fusedLocationClient.requestLocationUpdates(locationRequest,
             object : LocationCallback(){},

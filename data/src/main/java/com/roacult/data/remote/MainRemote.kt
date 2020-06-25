@@ -264,7 +264,7 @@ class MainRemote(
         map["dtype"] = updates.categorie.toRequestBody("text/plain".toMediaTypeOrNull())
         map["address"] = updates.address.toRequestBody("text/plain".toMediaTypeOrNull())
         map["geo_cord"] = geoCord.toRequestBody("text/plain".toMediaTypeOrNull())
-        map["status"] = DeclarationState.NOT_VALIDATED.toRemote().toRequestBody("text/plain".toMediaTypeOrNull())
+        map["status"] = updates.state.toRemote().toRequestBody("text/plain".toMediaTypeOrNull())
         map["citizen"] = uid.toRequestBody("text/plain".toMediaTypeOrNull())
 
         service.putDeclaration(token,updates.id,map)

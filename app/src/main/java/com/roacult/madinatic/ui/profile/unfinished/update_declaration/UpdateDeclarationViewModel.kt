@@ -2,6 +2,7 @@ package com.roacult.madinatic.ui.profile.unfinished.update_declaration
 
 import com.google.gson.Gson
 import com.roacult.domain.entities.Declaration
+import com.roacult.domain.entities.DeclarationState
 import com.roacult.domain.exceptions.DeclarationFailure
 import com.roacult.domain.usecases.declaration.DeleteDeclaration
 import com.roacult.domain.usecases.declaration.GetCategories
@@ -70,7 +71,7 @@ class UpdateDeclarationViewModel(
 
     }
 
-    fun save() {
+    fun save(declarationState: DeclarationState) {
 
         if(title.isEmpty()){
             setState { copy(errorMsg = Event(stringProvider.getStringFromResource(R.string.title_empty))) }
@@ -91,7 +92,7 @@ class UpdateDeclarationViewModel(
 
         setState { copy(addDeclaration = Loading()) }
         scope.launchInteractor(updateDeclaration, AddDocumentsParams(
-            DeclarationUpdate(declaration.id,title,categorie,description,address.name,address.lat,address.long),
+            DeclarationUpdate(declaration.id,title,categorie,description,declarationState,address.name,address.lat,address.long),
             docs.map { it.toAttachment() }
         )){
             it.either({

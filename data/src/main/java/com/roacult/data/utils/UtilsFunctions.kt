@@ -95,6 +95,7 @@ fun String.toDeclarationState() : DeclarationState {
         REMOTEDECLARATIONSTATES.UNDER_TREATMENT -> DeclarationState.UNDER_TREATMENT
         REMOTEDECLARATIONSTATES.TREATED -> DeclarationState.TREATED
         REMOTEDECLARATIONSTATES.ARCHIVED -> DeclarationState.ARCHIVED
+        REMOTEDECLARATIONSTATES.DRAFT -> DeclarationState.DRAFT
         else -> DeclarationState.NOT_VALIDATED
     }
 }

@@ -143,25 +143,25 @@
                     app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/save"
+                    android:id="@+id/deposer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/save"
+                    android:text="@string/d_poser"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/materialButton" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cancel"
+                    android:id="@+id/save"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/cancel"
-                    app:layout_constraintBottom_toBottomOf="@+id/save"
-                    app:layout_constraintEnd_toStartOf="@+id/save"
-                    app:layout_constraintTop_toTopOf="@+id/save" />
+                    android:text="@string/save"
+                    app:layout_constraintBottom_toBottomOf="@+id/deposer"
+                    app:layout_constraintEnd_toStartOf="@+id/deposer"
+                    app:layout_constraintTop_toTopOf="@+id/deposer" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
