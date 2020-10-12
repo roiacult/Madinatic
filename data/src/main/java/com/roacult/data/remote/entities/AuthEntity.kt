@@ -25,7 +25,7 @@ data class RemoteRegistrationParams(
     @SerializedName("password1") val password: String,
     @SerializedName("password2") val password2: String,
     @SerializedName("date_of_birth") val dateBirth: String,
-    @SerializedName("nationaid") val nationalid: String
+    @SerializedName("national_id") val nationalid: String
 )
 
 fun RegistrationParams.toRemoteEntity() : RemoteRegistrationParams{
